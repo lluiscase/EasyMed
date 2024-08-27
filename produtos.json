@@ -1,0 +1,15 @@
+{
+    "categoria":[{
+        //Para cada sessão de produtos por favor replicar a parte abaixo
+        "nome":"",
+        "produtos":[{
+            //Para cada produto replicar a parte abaixo
+            "id":/*coloque um numero aqui*/,
+            "nome":"",
+            "preco":/*coloque um numero aqui*/,
+            "descricacao":""
+        }]
+    }
+        
+    ]
+}
