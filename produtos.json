@@ -1,15 +1,102 @@
 {
     "categoria":[{
-        //Para cada sessão de produtos por favor replicar a parte abaixo
-        "nome":"",
+        
+        "nome":"Remedios Controlados",
         "produtos":[{
-            //Para cada produto replicar a parte abaixo
-            "id":/*coloque um numero aqui*/,
-            "nome":"",
-            "preco":/*coloque um numero aqui*/,
-            "descricacao":""
+
+            "id":"1",
+            "nome":"Diazepam",
+            "preco":"R$ 12,19",
+            "descricacao":"Indicação: Diazepam é indicado para lívio sintomático da ansiedade, tensão e outras queixas somáticas ou psicológicas associadas com a síndrome da ansiedade. Pode também ser útil como coadjuvante no tratamento da ansiedade ou agitação associada a desordens psiquiátricas. Diazepam é útil no alívio do espasmo muscular reflexo devido a traumas locais (lesão, inflamação)."
+        }]
+    },
+
+    {
+    "nome":"Remedios Controlados",
+    "produtos":[{
+
+        "id":"2",
+        "nome":"Morfina",
+        "preco":"R$ 51,59",
+        "descricacao":"A morfina é um analgésico potente da classe dos opioides, amplamente utilizada para o tratamento de dores severas, especialmente quando outras formas de alívio da dor não são eficazes. Disponível em várias formas, incluindo comprimidos, cápsulas, soluções orais, injeções e adesivos transdérmicos, a morfina age ligando-se aos receptores opioides no sistema nervoso central e periférico. Essa ligação reduz a percepção da dor e altera a resposta emocional à dor."
+    }]
+         },
+    
+    {
+    "nome":"Remedios Controlados",
+    "produtos":[{
+
+        "id":"3",
+        "nome":"Dexedrine",
+        "preco":"R$ 51,59",
+        "descricacao":"A morfina é um analgésico potente da classe dos opioides, amplamente utilizada para o tratamento de dores severas, especialmente quando outras formas de alívio da dor não são eficazes. Disponível em várias formas, incluindo comprimidos, cápsulas, soluções orais, injeções e adesivos transdérmicos, a morfina age ligando-se aos receptores opioides no sistema nervoso central e periférico. Essa ligação reduz a percepção da dor e altera a resposta emocional à dor."
+    }]
+        
+    },
+
+    {
+        "nome":"Anti-inflamatórios",
+        "produtos":[{
+
+            "id":"4",
+            "nome":"Ibuprofeno",
+            "preco":"R$ 6,38",
+            "descricacao":" O ibuprofeno é um medicamento anti-inflamatório não esteroide (AINE) amplamente utilizado para aliviar a dor,reduzir a inflamação e diminuir a febre. É um dos AINEs mais comuns e é vendido tanto com prescrição médica quanto sem ela."
+        }]
+    },
+
+    {
+        "nome":"Anti-inflamatórios",
+        "produtos":[{
+
+            "id":"5",
+            "nome":"Aspirina",
+            "preco":"R$16,97",
+            "descricacao":"é um medicamento anti-inflamatório não esteroide (AINE) utilizado para aliviar a dor, reduzir a inflamação e diminuir a febre. É também conhecida por suas propriedades antiplaquetárias, ou seja, pode ajudar a prevenir a formação de coágulos sanguíneos."
+        }]
+    },
+    {
+        "nome":"Anti-inflamatórios",
+        "produtos":[{
+
+            "id":"6",
+            "nome":"Naproxeno ",
+            "preco":"R$24,29",
+            "descricacao":" O naproxeno é um medicamento anti-inflamatório não esteroide (AINE) utilizado para aliviar a dor-Moderada, reduzir a inflamação e diminuir a febre. É eficaz no tratamento de várias condições que envolvem dor e inflamação."
+        }]
+    },
+    {
+        "nome":"Remédios Antialérgicos",
+        "produtos":[{
+
+            "id":"4",
+            "nome":"Loratadina",
+            "preco":"R$11,99",
+            "descricacao":" A loratadina é um remédio antialérgico usado no alívio dos sintomas de rinite alérgica como coceira nasal, tosse alérgica, coriza, espirros, ardor e coceira nos olhos"
+        }]
+    },
+
+    {
+        "nome":"Remédios Antialérgicos",
+        "produtos":[{
+
+            "id":"5",
+            "nome":"Dicloridrato de Cetirizina",
+            "preco":"R$25,76 ",
+            "descricacao":"O dicloridrato de cetirizina é um anti-histamínico de segunda geração utilizado para o alívio de sintomas alérgicos, como rinite alérgica (alergia sazonal ou perene) e urticária (erupções cutâneas com coceira). É conhecido por ser eficaz no controle dos sintomas sem causar sonolência significativa, ao contrário dos anti-histamínicos de primeira geração."
+        }]
+    },
+    {
+        "nome":"Remédios Antialérgicos",
+        "produtos":[{
+
+            "id":"6",
+            "nome":"Furoato de Mometasona",
+            "preco":"R$68,83",
+            "descricacao":"O furoato de mometasona é um corticosteroide utilizado para tratar e controlar a inflamação e os sintomas associados a condições alérgicas e inflamatórias. Disponível principalmente em forma de spray nasal, é eficaz no tratamento da rinite alérgica e na redução dos sintomas inflamatórios nas vias nasais."
         }]
     }
-        
-    ]
+]
 }
+       
+    
