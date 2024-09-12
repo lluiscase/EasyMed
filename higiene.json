@@ -1,0 +1,49 @@
+{
+    "categoria": [{
+        "nome": "Higiene",
+        "produtos": [
+            {
+                "id": 1,
+                "nome": "Refil Sabonete Líquido Lux Botanicals Orquídea Negra 200ml",
+                "preco": 5.99,
+                "descricao": "A fórmula é elaborada por uma combinação única e exclusiva de ingredientes botânicos naturais. Além disso, o sabonete foi especialmente produzido para proporcionar uma sensação aveludada na sua pele, tornando o banho o início de qualquer ritual de beleza, deixando a sua pele preparada para receber os próximos cuidados."
+            },
+            {
+                "id": 2,
+                "nome": "Absorvente Always Seca P com Abas 32 unidades",
+                "preco": 14.69,
+                "descricao": "Absorvente com abas e cobertura de malha seca. Possui formato anatômico que se adapta ao corpo. Conta com barreiras antivazamentos e sistema antiumidade. Proporciona absorção instantânea e segura ao longo do dia. Mantém a pele protegida e livre de umidade."
+            },
+            {
+                "id": 3,
+                "nome": "Hastes Flexíveis Cotonetes 150 Unidades",
+                "preco": 9.59,
+                "descricao": "100% em algodão. Conforto e cuidado para a pele. Altamente absorvente. Não solta fiapos e não desfia. Contém 150 unidades."
+            },
+            {
+                "id": 4,
+                "nome": "Colgate Creme Dental Tripla Ação Menta 90G",
+                "preco": 5.19,
+                "descricao": "A pasta de dente Colgate Tripla Ação Menta Original proporciona tripla proteção para você e sua família: dentes brancos, protegidos e um hálito refrescante."
+            },
+            {
+                "id": 5,
+                "nome": "Colgate Escova De Dente Slim Soft 4 Unidades",
+                "preco": 27.11,
+                "descricao": "Essa escova de dente Colgate Slim Soft Black foi desenvolvida com a tecnologia de ponta da Colgate. Por isso, essa escova de dente tem cerdas macias infundidas em carvão com pontas ultrafinas para que você tenha uma limpeza profunda e delicada."
+            },
+            {
+                "id": 6,
+                "nome": "Papel Higiênico Folha Dupla Mili Sensitive Care - 12 Rolos 30m",
+                "preco": 14.18,
+                "descricao": "O Papel Higiênico Sensitive Care Folha Dupla possui absorção em dobro, muita maciez e folhas branquinhas. Dermatologicamente testado, possui fragrância neutra, para você cuidar da sua pele com toda a proteção e delicadez que ela precisa e merece. Contém 12 rolos folha dupla com 30m de comprimento cada."
+            },
+            {
+                "id": 7,
+                "nome": "Apolo Algodão Em Bola 100G",
+                "preco": 10.16,
+                "descricao": "Cuidados Pessoais. Embalagem contém 100g. Ideal para remoção de cosméticos e possui alto poder de absorção."
+            }
+        ]
+    }]
+}
