@@ -15,13 +15,13 @@ class MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(
-            leading: Image.asset('assets/Logo.png', width: 47.43, height: 40),
+            leading: Image.asset('assets/icons/logo.png', width: 47.43, height: 40),
             title: const Text("Olá Helena"),
             actions: [
               Image.asset(
-                'assets/return.png',
-                width: 39,
-                height: 24,
+                'assets/icons/return.png',
+                width: 60,
+                height: 50,
               ),
             ],
           ),
@@ -54,7 +54,7 @@ class MyAppState extends State<MyApp> {
                           height: 30,
                         ),
                         Text(
-                          "Meus Dados.",
+                          "Meus Dados",
                           style: TextStyle(fontSize: 20),
                         ),
                         SizedBox(
