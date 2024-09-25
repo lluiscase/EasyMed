@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
             child: Container(
             margin: EdgeInsets.all(10),
             child: Image.asset(
-              'assets/icons/Logo EasyMeds.png'
+              'assets/icons/creme.png'
             ),
             decoration: BoxDecoration(
               color: Color(0xffF7f8f8 ),
