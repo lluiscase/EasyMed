@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -13,27 +15,39 @@ class HomePage extends StatelessWidget {
           'EasyMed',
           style: TextStyle(
             color: const Color(0xff080F0F),
-            fontSize: 25,
+            fontSize: 20,
             fontWeight: FontWeight.w700
+            
                       ),
         ),
         elevation: 0.0,
+        
         leading: GestureDetector(
           onTap: (){
-            
+            print('Caracas ele clicou em mim');
           },
             child: Container(
-            margin: EdgeInsets.all(10),
-            child: Image.asset(
-              'assets/icons/Logo EasyMeds.png'
-            ),
-            decoration: BoxDecoration(
-              color: Color(0xffF7f8f8 ),
-              borderRadius: BorderRadius.circular(1)
+              decoration: BoxDecoration(
+                color: Color(0xffF7f8f8 ),
+                borderRadius: BorderRadius.circular(1)
+              ),
+              margin: EdgeInsets.all(15),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                Image.asset(
+                'assets/icons/shopping-basket.png'
+                ),
+                  VerticalDivider(
+                    thickness: 3,
+                    color: Colors.black54,
+                    width: 5,
+                    indent:5
+                    ),
+                ],
+              ),
             ),
           ),
-        ),
-
         actions: [
           GestureDetector(
             onTap: (){
@@ -51,26 +65,39 @@ class HomePage extends StatelessWidget {
         ),
           ),
         ],
-      ),
+        ),
+
       bottomNavigationBar: SizedBox(
         child: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
+          selectedItemColor: Color(0xff16697A),
+          backgroundColor: Color(0xffF9FAFD),
           items: const <BottomNavigationBarItem> [
           BottomNavigationBarItem(
             icon: Icon(Icons.home_filled),
-            label: 'home'
+            label: 'Home'
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.location_searching),
+            icon: ImageIcon(
+              AssetImage('assets/icons/medicamento.png'),
+              color: Color(0xff16697A),
+            ),
             label: 'Localização'
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.event_busy),
-            label: 'ofertas'
+            icon: ImageIcon(
+              AssetImage('assets/icons/tag.png'),
+              color: Color(0xff16697A),
+            ),
+            label: 'Ofertas'
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'perfil'
+            icon: ImageIcon(
+              AssetImage('assets/icons/profile-user.png'),
+              color: Color(0xff16697A),
+              
+              ),
+            label: 'Perfil'
           ),
         
         ],
@@ -102,7 +129,7 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-    );
+      );
   }
 
   Container searchField() {
