@@ -27,6 +27,7 @@ class HomePage extends StatelessWidget {
             print('Caracas ele clicou em mim');
           },
             child: Container(
+<<<<<<< HEAD
               decoration: BoxDecoration(
                 color: Color(0xffF7f8f8 ),
                 borderRadius: BorderRadius.circular(1)
@@ -46,6 +47,15 @@ class HomePage extends StatelessWidget {
                     ),
                 ],
               ),
+=======
+            margin: EdgeInsets.all(10),
+            child: Image.asset(
+              'assets/icons/logo.png'
+            ),
+            decoration: BoxDecoration(
+              color: Color(0xffF7f8f8 ),
+              borderRadius: BorderRadius.circular(1)
+>>>>>>> 7107198e1910e45003e43d5a7ba5880e7b361e79
             ),
           ),
         actions: [
@@ -56,7 +66,7 @@ class HomePage extends StatelessWidget {
             child:Container(
             margin: EdgeInsets.all(10),
             child: Image.asset(
-            'assets/icons/shopping-basket.png'
+            'assets/icons/shopping_basket.png'
             ),
             decoration: BoxDecoration(
             color: Color(0xffF7f8f8 ),
