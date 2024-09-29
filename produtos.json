@@ -1,102 +1,221 @@
 {
-    "categoria":[{
-        
+    "categoria":[
+        {
         "nome":"Remedios Controlados",
-        "produtos":[{
+        "produtos":[
+            {
 
             "id":"1",
             "nome":"Diazepam",
             "preco":"R$ 12,19",
             "descricacao":"Indicação: Diazepam é indicado para lívio sintomático da ansiedade, tensão e outras queixas somáticas ou psicológicas associadas com a síndrome da ansiedade. Pode também ser útil como coadjuvante no tratamento da ansiedade ou agitação associada a desordens psiquiátricas. Diazepam é útil no alívio do espasmo muscular reflexo devido a traumas locais (lesão, inflamação)."
-        }]
+        },
+        {
+            "id":"2",
+            "nome":"Morfina",
+            "preco":"R$ 51,59",
+            "descricacao":"A morfina é um analgésico potente da classe dos opioides, amplamente utilizada para o tratamento de dores severas, especialmente quando outras formas de alívio da dor não são eficazes. Disponível em várias formas, incluindo comprimidos, cápsulas, soluções orais, injeções e adesivos transdérmicos, a morfina age ligando-se aos receptores opioides no sistema nervoso central e periférico. Essa ligação reduz a percepção da dor e altera a resposta emocional à dor."
+        },
+        {
+            "id":"3",
+            "nome":"Dexedrine",
+            "preco":"R$ 51,59",
+            "descricacao":"A morfina é um analgésico potente da classe dos opioides, amplamente utilizada para o tratamento de dores severas, especialmente quando outras formas de alívio da dor não são eficazes. Disponível em várias formas, incluindo comprimidos, cápsulas, soluções orais, injeções e adesivos transdérmicos, a morfina age ligando-se aos receptores opioides no sistema nervoso central e periférico. Essa ligação reduz a percepção da dor e altera a resposta emocional à dor."
+        }
+    ]
     },
-
-    {
-    "nome":"Remedios Controlados",
-    "produtos":[{
-
-        "id":"2",
-        "nome":"Morfina",
-        "preco":"R$ 51,59",
-        "descricacao":"A morfina é um analgésico potente da classe dos opioides, amplamente utilizada para o tratamento de dores severas, especialmente quando outras formas de alívio da dor não são eficazes. Disponível em várias formas, incluindo comprimidos, cápsulas, soluções orais, injeções e adesivos transdérmicos, a morfina age ligando-se aos receptores opioides no sistema nervoso central e periférico. Essa ligação reduz a percepção da dor e altera a resposta emocional à dor."
-    }]
-         },
-    
-    {
-    "nome":"Remedios Controlados",
-    "produtos":[{
-
-        "id":"3",
-        "nome":"Dexedrine",
-        "preco":"R$ 51,59",
-        "descricacao":"A morfina é um analgésico potente da classe dos opioides, amplamente utilizada para o tratamento de dores severas, especialmente quando outras formas de alívio da dor não são eficazes. Disponível em várias formas, incluindo comprimidos, cápsulas, soluções orais, injeções e adesivos transdérmicos, a morfina age ligando-se aos receptores opioides no sistema nervoso central e periférico. Essa ligação reduz a percepção da dor e altera a resposta emocional à dor."
-    }]
-        
-    },
-
     {
         "nome":"Anti-inflamatórios",
-        "produtos":[{
+        "produtos":[
+            {
 
-            "id":"4",
+            "id":"1",
             "nome":"Ibuprofeno",
             "preco":"R$ 6,38",
             "descricacao":" O ibuprofeno é um medicamento anti-inflamatório não esteroide (AINE) amplamente utilizado para aliviar a dor,reduzir a inflamação e diminuir a febre. É um dos AINEs mais comuns e é vendido tanto com prescrição médica quanto sem ela."
-        }]
-    },
-
-    {
-        "nome":"Anti-inflamatórios",
-        "produtos":[{
-
-            "id":"5",
+        },
+        {
+            "id":"2",
             "nome":"Aspirina",
             "preco":"R$16,97",
             "descricacao":"é um medicamento anti-inflamatório não esteroide (AINE) utilizado para aliviar a dor, reduzir a inflamação e diminuir a febre. É também conhecida por suas propriedades antiplaquetárias, ou seja, pode ajudar a prevenir a formação de coágulos sanguíneos."
-        }]
-    },
-    {
-        "nome":"Anti-inflamatórios",
-        "produtos":[{
-
-            "id":"6",
+      
+        },
+        {
+            "id":"3",
             "nome":"Naproxeno ",
             "preco":"R$24,29",
             "descricacao":" O naproxeno é um medicamento anti-inflamatório não esteroide (AINE) utilizado para aliviar a dor-Moderada, reduzir a inflamação e diminuir a febre. É eficaz no tratamento de várias condições que envolvem dor e inflamação."
-        }]
+
+        }
+    ]
     },
     {
         "nome":"Remédios Antialérgicos",
-        "produtos":[{
-
-            "id":"4",
+        "produtos":[
+            {
+            "id":"1",
             "nome":"Loratadina",
             "preco":"R$11,99",
             "descricacao":" A loratadina é um remédio antialérgico usado no alívio dos sintomas de rinite alérgica como coceira nasal, tosse alérgica, coriza, espirros, ardor e coceira nos olhos"
-        }]
-    },
-
-    {
-        "nome":"Remédios Antialérgicos",
-        "produtos":[{
-
-            "id":"5",
+        },
+        {
+            "id":"2",
             "nome":"Dicloridrato de Cetirizina",
             "preco":"R$25,76 ",
             "descricacao":"O dicloridrato de cetirizina é um anti-histamínico de segunda geração utilizado para o alívio de sintomas alérgicos, como rinite alérgica (alergia sazonal ou perene) e urticária (erupções cutâneas com coceira). É conhecido por ser eficaz no controle dos sintomas sem causar sonolência significativa, ao contrário dos anti-histamínicos de primeira geração."
-        }]
-    },
-    {
-        "nome":"Remédios Antialérgicos",
-        "produtos":[{
-
-            "id":"6",
+        },
+        {
+            "id":"3",
             "nome":"Furoato de Mometasona",
             "preco":"R$68,83",
             "descricacao":"O furoato de mometasona é um corticosteroide utilizado para tratar e controlar a inflamação e os sintomas associados a condições alérgicas e inflamatórias. Disponível principalmente em forma de spray nasal, é eficaz no tratamento da rinite alérgica e na redução dos sintomas inflamatórios nas vias nasais."
-        }]
+        }
+    ]
+    },
+    {
+        "nome":"Beleza",
+        "produtos":[
+            {
+                "id": "1",
+                "nome": "Batom Líquido Matte Aveludado Karen Bachini Afrodite 3,8 ml",
+                "preco": "32.90",
+                "descricao": "O Batom líquido By Karen Bachini apresenta uma fórmula inovadora com textura aveludada, que confere efeito mate e aplicação altamente confortável. Se espalha uniformemente e não marca as linhas dos lábios, revelando cor intensa e efeito ultra-mate."
+            },
+            {
+                "id": "2",
+                "nome": "Caneta Delineadora Líquida Matte Fran by Franciny Ehlke Black 1,2 mL",
+                "preco": "38.90",
+                "descricao": "Caneta Delineadora Líquida Matte Fran by Franciny Ehlke Black é extremamente precisa. A ponta macia oferece deslizamento e controle na aplicação, proporcionando variações de traços, desde os mais finos aos mais dramáticos. Com pigmentos super black e à prova d'água, o produto seca rapidamente e não transfere!"
+            },
+            {
+                "id": "3",
+                "nome": "Base Líquida Matte Eudora Niina Secrets Daily Tint Cream Cor 70 25 ml",
+                "preco": "36.90",
+                "descricao": "Base Líquida Matte Eudora Niina Secrets Daily Tint Cream Cor 70 proporciona acabamento matte com efeito segunda pele, uniformiza o tom de pele, camuflando olheiras e vermelhidões sem marcar as linhas de expressão."
+            },
+            {
+                "id": "4",
+                "nome": "Bálsamo Demaquilante Banila Co Clean It Zero Nourishing 100 ml",
+                "preco": "178.90",
+                "descricao": "Bálsamo Demaquilante Banila Co Clean It Zero Nourishing de textura suave e macia que derrete na pele. Remove suavemente as impurezas da pele, acalma e mantém um bom equilíbrio da pele. Acabamento hidratante sem ressecamento."
+            },
+            {
+                "id":"5",
+                "nome": "Máscara para Cílios de Volume À Prova D'Água Essence I Love Extreme Preto 12 ml",
+                "preco": "31.90",
+                "descricao": "Máscara para Cílios de Volume À Prova D'Água Essence é perfeita para quem gosta de volume extremo! Pincel extra grande e textura cremosa que cobre cada cílio individualmente com preto intenso, proporcionando efeito volume com apenas uma aplicação. Sua fórmula à prova d'água garante longa duração."
+            },
+            {
+                "id": "6",
+                "nome": "Victoria's Secret Cool Blooms - Body Splash 250ml",
+                "preco": "136.00",
+                "descricao": "Victoria's Secret Cool Blooms - Body Splash 250ml"
+            },
+            {
+                "id": "7",
+                "nome": "Lip Balm de Esfoliação Fran By Franciny Ehlke Scrub Stick Bamboo 6,2 g",
+                "preco": "33.90",
+                "descricao": "Lip Balm de Esfoliação Fran By Franciny Ehlke Scrub Stick um esfoliante com partículas naturais de bambu, enriquecido com Manteiga de Karité, Óleo de Rosa Mosqueta e Vitamina E."
+            }
+
+        ]
+    },
+    {
+        "nome":"Higiene",
+        "produtos":[
+            {
+                "id": "1",
+                "nome": "Refil Sabonete Líquido Lux Botanicals Orquídea Negra 200ml",
+                "preco": "5.99",
+                "descricao": "A fórmula é elaborada por uma combinação única e exclusiva de ingredientes botânicos naturais. Além disso, o sabonete foi especialmente produzido para proporcionar uma sensação aveludada na sua pele, tornando o banho o início de qualquer ritual de beleza, deixando a sua pele preparada para receber os próximos cuidados."
+            },
+            {
+                "id": "2",
+                "nome": "Absorvente Always Seca P com Abas 32 unidades",
+                "preco": "14.69",
+                "descricao": "Absorvente com abas e cobertura de malha seca. Possui formato anatômico que se adapta ao corpo. Conta com barreiras antivazamentos e sistema antiumidade. Proporciona absorção instantânea e segura ao longo do dia. Mantém a pele protegida e livre de umidade."
+            },
+            {
+                "id": "3",
+                "nome": "Hastes Flexíveis Cotonetes 150 Unidades",
+                "preco": "9.59",
+                "descricao": "100% em algodão. Conforto e cuidado para a pele. Altamente absorvente. Não solta fiapos e não desfia. Contém 150 unidades."
+            },
+            {
+                "id": "4",
+                "nome": "Colgate Creme Dental Tripla Ação Menta 90G",
+                "preco": "5.19",
+                "descricao": "A pasta de dente Colgate Tripla Ação Menta Original proporciona tripla proteção para você e sua família: dentes brancos, protegidos e um hálito refrescante."
+            },
+            {
+                "id": "5",
+                "nome": "Colgate Escova De Dente Slim Soft 4 Unidades",
+                "preco": "27.11",
+                "descricao": "Essa escova de dente Colgate Slim Soft Black foi desenvolvida com a tecnologia de ponta da Colgate. Por isso, essa escova de dente tem cerdas macias infundidas em carvão com pontas ultrafinas para que você tenha uma limpeza profunda e delicada."
+            },
+            {
+                "id": "6",
+                "nome": "Papel Higiênico Folha Dupla Mili Sensitive Care - 12 Rolos 30m",
+                "preco": "14.18",
+                "descricao": "O Papel Higiênico Sensitive Care Folha Dupla possui absorção em dobro, muita maciez e folhas branquinhas. Dermatologicamente testado, possui fragrância neutra, para você cuidar da sua pele com toda a proteção e delicadez que ela precisa e merece. Contém 12 rolos folha dupla com 30m de comprimento cada."
+            },
+            {
+                "id": "7",
+                "nome": "Apolo Algodão Em Bola 100G",
+                "preco": "10.16",
+                "descricao": "Cuidados Pessoais. Embalagem contém 100g. Ideal para remoção de cosméticos e possui alto poder de absorção."
+            }
+        ]
+    },
+    {
+        "nome":"Higiene bebe",
+        "produtos":[
+            {
+                "id": "1",
+                "nome": "Mamadeira NUK Essence Smart Flow Girl S1 com 150ml",
+                "preco": "41.51",
+                "descricao": "A Mamadeira Anticólica NUK Essence Smart Flow é produzido em silicone macio e extra flexível contém área Soft Zone com textura agradável que permite um toque suave na boca e nos lábios do bebê. O frasco de 150ml acompanha o bico tamanho S com 3 furos sendo indicado para bebês 0+ meses e recomendado para líquidos ralos, como por exemplo: leite materno, chá e água. Livre de BPA."
+            },
+            {
+                "id":"2",
+                "nome":"Fralda Needs Baby M 44 unidades Needs",
+                "preco":"31.92",
+                "descricao":"4 camadas de rápida absorção, com gel ultra-absorvente, sugam os fluídos em segundos."
+            },
+            {
+                "id":"3",
+                "nome":"Escova de Dente Infantil Curaprox Kids Cor Variada com 1 unidade",
+                "preco":"R$ 28,99",
+                "descricao":"Escova de dente infantil ultra macia"
+            },
+            {
+                "id":"4",
+                "nome":"Chupeta NUK Space Boy Tamanho 2 para 6 meses+ com 2 unidades",
+                "preco":"R$ 66,79",
+                "descricao":"A Chupeta NUK Space Silicone é leve e permite que a pele sensível do bebê respire e fique seca durante sua utilização. Possui bico Oral Fit 2.0 ortodôntico com topo curvado que se adapta ao céu da boca da criança, e sua base reta possibilita o melhor posicionamento da língua."
+            },
+            {
+                "id":"5",
+                "nome":"Fórmula Infantil Ascenda Nestlé Sem Sabor 3 a 10 anos 800g",
+                "preco":"R$ 101,99",
+                "descricao":"Fórmula pediátrica para nutrição enteral e oral,28 vitaminas e minerais essenciais."
+            },
+            {
+                "id":"6",
+                "nome":"Sabonete Líquido Mãos e Corpo Trá Lá Lá Kids Azul com 250ml",
+                "preco":"R$ 12,90",
+                "descricao":"Agora a Trá Lá Lá Kids está mais completa com os novos Sabonetes Líquidos Mãos e Corpo Trá Lá Lá Kids!"
+            },
+            {
+                "id":"7",
+                "nome":"Kit Sabonete em Barra Pom Pom Loção Hidratante com 5 unidades de 70g cada",
+                "preco":"R$ 16,39",
+                "descricao":"O Sabonete Pom Pom Loção Hidratante é um sabonete infantil que proporciona brilho e maciez. Minimiza o efeito ressecado da pele do seu bebê. Contém lanolina. Hipoalergênico. "
+            }
+        ]
     }
-]
+    ]
 }
        
     
