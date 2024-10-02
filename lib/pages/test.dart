@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class Produtos {
-  final String id;
-  final String nome;
-  final String preco;
-  final String descricao;
+  final String? id;
+  final String? nome;
+  final String? preco;
+  final String? descricao;
 
   Produtos({required this.id, required this.nome, required this.preco, required this.descricao});
 
@@ -14,7 +14,7 @@ class Produtos {
       id: json['id'],
       nome: json['nome'],
       preco: json['preco'],
-      descricao: json['descricacao'] ?? '',
+      descricao: json['descricao'] ?? '',
     );
   }
 }
@@ -36,7 +36,7 @@ class Categoria {
 }
 
 Future<List<Categoria>> fetchCategorias() async {
-  final response = await http.get(Uri.parse('https://raw.githubusercontent.com/lluiscase/EasyMed/main/produtos.json'));
+  final response = await http.get(Uri.parse('https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/produtos.json'));
 
   if (response.statusCode == 200) {
     Map<String, dynamic> jsonData = json.decode(response.body);
@@ -45,6 +45,16 @@ Future<List<Categoria>> fetchCategorias() async {
   } else {
     throw Exception('Falha de carregamento');
   }
+}
+
+Future<List<Produtos>> getProdutos(String nomecategoria)async{
+  var categoria = await fetchCategorias();
+  var vereficador = categoria.where((categoria)=>categoria.nome == nomecategoria );
+  List<Produtos> produtosList = [];
+  for(var b in vereficador){
+     produtosList.addAll(b.produtos);
+  }
+  return produtosList;
 }
 
 Future<void> printProdutos() async {
@@ -60,9 +70,9 @@ Future<void> printProdutos() async {
     for (var categoria in categorias) {
       print('Categoria: ${categoria.nome}');
       for (var produto in categoria.produtos) {
-        print('  Nome: ${produto.nome}');
-        print('  Preço: ${produto.preco}');
-        print('  Descrição: ${produto.descricao}');
+        print('Nome: ${produto.nome}');
+        print('Preço: ${produto.preco}');
+        print('Descrição: ${produto.descricao}');
       }
     }
   } else {
@@ -71,5 +81,6 @@ Future<void> printProdutos() async {
 }
 
 void main() async {
-  await printProdutos();
+  //getProdutos("Beleza");
+  //await printProdutos();
 }

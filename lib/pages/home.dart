@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutterguys/pages/perfil.dart';
-
+import 'package:flutterguys/pages/modules.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 void main() => runApp(HomePage());
 
 class HomePage extends StatefulWidget {
@@ -10,7 +12,68 @@ class HomePage extends StatefulWidget {
   HomePageState createState() => HomePageState();
 }
 
+class Produtos {
+  final String id;
+  final String nome;
+  final String preco;
+  final String descricao;
+
+  Produtos({required this.id, required this.nome, required this.preco, required this.descricao});
+
+  factory Produtos.fromJson(Map<String, dynamic> json) {
+    return Produtos(
+      id: json['id'],
+      nome: json['nome'],
+      preco: json['preco'],
+      descricao: json['descricao'] ?? '',
+    );
+  }
+}
+
+class Categoria {
+  final String nome;
+  List<Produtos> produtos;
+
+  Categoria({required this.nome, required this.produtos});
+
+  factory Categoria.fromJson(Map<String, dynamic> json) {
+    var produtoList = json['produtos'] as List?;
+    List<Produtos> produtos = produtoList?.map((produtoJson) => Produtos.fromJson(produtoJson)).toList() ?? [];
+    return Categoria(
+      nome: json['nome'],
+      produtos: produtos,
+    );
+  }
+}
+
 class HomePageState extends State<HomePage> {
+  late Future<List<Categoria>> categoriaProdutos;
+  @override
+  void initState(){
+    super.initState();
+    categoriaProdutos = fetchCategorias();
+  }
+  Future<List<Categoria>> fetchCategorias() async {
+  final response = await http.get(Uri.parse('https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/produtos.json'));
+  if (response.statusCode == 200) {
+    Map<String, dynamic> jsonData = json.decode(response.body);
+    List<dynamic> categoriasJson = jsonData['categoria'];
+    return categoriasJson.map((categoriaJson) => Categoria.fromJson(categoriaJson)).toList();
+  } else {
+    throw Exception('Falha de carregamento');
+  }
+}
+
+Future<List<Produtos>> getProdutos(String nomecategoria)async{
+  var categoria = await fetchCategorias();
+  var vereficador = categoria.where((categoria)=>categoria.nome == nomecategoria );
+  List<Produtos> produtosList = [];
+  for(var b in vereficador){
+     produtosList.addAll(b.produtos);
+  }
+  return produtosList;
+}
+
   int _selectedIndex = 0;
 
   @override
@@ -18,112 +81,65 @@ class HomePageState extends State<HomePage> {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Color(0xffF9FAFD),
-        appBar: AppBar(
-          backgroundColor: Color(0xffF9FAFD),
-          title: Text(
-            'Olá Helena',
-            style: TextStyle(
-              color: const Color(0xff080F0F),
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          elevation: 0.0,
-          leading: GestureDetector(
-            onTap: () {
-              print('Caracas ele clicou em mim');
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                color: Color(0xffF7f8f8),
-                borderRadius: BorderRadius.circular(1),
-              ),
-              margin: EdgeInsets.all(8),
-              child: Row(
-                children: [
-                  Flexible(
-                    child: Image.asset(
-                      'assets/icons/logo.png',
-                      fit: BoxFit.contain,
-                      width: 100,
-                    ),
+        appBar: appbar(),
+        bottomNavigationBar: Builder(
+          builder: (BuildContext context) {
+            return BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              selectedItemColor: Color(0xff16697A),
+              backgroundColor: Color(0xffF9FAFD),
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home_filled, color: Color(0xff16697A),),
+                  label: 'Home',
+                ),
+                BottomNavigationBarItem(
+                  icon: ImageIcon(
+                    AssetImage('assets/icons/medicamento.png'),
+                    color: Color(0xff16697A),
                   ),
-                ],
-              ),
-            ),
-          ),
-          actions: [
-            GestureDetector(
-              onTap: () {
-                print('Clicou no carrinho');
-              },
-              child: Container(
-                margin: EdgeInsets.all(10),
-                child: Image.asset(
-                  'assets/icons/shopping_basket.png',
-                  width: 50,
+                  label: 'Localização',
                 ),
-                decoration: BoxDecoration(
-                  color: Color(0xffF7f8f8),
-                  borderRadius: BorderRadius.circular(1),
+                BottomNavigationBarItem(
+                  icon: ImageIcon(
+                    AssetImage('assets/icons/tag.png'),
+                    color: Color(0xff16697A),
+                  ),
+                  label: 'Ofertas',
                 ),
-              ),
-            ),
-          ],
+                BottomNavigationBarItem(
+                  icon: ImageIcon(
+                    AssetImage('assets/icons/profile_user.png'),
+                    color: Color(0xff16697A),
+                  ),
+                  label: 'Perfil',
+                ),
+              ],
+              currentIndex: _selectedIndex,
+              onTap: (index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+            
+                if (index == 1) {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));
+                }
+                else if (index == 2) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Perfil()),
+                  );
+                }
+                else if (index == 3) {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));
+                }
+                else Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));
+                },
+            );
+          }
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: Color(0xff16697A),
-          backgroundColor: Color(0xffF9FAFD),
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home_filled),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(
-                AssetImage('assets/icons/medicamento.png'),
-                color: Color(0xff16697A),
-              ),
-              label: 'Localização',
-            ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(
-                AssetImage('assets/icons/tag.png'),
-                color: Color(0xff16697A),
-              ),
-              label: 'Ofertas',
-            ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(
-                AssetImage('assets/icons/profile_user.png'),
-                color: Color(0xff16697A),
-              ),
-              label: 'Perfil',
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          onTap: (index) {
-            setState(() {
-              _selectedIndex = index;
-            });
-
-            if (index == 1) {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));
-            }
-            else if (index == 2) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Perfil()),
-              );
-            }
-            else if (index == 3) {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));
-            }
-            else Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));
-            },
-        ),
-        body: Column(
+        body: SingleChildScrollView(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             searchField(),
@@ -141,42 +157,257 @@ class HomePageState extends State<HomePage> {
             Container(
               height: 150,
               color: Colors.amber,
+              child: FutureBuilder(
+                future: fetchCategorias(), 
+                builder: (context, snapshot){
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text("Erro ao carregar categorias"));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text("Nenhuma categoria disponível"));
+          }
+            return ListView.separated(
+              itemCount: snapshot.data!.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: EdgeInsets.all(10),
+                  width: 100,
+                  height: 5,
+                  child: Center(
+                    child: Text(
+                      snapshot.data![index].nome,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xff16697A),
+                        fontSize: 10,
+                  ),
+                  )
+                  ),
+                  decoration: BoxDecoration(
+                    color: Color(0xffeeefe6),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                );
+                  },
+                  separatorBuilder: (context, index) => const Divider(),
+                );
+              }),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20, left: 20),
+              child: Text(
+                'Festival do bebê',
+                style: TextStyle(
+                  color: Color(0xff16697A),
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            Container(
+              height: 150,
+              color: Colors.amber,
+              child: FutureBuilder(
+                future: getProdutos("Higiene bebe"), 
+                builder: (context, snapshot){
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text("Erro ao carregar categorias"));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text("Nenhuma categoria disponível"));
+          }
+            return ListView.separated(
+              itemCount: snapshot.data!.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: EdgeInsets.all(10),
+                  width: 100,
+                  height: 5,
+                     child: Column(
+                        children: [
+                          Text(
+                          snapshot.data![index].nome,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Color(0xff16697A),
+                            fontSize: 10,
+                      ),
+                      ),
+                      Text(
+                          snapshot.data![index].nome,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Color(0xff16697A),
+                            fontSize: 10,
+                      ),
+                      )
+                        ]
+                  ),
+                  decoration: BoxDecoration(
+                    color: Color(0xffeeefe6),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                );
+                  },
+                  separatorBuilder: (context, index) => const Divider(),
+                );
+              }),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20, left: 20),
+              child: Text(
+                'Beleza',
+                style: TextStyle(
+                  color: Color(0xff16697A),
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            Container(
+              height: 150,
+              color: Colors.amber,
+              child: FutureBuilder(
+                future: fetchCategorias(), 
+                builder: (context, snapshot){
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text("Erro ao carregar categorias"));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text("Nenhuma categoria disponível"));
+          }
+            return ListView.separated(
+              itemCount: snapshot.data!.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: EdgeInsets.all(10),
+                  width: 100,
+                  height: 5,
+                  child: Center(
+                    child: Text(
+                      snapshot.data![index].nome,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xff16697A),
+                        fontSize: 10,
+                  ),
+                  )
+                  ),
+                  decoration: BoxDecoration(
+                    color: Color(0xffeeefe6),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                );
+                  },
+                  separatorBuilder: (context, index) => const Divider(),
+                );
+              }),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20, left: 20),
+              child: Text(
+                'Higiene',
+                style: TextStyle(
+                  color: Color(0xff16697A),
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            Container(
+              height: 150,
+              color: Colors.amber,
+              child: FutureBuilder(
+                future: fetchCategorias(), 
+                builder: (context, snapshot){
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text("Erro ao carregar categorias"));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text("Nenhuma categoria disponível"));
+          }
+            return ListView.separated(
+              itemCount: snapshot.data!.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: EdgeInsets.all(10),
+                  width: 100,
+                  height: 5,
+                  child: Center(
+                    child: Text(
+                      snapshot.data![index].nome,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xff16697A),
+                        fontSize: 10,
+                  ),
+                  )
+                  ),
+                  decoration: BoxDecoration(
+                    color: Color(0xffeeefe6),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                );
+                  },
+                  separatorBuilder: (context, index) => const Divider(),
+                );
+              }),
+            ),
+            Container(
+              height: 150,
+              color: Colors.amber,
+              child: FutureBuilder(
+                future: fetchCategorias(), 
+                builder: (context, snapshot){
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text("Erro ao carregar categorias"));
+          } else if (!snapshot.hasData && snapshot.data!.isEmpty) {
+            return Center(child: Text("Nenhuma categoria disponível"));
+          }
+            return ListView.separated(
+              itemCount: snapshot.data!.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: EdgeInsets.all(10),
+                  width: 100,
+                  height: 5,
+                  child: Center(
+                    
+                    child: Text(
+                      snapshot.data![index].produtos[index].nome,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xff16697A),
+                        fontSize: 10,
+                  ),
+                  )
+                  ),
+                  decoration: BoxDecoration(
+                    color: Color(0xffeeefe6),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                );
+                  },
+                  separatorBuilder: (context, index) => const Divider(),
+                );
+              }),
             ),
           ],
         ),
+        )
       ),
     );
   }
 
-  Container searchField() {
-    return Container(
-      margin: EdgeInsets.only(top: 40, left: 20, right: 20),
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Color(0xff101617).withOpacity(0.11),
-            blurRadius: 40,
-            spreadRadius: 0.0,
-          ),
-        ],
-      ),
-      height: 35,
-      child: TextField(
-        decoration: InputDecoration(
-          filled: true,
-          fillColor: const Color.fromARGB(255, 226, 226, 226),
-          hintText: 'Pesquisar um item',
-          hintStyle: TextStyle(
-            color: Color.fromARGB(255, 190, 190, 190),
-            fontSize: 12,
-          ),
-          prefixIcon: Icon(Icons.search),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15),
-            borderSide: BorderSide.none,
-          ),
-        ),
-      ),
-    );
-  }
 }
