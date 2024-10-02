@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterguys/pages/historico.dart';
+import 'package:flutterguys/pages/meusDados.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(const Perfil());
 
@@ -11,17 +13,33 @@ class Perfil extends StatefulWidget {
 }
 
 class PerfilState extends State<Perfil> {
+  String nomeUsuario = 'Visitante';
+
+  @override
+  void initState() {
+    super.initState();
+    _carregaNomeUsuario();
+  }
+
+  Future<void> _carregaNomeUsuario() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      nomeUsuario = prefs.getString('nomeUsuario') ?? 'Visitante';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          leading: Image.asset('assets/icons/logo.png', width: 47.43, height: 40),
-          title: const Text("Olá Helena"),
+          leading:
+              Image.asset('assets/icons/logo.png', width: 47.43, height: 40),
+          title: Text("Olá, $nomeUsuario"),
           actions: [
             GestureDetector(
               onTap: () {
-                Navigator.pop(context); // Volta para a tela anterior
+                Navigator.pop(context);
               },
               child: Image.asset(
                 'assets/icons/return.png',
@@ -43,9 +61,9 @@ class PerfilState extends State<Perfil> {
                 child: Icon(Icons.person, size: 50),
               ),
               const SizedBox(height: 20),
-              const Text(
-                "Helena Bianchi",
-                style: TextStyle(
+              Text(
+                nomeUsuario,
+                style: const TextStyle(
                   fontSize: 20,
                   color: Colors.blue,
                 ),
@@ -54,21 +72,6 @@ class PerfilState extends State<Perfil> {
               Expanded(
                 child: ListView(
                   children: [
-                    const ListTile(
-                      title: Text(
-                        "Meus Dados",
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ),
-                    const Divider(),
-                    const ListTile(
-                      title: Text(
-                        "Retiradas",
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ),
-                    const Divider(),
-                    // Aqui está a opção "Histórico" com navegação.
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -81,6 +84,31 @@ class PerfilState extends State<Perfil> {
                       child: const ListTile(
                         title: Text(
                           "Histórico",
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      ),
+                    ),
+                    const Divider(),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MeusDados(
+                              onNomeSalvo: (String novoNome) {
+                                setState(() {
+                                  nomeUsuario = novoNome.isNotEmpty
+                                      ? novoNome
+                                      : 'Visitante';
+                                });
+                              },
+                            ),
+                          ),
+                        );
+                      },
+                      child: const ListTile(
+                        title: Text(
+                          "Meus Dados",
                           style: TextStyle(fontSize: 20),
                         ),
                       ),

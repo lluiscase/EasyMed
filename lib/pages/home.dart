@@ -53,6 +53,7 @@ class HomePageState extends State<HomePage> {
     super.initState();
     categoriaProdutos = fetchCategorias();
   }
+
   Future<List<Categoria>> fetchCategorias() async {
   final response = await http.get(Uri.parse('https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/produtos.json'));
   if (response.statusCode == 200) {
