@@ -110,77 +110,79 @@ class MeusDadosState extends State<MeusDados> {
             ),
           ],
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(height: 30),
-              const CircleAvatar(
-                radius: 60,
-                backgroundColor: Colors.blue,
-                child: Icon(Icons.person, size: 50),
-              ),
-              const SizedBox(height: 20),
-              Text(
-                nomeExibido,
-                style: const TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.blue,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(height: 30),
+                const CircleAvatar(
+                  radius: 60,
+                  backgroundColor: Colors.blue,
+                  child: Icon(Icons.person, size: 50),
                 ),
-              ),
-              const SizedBox(height: 30),
-              TextFormField(
-                controller: nomeController,
-                decoration: const InputDecoration(
-                  labelText: 'Nome Completo',
-                  border: OutlineInputBorder(),
+                const SizedBox(height: 20),
+                Text(
+                  nomeExibido,
+                  style: const TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.blue,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 20),
-              TextFormField(
-                controller: emailController,
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                  border: OutlineInputBorder(),
+                const SizedBox(height: 30),
+                TextFormField(
+                  controller: nomeController,
+                  decoration: const InputDecoration(
+                    labelText: 'Nome Completo',
+                    border: OutlineInputBorder(),
+                  ),
                 ),
-                keyboardType: TextInputType.emailAddress,
-              ),
-              const SizedBox(height: 20),
-              TextFormField(
-                controller: telefoneController,
-                decoration: const InputDecoration(
-                  labelText: 'Telefone',
-                  border: OutlineInputBorder(),
+                const SizedBox(height: 20),
+                TextFormField(
+                  controller: emailController,
+                  decoration: const InputDecoration(
+                    labelText: 'Email',
+                    border: OutlineInputBorder(),
+                  ),
+                  keyboardType: TextInputType.emailAddress,
                 ),
-                keyboardType: TextInputType.phone,
-              ),
-              const SizedBox(height: 20),
-              TextFormField(
-                controller: cpfController,
-                decoration: const InputDecoration(
-                  labelText: 'CPF',
-                  border: OutlineInputBorder(),
+                const SizedBox(height: 20),
+                TextFormField(
+                  controller: telefoneController,
+                  decoration: const InputDecoration(
+                    labelText: 'Telefone',
+                    border: OutlineInputBorder(),
+                  ),
+                  keyboardType: TextInputType.phone,
                 ),
-              ),
-              const SizedBox(height: 20),
-              TextFormField(
-                controller: enderecoController,
-                decoration: const InputDecoration(
-                  labelText: 'Endereço',
-                  border: OutlineInputBorder(),
+                const SizedBox(height: 20),
+                TextFormField(
+                  controller: cpfController,
+                  decoration: const InputDecoration(
+                    labelText: 'CPF',
+                    border: OutlineInputBorder(),
+                  ),
                 ),
-                keyboardType: TextInputType.streetAddress,
-              ),
-              const SizedBox(height: 30),
-              ElevatedButton(
-                onPressed: () {
-                  _salvamentoDosDados();
-                },
-                child: const Text('Salvar'),
-              ),
-            ],
+                const SizedBox(height: 20),
+                TextFormField(
+                  controller: enderecoController,
+                  decoration: const InputDecoration(
+                    labelText: 'Endereço',
+                    border: OutlineInputBorder(),
+                  ),
+                  keyboardType: TextInputType.streetAddress,
+                ),
+                const SizedBox(height: 30),
+                ElevatedButton(
+                  onPressed: () {
+                    _salvamentoDosDados();
+                  },
+                  child: const Text('Salvar'),
+                ),
+              ],
+            ),
           ),
         ),
       ),
