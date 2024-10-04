@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterguys/pages/historico.dart';
 import 'package:flutterguys/pages/meusDados.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutterguys/pages/retiradas.dart';
 
 void main() => runApp(const Perfil());
 
@@ -121,12 +122,26 @@ class PerfilState extends State<Perfil> {
                       ),
                     ),
                     const Divider(),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Retiradas()));
+                      },
+                      child: const ListTile(
+                        title:
+                            Text("Retiradas", style: TextStyle(fontSize: 20)),
+                      ),
+                    ),
+                    const Divider(),
                     const ListTile(
                       title: Text(
                         "Sair",
                         style: TextStyle(fontSize: 20),
                       ),
                     ),
+                    const Divider(),
                   ],
                 ),
               ),
