@@ -2,6 +2,7 @@
     "categoria":[
         {
         "nome":"Remedios Controlados",
+        "photo":"https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/medicamento.png",
         "produtos":[
             {
 
@@ -26,6 +27,7 @@
     },
     {
         "nome":"Anti-inflamatórios",
+        "photo":"https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/medicamento.png",
         "produtos":[
             {
 
@@ -52,6 +54,7 @@
     },
     {
         "nome":"Remédios Antialérgicos",
+        "photo":"https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/medicamento.png",
         "produtos":[
             {
             "id":"1",
@@ -75,6 +78,7 @@
     },
     {
         "nome":"Beleza",
+        "photo":"https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/creme.png",
         "produtos":[
             {
                 "id": "1",
@@ -123,6 +127,7 @@
     },
     {
         "nome":"Higiene",
+        "photo":"https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/produtos_de_higiene_pessoal.png",
         "produtos":[
             {
                 "id": "1",
