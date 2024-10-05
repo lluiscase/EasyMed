@@ -36,7 +36,7 @@ class PerfilState extends State<Perfil> {
         appBar: AppBar(
           leading:
               Image.asset('assets/icons/logo.png', width: 47.43, height: 40),
-          title: Text("Olá, $nomeUsuario"),
+          title: Text("Olá!, $nomeUsuario"),
           actions: [
             GestureDetector(
               onTap: () {

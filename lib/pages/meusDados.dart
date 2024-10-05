@@ -45,7 +45,6 @@ class MeusDadosState extends State<MeusDados> {
     await prefs.setString('telefoneUsuario', telefoneController.text);
     await prefs.setString('cpfUsuario', cpfController.text);
     await prefs.setString('enderecoUsuario', enderecoController.text);
-    print("Dados salvos!");
 
     widget.onNomeSalvo(nomeController.text);
 
