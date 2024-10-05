@@ -3,6 +3,7 @@ import 'package:flutterguys/pages/historico.dart';
 import 'package:flutterguys/pages/meusDados.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutterguys/pages/retiradas.dart';
+import 'dart:io';
 
 void main() => runApp(const Perfil());
 
@@ -15,17 +16,19 @@ class Perfil extends StatefulWidget {
 
 class PerfilState extends State<Perfil> {
   String nomeUsuario = 'Visitante';
+  String? caminhoImagemPerfil;
 
   @override
   void initState() {
     super.initState();
-    _carregaNomeUsuario();
+    _carregaDadosUsuario();
   }
 
-  Future<void> _carregaNomeUsuario() async {
+  Future<void> _carregaDadosUsuario() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       nomeUsuario = prefs.getString('nomeUsuario') ?? 'Visitante';
+      caminhoImagemPerfil = prefs.getString('caminhoImagemPerfil');
     });
   }
 
@@ -35,7 +38,7 @@ class PerfilState extends State<Perfil> {
       home: Scaffold(
         appBar: AppBar(
           leading:
-              Image.asset('assets/icons/logo.png', width: 47.43, height: 40),
+          Image.asset('assets/icons/logo.png', width: 47.43, height: 40),
           title: Text("Olá!, $nomeUsuario"),
           actions: [
             GestureDetector(
@@ -56,10 +59,15 @@ class PerfilState extends State<Perfil> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 30),
-              const CircleAvatar(
+              CircleAvatar(
                 radius: 60,
                 backgroundColor: Colors.blue,
-                child: Icon(Icons.person, size: 50),
+                backgroundImage: caminhoImagemPerfil != null
+                    ? FileImage(File(caminhoImagemPerfil!))
+                    : null,
+                child: caminhoImagemPerfil == null
+                    ? const Icon(Icons.person, size: 50, color: Colors.white)
+                    : null,
               ),
               const SizedBox(height: 20),
               Text(
@@ -101,6 +109,7 @@ class PerfilState extends State<Perfil> {
                                   nomeUsuario = novoNome.isNotEmpty
                                       ? novoNome
                                       : 'Visitante';
+                                  _carregaDadosUsuario();
                                 });
                               },
                             ),
@@ -131,7 +140,7 @@ class PerfilState extends State<Perfil> {
                       },
                       child: const ListTile(
                         title:
-                            Text("Retiradas", style: TextStyle(fontSize: 20)),
+                        Text("Retiradas", style: TextStyle(fontSize: 20)),
                       ),
                     ),
                     const Divider(),

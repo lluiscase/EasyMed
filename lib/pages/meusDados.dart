@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class MeusDados extends StatefulWidget {
   final Function(String) onNomeSalvo;
@@ -16,6 +18,9 @@ class MeusDadosState extends State<MeusDados> {
   final TextEditingController telefoneController = TextEditingController();
   final TextEditingController cpfController = TextEditingController();
   final TextEditingController enderecoController = TextEditingController();
+  final ImagePicker _picker = ImagePicker();
+  XFile? _imagemPerfil;
+  String? _caminhoImagemPerfil;
 
   String nomeExibido = 'Visitante';
 
@@ -25,6 +30,16 @@ class MeusDadosState extends State<MeusDados> {
     _carregamentoDados();
   }
 
+  Future<void> _escolherImagem() async {
+    final XFile? imagemSelecionada = await _picker.pickImage(source: ImageSource.gallery);
+    if (imagemSelecionada != null) {
+      setState(() {
+        _imagemPerfil = imagemSelecionada;
+        _caminhoImagemPerfil = imagemSelecionada.path;
+      });
+    }
+  }
+
   Future<void> _carregamentoDados() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     nomeController.text = prefs.getString('nomeUsuario') ?? '';
@@ -32,9 +47,13 @@ class MeusDadosState extends State<MeusDados> {
     telefoneController.text = prefs.getString('telefoneUsuario') ?? '';
     cpfController.text = prefs.getString('cpfUsuario') ?? '';
     enderecoController.text = prefs.getString('enderecoUsuario') ?? '';
+    _caminhoImagemPerfil = prefs.getString('caminhoImagemPerfil');
 
     setState(() {
       nomeExibido = nomeController.text.isNotEmpty ? nomeController.text : 'Visitante';
+      if (_caminhoImagemPerfil != null) {
+        _imagemPerfil = XFile(_caminhoImagemPerfil!);
+      }
     });
   }
 
@@ -45,6 +64,10 @@ class MeusDadosState extends State<MeusDados> {
     await prefs.setString('telefoneUsuario', telefoneController.text);
     await prefs.setString('cpfUsuario', cpfController.text);
     await prefs.setString('enderecoUsuario', enderecoController.text);
+
+    if (_caminhoImagemPerfil != null) {
+      await prefs.setString('caminhoImagemPerfil', _caminhoImagemPerfil!);
+    }
 
     widget.onNomeSalvo(nomeController.text);
 
@@ -116,10 +139,18 @@ class MeusDadosState extends State<MeusDados> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(height: 30),
-                const CircleAvatar(
-                  radius: 60,
-                  backgroundColor: Colors.blue,
-                  child: Icon(Icons.person, size: 50),
+                GestureDetector(
+                  onTap: _escolherImagem,
+                  child: CircleAvatar(
+                    radius: 60,
+                    backgroundColor: Colors.blue,
+                    backgroundImage: _imagemPerfil != null
+                        ? FileImage(File(_imagemPerfil!.path))
+                        : null,
+                    child: _imagemPerfil == null
+                        ? const Icon(Icons.person, size: 50, color: Colors.white)
+                        : null,
+                  ),
                 ),
                 const SizedBox(height: 20),
                 Text(
@@ -163,6 +194,7 @@ class MeusDadosState extends State<MeusDados> {
                     labelText: 'CPF',
                     border: OutlineInputBorder(),
                   ),
+                  keyboardType: TextInputType.phone,
                 ),
                 const SizedBox(height: 20),
                 TextFormField(
@@ -173,12 +205,23 @@ class MeusDadosState extends State<MeusDados> {
                   ),
                   keyboardType: TextInputType.streetAddress,
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 50),
                 ElevatedButton(
-                  onPressed: () {
-                    _salvamentoDosDados();
-                  },
-                  child: const Text('Salvar'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    minimumSize: const Size(180, 51),
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                  onPressed: _salvamentoDosDados,
+                  child: const Text(
+                    'Salvar',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ],
             ),
