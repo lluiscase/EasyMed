@@ -1,30 +1,5 @@
 {
     "categoria":[
-        {
-        "nome":"Remedios Controlados",
-        "photo":"https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/medicamento.png",
-        "produtos":[
-            {
-
-            "id":"1",
-            "nome":"Diazepam",
-            "preco":"R$ 12,19",
-            "descricao":"Indicação: Diazepam é indicado para lívio sintomático da ansiedade, tensão e outras queixas somáticas ou psicológicas associadas com a síndrome da ansiedade. Pode também ser útil como coadjuvante no tratamento da ansiedade ou agitação associada a desordens psiquiátricas. Diazepam é útil no alívio do espasmo muscular reflexo devido a traumas locais (lesão, inflamação)."
-        },
-        {
-            "id":"2",
-            "nome":"Morfina",
-            "preco":"R$ 51,59",
-            "descricao":"A morfina é um analgésico potente da classe dos opioides, amplamente utilizada para o tratamento de dores severas, especialmente quando outras formas de alívio da dor não são eficazes. Disponível em várias formas, incluindo comprimidos, cápsulas, soluções orais, injeções e adesivos transdérmicos, a morfina age ligando-se aos receptores opioides no sistema nervoso central e periférico. Essa ligação reduz a percepção da dor e altera a resposta emocional à dor."
-        },
-        {
-            "id":"3",
-            "nome":"Dexedrine",
-            "preco":"R$ 51,59",
-            "descricao":"A morfina é um analgésico potente da classe dos opioides, amplamente utilizada para o tratamento de dores severas, especialmente quando outras formas de alívio da dor não são eficazes. Disponível em várias formas, incluindo comprimidos, cápsulas, soluções orais, injeções e adesivos transdérmicos, a morfina age ligando-se aos receptores opioides no sistema nervoso central e periférico. Essa ligação reduz a percepção da dor e altera a resposta emocional à dor."
-        }
-    ]
-    },
     {
         "nome":"Anti-inflamatórios",
         "photo":"https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/medicamento.png",
@@ -34,20 +9,23 @@
             "id":"1",
             "nome":"Ibuprofeno",
             "preco":"R$ 6,38",
-            "descricao":" O ibuprofeno é um medicamento anti-inflamatório não esteroide (AINE) amplamente utilizado para aliviar a dor,reduzir a inflamação e diminuir a febre. É um dos AINEs mais comuns e é vendido tanto com prescrição médica quanto sem ela."
+            "descricao":" O ibuprofeno é um medicamento anti-inflamatório não esteroide (AINE) amplamente utilizado para aliviar a dor,reduzir a inflamação e diminuir a febre. É um dos AINEs mais comuns e é vendido tanto com prescrição médica quanto sem ela.",
+            "foto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLK4lqZKHVN2g5Ia3yIv-tP8hlHJdGbr1IvQ&s"
         },
         {
             "id":"2",
             "nome":"Aspirina",
             "preco":"R$16,97",
-            "descricao":"é um medicamento anti-inflamatório não esteroide (AINE) utilizado para aliviar a dor, reduzir a inflamação e diminuir a febre. É também conhecida por suas propriedades antiplaquetárias, ou seja, pode ajudar a prevenir a formação de coágulos sanguíneos."
+            "descricao":"é um medicamento anti-inflamatório não esteroide (AINE) utilizado para aliviar a dor, reduzir a inflamação e diminuir a febre. É também conhecida por suas propriedades antiplaquetárias, ou seja, pode ajudar a prevenir a formação de coágulos sanguíneos.",
+            "foto": "https://paguemenos.vtexassets.com/arquivos/ids/274392/Analgesico-Aspirina-500mg-a%E2%82%AC%E2%80%9C-caixa-com-20-comprimidos-Pague-Menos-43534-2.jpg?v=637305908740470000"
       
         },
         {
             "id":"3",
             "nome":"Naproxeno ",
             "preco":"R$24,29",
-            "descricao":" O naproxeno é um medicamento anti-inflamatório não esteroide (AINE) utilizado para aliviar a dor-Moderada, reduzir a inflamação e diminuir a febre. É eficaz no tratamento de várias condições que envolvem dor e inflamação."
+            "descricao":" O naproxeno é um medicamento anti-inflamatório não esteroide (AINE) utilizado para aliviar a dor-Moderada, reduzir a inflamação e diminuir a febre. É eficaz no tratamento de várias condições que envolvem dor e inflamação.",
+            "foto": "https://www.drogarianovaesperanca.com.br/imagens/600x600/naproxeno-sodico-550mg-com-20-comprimidos-04f87525e1.jpg"
 
         }
     ]
@@ -60,19 +38,22 @@
             "id":"1",
             "nome":"Loratadina",
             "preco":"R$11,99",
-            "descricao":" A loratadina é um remédio antialérgico usado no alívio dos sintomas de rinite alérgica como coceira nasal, tosse alérgica, coriza, espirros, ardor e coceira nos olhos"
+            "descricao":" A loratadina é um remédio antialérgico usado no alívio dos sintomas de rinite alérgica como coceira nasal, tosse alérgica, coriza, espirros, ardor e coceira nos olhos",
+            "foto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmdLJv81rtubs4mxFJIkIe497s6EQ4f9Fhdw&s"
         },
         {
             "id":"2",
             "nome":"Dicloridrato de Cetirizina",
             "preco":"R$25,76 ",
-            "descricao":"O dicloridrato de cetirizina é um anti-histamínico de segunda geração utilizado para o alívio de sintomas alérgicos, como rinite alérgica (alergia sazonal ou perene) e urticária (erupções cutâneas com coceira). É conhecido por ser eficaz no controle dos sintomas sem causar sonolência significativa, ao contrário dos anti-histamínicos de primeira geração."
+            "descricao":"O dicloridrato de cetirizina é um anti-histamínico de segunda geração utilizado para o alívio de sintomas alérgicos, como rinite alérgica (alergia sazonal ou perene) e urticária (erupções cutâneas com coceira). É conhecido por ser eficaz no controle dos sintomas sem causar sonolência significativa, ao contrário dos anti-histamínicos de primeira geração.",
+            "foto": "https://drogariaglobo.vtexassets.com/arquivos/ids/1106828/Dicloridrato-de-Cetirizina-1mg-mL-Solucao-Oral-Generico-Medley-120ml.jpg?v=638279650373870000"
         },
         {
             "id":"3",
             "nome":"Furoato de Mometasona",
             "preco":"R$68,83",
-            "descricao":"O furoato de mometasona é um corticosteroide utilizado para tratar e controlar a inflamação e os sintomas associados a condições alérgicas e inflamatórias. Disponível principalmente em forma de spray nasal, é eficaz no tratamento da rinite alérgica e na redução dos sintomas inflamatórios nas vias nasais."
+            "descricao":"O furoato de mometasona é um corticosteroide utilizado para tratar e controlar a inflamação e os sintomas associados a condições alérgicas e inflamatórias. Disponível principalmente em forma de spray nasal, é eficaz no tratamento da rinite alérgica e na redução dos sintomas inflamatórios nas vias nasais.",
+            "foto":"https://bemol.vtexassets.com/arquivos/ids/287789-800-800?v=638554512600730000&width=800&height=800&aspect=true"
         }
     ]
     },
@@ -84,43 +65,50 @@
                 "id": "1",
                 "nome": "Batom Afrodite Karen Bachini",
                 "preco": "32.90",
-                "descricao": "O Batom líquido By Karen Bachini apresenta uma fórmula inovadora com textura aveludada, que confere efeito mate e aplicação altamente confortável. Se espalha uniformemente e não marca as linhas dos lábios, revelando cor intensa e efeito ultra-mate. O produto contém 3,8 ml"
+                "descricao": "O Batom líquido By Karen Bachini apresenta uma fórmula inovadora com textura aveludada, que confere efeito mate e aplicação altamente confortável. Se espalha uniformemente e não marca as linhas dos lábios, revelando cor intensa e efeito ultra-mate. O produto contém 3,8 ml",
+                "foto": "https://drogariasp.vteximg.com.br/arquivos/ids/1068556-500-500/image-33078483b2434fb89636c0ff01cae7af.jpg?v=638457808353000000"
             },
             {
                 "id": "2",
                 "nome": "Caneta Delineadora Franciny Ehlke",
                 "preco": "38.90",
-                "descricao": "Caneta Delineadora Líquida Matte Fran by Franciny Ehlke Black é extremamente precisa. A ponta macia oferece deslizamento e controle na aplicação, proporcionando variações de traços, desde os mais finos aos mais dramáticos. Com pigmentos super black e à prova d'água, o produto seca rapidamente e não transfere!"
+                "descricao": "Caneta Delineadora Líquida Matte Fran by Franciny Ehlke Black é extremamente precisa. A ponta macia oferece deslizamento e controle na aplicação, proporcionando variações de traços, desde os mais finos aos mais dramáticos. Com pigmentos super black e à prova d'água, o produto seca rapidamente e não transfere!",
+                "foto": "https://cdn.iset.io/assets/70914/produtos/171/5989e1511894237bc821539f0ce2bd12653e595f383e3.png"
             },
             {
                 "id": "3",
                 "nome": "Base Matte Eudora Niina Secrets",
                 "preco": "36.90",
-                "descricao": "Base Líquida Matte Eudora Niina Secrets Daily Tint Cream Cor 70 proporciona acabamento matte com efeito segunda pele, uniformiza o tom de pele, camuflando olheiras e vermelhidões sem marcar as linhas de expressão."
+                "descricao": "Base Líquida Matte Eudora Niina Secrets Daily Tint Cream Cor 70 proporciona acabamento matte com efeito segunda pele, uniformiza o tom de pele, camuflando olheiras e vermelhidões sem marcar as linhas de expressão.",
+                "foto":"https://res.cloudinary.com/beleza-na-web/image/upload/w_1500,f_auto,fl_progressive,q_auto:eco,w_800/v1/imagens/products/E48104/_NIINA_SECRET_BASE_PERFECT_MATCH_COR5_E48104.jpg"
             },
             {
                 "id": "4",
                 "nome": "Bálsamo Demaquilante Banila",
                 "preco": "178.90",
-                "descricao": "Bálsamo Demaquilante Banila Co Clean It Zero Nourishing de textura suave e macia que derrete na pele. Remove suavemente as impurezas da pele, acalma e mantém um bom equilíbrio da pele. Acabamento hidratante sem ressecamento."
+                "descricao": "Bálsamo Demaquilante Banila Co Clean It Zero Nourishing de textura suave e macia que derrete na pele. Remove suavemente as impurezas da pele, acalma e mantém um bom equilíbrio da pele. Acabamento hidratante sem ressecamento.",
+                "foto":"https://amobeleza.vtexassets.com/arquivos/ids/247626/balsamo-demaquilante-banila-co-clean-it-zero-original-cem-ml-foto-um.jpg?v=638227973727400000"
             },
             {
                 "id":"5",
-                "nome": "Máscara para Cílios Essence ",
+                "nome": "Máscara para Cílios Essence",
                 "preco": "31.90",
-                "descricao": "Máscara para Cílios de Volume À Prova D'Água Essence é perfeita para quem gosta de volume extremo! Pincel extra grande e textura cremosa que cobre cada cílio individualmente com preto intenso, proporcionando efeito volume com apenas uma aplicação. Sua fórmula à prova d'água garante longa duração."
+                "descricao": "Máscara para Cílios de Volume À Prova D'Água Essence é perfeita para quem gosta de volume extremo! Pincel extra grande e textura cremosa que cobre cada cílio individualmente com preto intenso, proporcionando efeito volume com apenas uma aplicação. Sua fórmula à prova d'água garante longa duração.",
+                "foto":"https://m.media-amazon.com/images/I/61HLmRuVZvL._AC_UF1000,1000_QL80_.jpg"
             },
             {
                 "id": "6",
                 "nome": "Victoria's Secret Cool Blooms",
                 "preco": "136.00",
-                "descricao": "Victoria's Secret Cool Blooms - Body Splash 250ml"
+                "descricao": "Victoria's Secret Cool Blooms - Body Splash 250ml",
+                "foto":"https://acdn.mitiendanube.com/stores/002/240/964/products/40fe96bc-b06a-4fba-a6c1-130405ca6d121-43b894a8c7ff196f0516768977387638-640-0.jpeg"
             },
             {
                 "id": "7",
                 "nome": "Lip Balm By Franciny Ehlke",
                 "preco": "33.90",
-                "descricao": "Lip Balm de Esfoliação Fran By Franciny Ehlke Scrub Stick um esfoliante com partículas naturais de bambu, enriquecido com Manteiga de Karité, Óleo de Rosa Mosqueta e Vitamina E."
+                "descricao": "Lip Balm de Esfoliação Fran By Franciny Ehlke Scrub Stick um esfoliante com partículas naturais de bambu, enriquecido com Manteiga de Karité, Óleo de Rosa Mosqueta e Vitamina E.",
+                "foto":"https://cdn.iset.io/assets/70914/produtos/150/6cdc3134e1035b98d08b5ce01185197f653e590d50f15.png"
             }
 
         ]
