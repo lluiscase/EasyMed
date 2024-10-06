@@ -121,43 +121,50 @@
                 "id": "1",
                 "nome": "Sabonete Líquido Lux Botanicals",
                 "preco": "5.99",
-                "descricao": "A fórmula é elaborada por uma combinação única e exclusiva de ingredientes botânicos naturais. Além disso, o sabonete foi especialmente produzido para proporcionar uma sensação aveludada na sua pele, tornando o banho o início de qualquer ritual de beleza, deixando a sua pele preparada para receber os próximos cuidados."
+                "descricao": "A fórmula é elaborada por uma combinação única e exclusiva de ingredientes botânicos naturais. Além disso, o sabonete foi especialmente produzido para proporcionar uma sensação aveludada na sua pele, tornando o banho o início de qualquer ritual de beleza, deixando a sua pele preparada para receber os próximos cuidados.",
+                "foto": "https://www.perfumariasumire.com.br/media/catalog/product/s/a/sabonete_liquido_lux_botanicals_orquidea_negra_250ml.jpg?optimize=medium&bg-color=255,255,255&fit=bounds&height=563&width=553&canvas=553:563"
             },
             {
                 "id": "2",
                 "nome": "Absorvente Always Seca",
                 "preco": "14.69",
-                "descricao": "Absorvente com abas e cobertura de malha seca. Possui formato anatômico que se adapta ao corpo. Conta com barreiras antivazamentos e sistema antiumidade. Proporciona absorção instantânea e segura ao longo do dia. Mantém a pele protegida e livre de umidade."
+                "descricao": "Absorvente com abas e cobertura de malha seca. Possui formato anatômico que se adapta ao corpo. Conta com barreiras antivazamentos e sistema antiumidade. Proporciona absorção instantânea e segura ao longo do dia. Mantém a pele protegida e livre de umidade.",
+                "foto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrxCzrSmHwrXsk4p9Ng8kNuul_Pch1uXx6EA&s"
             },
             {
                 "id": "3",
                 "nome": "Hastes Flexíveis Cotonetes",
                 "preco": "9.59",
-                "descricao": "100% em algodão. Conforto e cuidado para a pele. Altamente absorvente. Não solta fiapos e não desfia. Contém 150 unidades."
+                "descricao": "100% em algodão. Conforto e cuidado para a pele. Altamente absorvente. Não solta fiapos e não desfia. Contém 150 unidades.",
+                "foto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS17M9tKXcXRTiWhtkqfTbO9rQuS_84DdQlKw&s"
             },
             {
                 "id": "4",
                 "nome": "Colgate Creme Dental Tripla Ação",
                 "preco": "5.19",
-                "descricao": "A pasta de dente Colgate Tripla Ação Menta Original proporciona tripla proteção para você e sua família: dentes brancos, protegidos e um hálito refrescante."
+                "descricao": "A pasta de dente Colgate Tripla Ação Menta Original proporciona tripla proteção para você e sua família: dentes brancos, protegidos e um hálito refrescante.",
+                "foto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu-h0YSkRuYoUZVyEJcACGa9-zlr9TWFOVYw&s"
             },
             {
                 "id": "5",
                 "nome": "Colgate Escova De Dente Slim",
                 "preco": "27.11",
-                "descricao": "Essa escova de dente Colgate Slim Soft Black foi desenvolvida com a tecnologia de ponta da Colgate. Por isso, essa escova de dente tem cerdas macias infundidas em carvão com pontas ultrafinas para que você tenha uma limpeza profunda e delicada."
+                "descricao": "Essa escova de dente Colgate Slim Soft Black foi desenvolvida com a tecnologia de ponta da Colgate. Por isso, essa escova de dente tem cerdas macias infundidas em carvão com pontas ultrafinas para que você tenha uma limpeza profunda e delicada.",
+                "foto": "https://tezegw.vteximg.com.br/arquivos/ids/266637-1000-1000/136520_997.png?v=638368417467730000"
             },
             {
                 "id": "6",
-                "nome": "Papel Higiênico Folha Dupla",
+                "nome": "Papel Higiênico Cotton",
                 "preco": "14.18",
-                "descricao": "O Papel Higiênico Sensitive Care Folha Dupla possui absorção em dobro, muita maciez e folhas branquinhas. Dermatologicamente testado, possui fragrância neutra, para você cuidar da sua pele com toda a proteção e delicadez que ela precisa e merece. Contém 12 rolos folha dupla com 30m de comprimento cada."
+                "descricao": "O Papel Higiênico Cotton Folha Dupla possui absorção em dobro, muita maciez e folhas branquinhas. Dermatologicamente testado, possui fragrância neutra, para você cuidar da sua pele com toda a proteção e delicadez que ela precisa e merece. Contém 12 rolos folha dupla com 30m de comprimento cada.",
+                "foto": "https://superprix.vteximg.com.br/arquivos/ids/190716-600-600/629464.jpg?v=637352756461500000"
             },
             {
                 "id": "7",
                 "nome": "Apolo Algodão Em Bola",
                 "preco": "10.16",
-                "descricao": "Cuidados Pessoais. Embalagem contém 100g. Ideal para remoção de cosméticos e possui alto poder de absorção."
+                "descricao": "Cuidados Pessoais. Embalagem contém 100g. Ideal para remoção de cosméticos e possui alto poder de absorção.",
+                "foto": "https://acdn.mitiendanube.com/stores/001/474/378/products/algodao_bolas_brancas_25g-removebg-preview-14d2476899f49364d717188156698687-1024-1024.png"
             }
         ]
     },
