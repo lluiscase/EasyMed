@@ -175,43 +175,50 @@
                 "id": "1",
                 "nome": "Mamadeira NUK Essence Smart",
                 "preco": "41.51",
-                "descricao": "A Mamadeira Anticólica NUK Essence Smart Flow é produzido em silicone macio e extra flexível contém área Soft Zone com textura agradável que permite um toque suave na boca e nos lábios do bebê. O frasco de 150ml acompanha o bico tamanho S com 3 furos sendo indicado para bebês 0+ meses e recomendado para líquidos ralos, como por exemplo: leite materno, chá e água. Livre de BPA."
+                "descricao": "A Mamadeira Anticólica NUK Essence Smart Flow é produzido em silicone macio e extra flexível contém área Soft Zone com textura agradável que permite um toque suave na boca e nos lábios do bebê. O frasco de 150ml acompanha o bico tamanho S com 3 furos sendo indicado para bebês 0+ meses e recomendado para líquidos ralos, como por exemplo: leite materno, chá e água. Livre de BPA.",
+                "foto": "https://cdn.awsli.com.br/600x700/389/389011/produto/224016606/mamadeira-essence-tc-smart-flow-270ml-boy-nuk-165e3bdc-ooimgx7ha0.jpg"
             },
             {
                 "id":"2",
-                "nome":"Fralda Needs",
-                "preco":"31.92",
-                "descricao":"4 camadas de rápida absorção, com gel ultra-absorvente, sugam os fluídos em segundos."
+                "nome":"Fralda Pampers",
+                "preco":"65.92",
+                "descricao":"Com alto poder de absorção e reforço de barreiras antivazamento, para o conforto dos pequenos, Pampers Confort Sec contém canais de ar que permitem uma circulação livre do ar dentro da fralda, evitando que o bumbum do bebê fique abafado e deixando a pele arejada e sequinha.",
+                "foto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYoAJCTCOGWUw0D6Y1qAzwdBAaoURWwc1Tjw&s"
             },
             {
                 "id":"3",
                 "nome":"Escova de Dente Infantil Curaprox ",
                 "preco":"R$ 28,99",
-                "descricao":"Escova de dente infantil ultra macia"
+                "descricao":"Escova de dente infantil ultra macia",
+                "foto":"https://www.loja.curaprox.com.br/uploads/1684330726.jpg"
             },
             {
                 "id":"4",
                 "nome":"Chupeta NUK Space Boy",
                 "preco":"R$ 66,79",
-                "descricao":"A Chupeta NUK Space Silicone é leve e permite que a pele sensível do bebê respire e fique seca durante sua utilização. Possui bico Oral Fit 2.0 ortodôntico com topo curvado que se adapta ao céu da boca da criança, e sua base reta possibilita o melhor posicionamento da língua."
+                "descricao":"A Chupeta NUK Space Silicone é leve e permite que a pele sensível do bebê respire e fique seca durante sua utilização. Possui bico Oral Fit 2.0 ortodôntico com topo curvado que se adapta ao céu da boca da criança, e sua base reta possibilita o melhor posicionamento da língua.",
+                "foto": "https://alexfarma.vteximg.com.br/arquivos/ids/157958-1000-1000/CHUP-NUK-SPACE-BOY-S2-REF-PA7333-2B-TAM2-min.jpg?v=638007629396770000"
             },
             {
                 "id":"5",
                 "nome":"Fórmula Infantil Ascenda Nestlé",
                 "preco":"R$ 101,99",
-                "descricao":"Fórmula pediátrica para nutrição enteral e oral,28 vitaminas e minerais essenciais."
+                "descricao":"Fórmula pediátrica para nutrição enteral e oral,28 vitaminas e minerais essenciais.",
+                "foto":"https://images.tcdn.com.br/img/img_prod/1232250/ascenda_800g_315_1_d19cd40525cb8a45ebfb744be87cf0e7.png"
             },
             {
                 "id":"6",
                 "nome":"Sabonete Líquido Mãos e Corpo Trá Lá Lá",
                 "preco":"R$ 12,90",
-                "descricao":"Agora a Trá Lá Lá Kids está mais completa com os novos Sabonetes Líquidos Mãos e Corpo Trá Lá Lá Kids!"
+                "descricao":"Agora a Trá Lá Lá Kids está mais completa com os novos Sabonetes Líquidos Mãos e Corpo Trá Lá Lá Kids!",
+                "foto":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXOcMcLHYe5Nrww513ox1FJA_VZFSzK2_APg&s"
             },
             {
                 "id":"7",
                 "nome":"Kit Sabonete em Barra Pom Pom",
                 "preco":"R$ 16,39",
-                "descricao":"O Sabonete Pom Pom Loção Hidratante é um sabonete infantil que proporciona brilho e maciez. Minimiza o efeito ressecado da pele do seu bebê. Contém lanolina. Hipoalergênico. "
+                "descricao":"O Sabonete Pom Pom Loção Hidratante é um sabonete infantil que proporciona brilho e maciez. Minimiza o efeito ressecado da pele do seu bebê. Contém lanolina. Hipoalergênico.",
+                "foto":"https://a-static.mlcdn.com.br/450x450/kit-4-sabonete-em-barra-pom-pom-glicerina-70g/drogariaaraujosa/50001027/f30676f9756a033f37582bd8fd65df72.jpeg"
             }
         ]
     }
