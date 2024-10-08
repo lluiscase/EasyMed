@@ -1,7 +1,7 @@
 {
     "categoria":[
     {
-        "nome":"Anti-inflamatórios",
+        "nome":"Medicamentos",
         "photo":"https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/medicamento.png",
         "produtos":[
             {
@@ -27,29 +27,23 @@
             "descricao":" O naproxeno é um medicamento anti-inflamatório não esteroide (AINE) utilizado para aliviar a dor-Moderada, reduzir a inflamação e diminuir a febre. É eficaz no tratamento de várias condições que envolvem dor e inflamação.",
             "foto": "https://www.drogarianovaesperanca.com.br/imagens/600x600/naproxeno-sodico-550mg-com-20-comprimidos-04f87525e1.jpg"
 
-        }
-    ]
-    },
-    {
-        "nome":"Remédios Antialérgicos",
-        "photo":"https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/medicamento.png",
-        "produtos":[
-            {
-            "id":"1",
+        },
+        {
+            "id":"4",
             "nome":"Loratadina",
             "preco":"R$11,99",
             "descricao":" A loratadina é um remédio antialérgico usado no alívio dos sintomas de rinite alérgica como coceira nasal, tosse alérgica, coriza, espirros, ardor e coceira nos olhos",
             "foto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmdLJv81rtubs4mxFJIkIe497s6EQ4f9Fhdw&s"
         },
         {
-            "id":"2",
+            "id":"5",
             "nome":"Dicloridrato de Cetirizina",
             "preco":"R$25,76 ",
             "descricao":"O dicloridrato de cetirizina é um anti-histamínico de segunda geração utilizado para o alívio de sintomas alérgicos, como rinite alérgica (alergia sazonal ou perene) e urticária (erupções cutâneas com coceira). É conhecido por ser eficaz no controle dos sintomas sem causar sonolência significativa, ao contrário dos anti-histamínicos de primeira geração.",
             "foto": "https://drogariaglobo.vtexassets.com/arquivos/ids/1106828/Dicloridrato-de-Cetirizina-1mg-mL-Solucao-Oral-Generico-Medley-120ml.jpg?v=638279650373870000"
         },
         {
-            "id":"3",
+            "id":"5",
             "nome":"Furoato de Mometasona",
             "preco":"R$68,83",
             "descricao":"O furoato de mometasona é um corticosteroide utilizado para tratar e controlar a inflamação e os sintomas associados a condições alérgicas e inflamatórias. Disponível principalmente em forma de spray nasal, é eficaz no tratamento da rinite alérgica e na redução dos sintomas inflamatórios nas vias nasais.",
@@ -170,6 +164,7 @@
     },
     {
         "nome":"Higiene bebe",
+        "photo": "https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/baby-stroller.png",
         "produtos":[
             {
                 "id": "1",

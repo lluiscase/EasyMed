@@ -2,6 +2,7 @@
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
+.test.dart
 
 # Arquivos de configuração específicos do sistema operacional
 .idea/
