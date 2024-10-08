@@ -88,3 +88,28 @@ AppBar appbar() {
       ),
     );
   }
+
+    Padding TitleProduct(String titulo) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 20, left: 20,right: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            titulo, 
+            style: TextStyle(
+              color: Color(0xff16697A),
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+          ),),
+          Text(
+            'Ver mais', 
+            style: TextStyle(
+              color: Color(0xfffc444c),
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+          ),)
+        ],
+      ),
+    );
+  }
