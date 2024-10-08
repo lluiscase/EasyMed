@@ -1,0 +1,20 @@
+# Diretórios específicos do Flutter
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# Arquivos de configuração específicos do sistema operacional
+.idea/
+.vscode/
+*.iml
+
+# Arquivos de build
+build/
+android/app/debug
+android/app/profile
+android/app/release
+
+# Arquivos do sistema
+.DS_Store
+*.log
+*.lock
