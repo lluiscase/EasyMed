@@ -60,7 +60,7 @@ class AlterarSenharState extends State<AlterarSenhar> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [ //
                   const Text(
-                    'Faça Seu Login',
+                    'Troque Sua Senha',
                     style: TextStyle(
                       fontSize: 24,
                       color: Colors.blue,
