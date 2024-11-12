@@ -1,68 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() => runApp(const AlterarSenhar());
+void main() => runApp(NovaSenhaApp());
 
-class AlterarSenhar extends StatefulWidget {
-  const AlterarSenhar({super.key});
+class NovaSenhaApp extends StatefulWidget {
+  const NovaSenhaApp({super.key});
 
   @override
-  AlterarSenharState createState() => AlterarSenharState();
+  NovaSenhaState createState() => NovaSenhaState();
 }
 
-class AlterarSenharState extends State<AlterarSenhar> {
+class NovaSenhaState extends State<NovaSenhaApp> {
   final TextEditingController novaSenhaController = TextEditingController();
-  final TextEditingController novaSenhaController1 = TextEditingController();
+  final TextEditingController confirmaSenhaController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _carregarSenhaUsuario();
   }
 
-  Future<void> _carregarSenhaUsuario() async {
+  Future<void> _salvamentoNovaSenha() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    novaSenhaController.text = prefs.getString('novaSenhar') ?? '';
-    novaSenhaController1.text = prefs.getString('novaSenhar1') ?? '';
-  }
-
-  Future<void> _SalvarSenharUsuario() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('novaSenhar', novaSenhaController.text);
-    await prefs.setString('novaSenhar1', novaSenhaController1.text);
+    await prefs.setString('senhaUsuario', novaSenhaController.text);
+    await prefs.setString('confirmarSenhaUsuario', confirmaSenhaController.text);
   }
 
   @override
   void dispose() {
     novaSenhaController.dispose();
-    novaSenhaController1.dispose();
+    confirmaSenhaController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          leading: Image.asset(
-            'assets/icons/logo.png',
-            width: 47.33,
-            height: 40,
+      home: Builder(
+        builder: (context) => Scaffold(
+          appBar: AppBar(
+            leading: Image.asset(
+              'assets/icons/logo.png',
+              width: 47.33,
+              height: 40,
+            ),
+            title: const Text("Olá!"),
           ),
-          title: const Text("Olá!"),
-        ),
-        body: Center(
-          child: SingleChildScrollView(
+          body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(10),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [ //
+                children: [
+                  const SizedBox(height: 170),
                   const Text(
-                    'Troque Sua Senha',
+                    'Criar uma nova senha',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 20,
                       color: Colors.blue,
                     ),
                   ),
@@ -70,26 +63,52 @@ class AlterarSenharState extends State<AlterarSenhar> {
                   TextFormField(
                     controller: novaSenhaController,
                     decoration: const InputDecoration(
-                      label: Text('Nova Senha'),
+                      labelText: 'Nova senha',
                       border: OutlineInputBorder(),
                     ),
                     obscureText: true,
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 50),
                   TextFormField(
-                    controller: novaSenhaController1,
+                    controller: confirmaSenhaController,
                     decoration: const InputDecoration(
-                      label: Text('Confirme a Senha'),
+                      labelText: 'Confirme sua senha',
                       border: OutlineInputBorder(),
                     ),
                     obscureText: true,
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 60),
                   ElevatedButton(
-                    onPressed: () {
-                      _SalvarSenharUsuario();
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      minimumSize: const Size(180, 51),
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    onPressed: () async {
+                      if (novaSenhaController.text.isEmpty || confirmaSenhaController.text.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Os campos não podem estar vazios')),
+                        );
+                      } else if (novaSenhaController.text == confirmaSenhaController.text) {
+                        await _salvamentoNovaSenha();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Senha salva com sucesso')),
+                        );
+                        novaSenhaController.clear();
+                        confirmaSenhaController.clear();
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('As senhas devem ser iguais')),
+                        );
+                      }
                     },
-                    child: const Text('Salvar Senha'),
+                    child: const Text(
+                      'Salvar',
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
                   ),
                 ],
               ),
