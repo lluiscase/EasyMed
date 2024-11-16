@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterguys/pages/perfil.dart';
 import 'package:flutterguys/pages/modules.dart';
+import 'package:flutterguys/pages/produtos.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 void main() => runApp(HomePage());
@@ -51,11 +52,30 @@ class Categoria {
 }
 
 class HomePageState extends State<HomePage> {
-  late Future<List<Categoria>> categoriaProdutos;
+  final SearchController controller = SearchController();
+
+  List<String> allProdutosList = [];
+  int _selectedIndex = 0;
   @override
   void initState(){
+    controller.addListener(_filterItems);
     super.initState();
-    categoriaProdutos = fetchCategorias();
+    getallProdutos();
+  }
+
+  void _filterItems() {
+  setState(() {
+    final query = controller.text.toLowerCase();
+    // Filtrar os produtos com base no texto digitado
+    allProdutosList
+        .where((item) => item.toLowerCase().contains(query))
+        .toList();
+  });
+}
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   Future<List<Categoria>> fetchCategorias() async {
@@ -79,7 +99,14 @@ Future<List<Produtos>> getProdutos(String nomecategoria)async{
   return produtosList;
 }
 
-  int _selectedIndex = 0;
+Future<void> getallProdutos()async{
+  var categoria = await fetchCategorias();
+  allProdutosList.clear();
+  for(var b in categoria){
+     allProdutosList.addAll(b.produtos.map((produto) => 
+     produto.nome.toString()));
+  }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +171,53 @@ Future<List<Produtos>> getProdutos(String nomecategoria)async{
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              searchField(),
+              SearchAnchor(
+                viewHintText: 'Pesquise...',
+                searchController: controller,
+                builder: (context,controller){
+                  return Container(
+                    margin: EdgeInsets.only(top: 15, left: 20, right: 20),
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color(0xff101617).withOpacity(0.11),
+                          blurRadius: 40,
+                          spreadRadius: 0.0,
+                        )
+                      ]
+                    ),
+                    height: 35,
+                    child: TextField(
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: const Color.fromARGB(255, 226, 226, 226),
+                      hintText: 'Pesquisar um item',
+                      hintStyle: TextStyle(
+                      color: Color.fromARGB(255, 190, 190, 190),
+                      fontSize: 12,
+                      ),
+                      prefixIcon: Icon(Icons.search),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide.none,
+                      ),
+                    ),
+                    onTap: (){
+                      controller.openView();
+                    },
+                    ),
+                      
+                  );
+                },
+                suggestionsBuilder: (context, controller) {
+                  return  List<ListTile>.generate(allProdutosList.length,(index){
+                    final text = allProdutosList[index];
+                    return ListTile(
+                      title: Text(text),
+                    );
+                  });
+                },
+              ),
               TitleProduct('Categorias'),
               Container(
               height: 100,
@@ -169,23 +242,30 @@ Future<List<Produtos>> getProdutos(String nomecategoria)async{
                   height: 5,
                   child: Column(
                     children:[
-                      Image.network(
-                        snapshot.data![index].photo, 
-                        width: 27,
-                        fit: BoxFit.contain,
-                        loadingBuilder: (context, child, loadingProgress) {
-                          return loadingProgress == null ? child : CircularProgressIndicator(); 
-                        },errorBuilder:(context, url, stackTrace) {
-                          return Icon(Icons.error);
-                        } ,),
-                      Text(
-                      snapshot.data![index].nome,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Color(0xff16697A),
-                        fontSize: 15,
-                  ),
-                  ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 15),
+                        child: Image.network(
+                          snapshot.data![index].photo, 
+                          width: 35,
+                          fit: BoxFit.contain,
+                          color: Color(0xff16697A),
+                          loadingBuilder: (context, child, loadingProgress) {
+                            return loadingProgress == null ? child : CircularProgressIndicator(); 
+                          },errorBuilder:(context, url, stackTrace) {
+                            return Icon(Icons.error);
+                          } ,),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(0.5),
+                        child: Text(
+                        snapshot.data![index].nome,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Color(0xff16697A),
+                          fontSize: 12,
+                                          ),
+                                          ),
+                      ),
 
                     ] 
                   ),
@@ -203,6 +283,7 @@ Future<List<Produtos>> getProdutos(String nomecategoria)async{
               Container(
                 height: 150,
                 child: BuilderCards('Higiene bebe'),
+                
               ),
               TitleProduct('Beleza'),
               Container(
@@ -217,7 +298,7 @@ Future<List<Produtos>> getProdutos(String nomecategoria)async{
               TitleProduct('Medicamentos'),
               Container(
                 height: 150,
-                child: BuilderCards(''),
+                child: BuilderCards('Medicamentos'),
               ),
             ],
           )
@@ -238,40 +319,55 @@ Future<List<Produtos>> getProdutos(String nomecategoria)async{
           return Center(child: Text("Nenhuma categoria disponível"));
         }
           return ListView.separated(
-            itemCount: snapshot.data!.length,
+            itemCount: 5,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
-              return Container(
-                margin: EdgeInsets.all(10),
+              return GestureDetector(
+                onTap: (){
+                   Navigator.push(context, MaterialPageRoute(builder: (context) => ProdutosPage(nome: snapshot.data![index].nome,desc: snapshot.data![index].descricao,prec: snapshot.data![index].preco,img:snapshot.data![index].foto)));
+                },
+              child: Container(
+                margin: EdgeInsets.all(8.0),
                 width: 95,
                 height: 5,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children:[
-                    Image.network(
-                        snapshot.data![index].foto, 
-                        width: 65,
-                        fit: BoxFit.contain,
-                        loadingBuilder: (context, child, loadingProgress) {
-                          return loadingProgress == null ? child : CircularProgressIndicator(); 
-                        },errorBuilder:(context, url, stackTrace) {
-                          return Icon(Icons.error);
-                        } ,),
-                    Text(
-                    snapshot.data![index].nome,
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: Color(0xff080F0F),
-                      fontSize: 9,
-                      
-                ),
-                ),
-                Text(
-                    'R\$${snapshot.data![index].preco}',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: Color(0xfffc444c),
-                      fontSize: 12,
-                ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 12,top: 10),
+                      child: Image.network(
+                        alignment: Alignment.center, 
+                          snapshot.data![index].foto, 
+                          width: 65,
+                          fit: BoxFit.contain,
+                          loadingBuilder: (context, child, loadingProgress) {
+                            return loadingProgress == null ? child : CircularProgressIndicator(); 
+                          },errorBuilder:(context, url, stackTrace) {
+                            return Icon(Icons.error);
+                          } ,),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: Text(
+                      snapshot.data![index].nome,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Color(0xff080F0F),
+                        fontSize: 9,
+                                      ),
+                                      ),
+                    ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 5.0),
+                  child: Text(
+                      'R\$${snapshot.data![index].preco}',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Color(0xfffc444c),
+                        fontSize: 12,
+                        
+                  ),
+                  ),
                 ),
                   ] 
                 ),
@@ -280,7 +376,7 @@ Future<List<Produtos>> getProdutos(String nomecategoria)async{
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(width: 1,color: Colors.grey)
                 ),
-              );
+              ));
                 },
                 separatorBuilder: (context, index) => const Divider(),
               );

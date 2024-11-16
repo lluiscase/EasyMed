@@ -84,21 +84,14 @@
                 "foto":"https://amobeleza.vtexassets.com/arquivos/ids/247626/balsamo-demaquilante-banila-co-clean-it-zero-original-cem-ml-foto-um.jpg?v=638227973727400000"
             },
             {
-                "id":"5",
-                "nome": "Máscara para Cílios Essence",
-                "preco": "31.90",
-                "descricao": "Máscara para Cílios de Volume À Prova D'Água Essence é perfeita para quem gosta de volume extremo! Pincel extra grande e textura cremosa que cobre cada cílio individualmente com preto intenso, proporcionando efeito volume com apenas uma aplicação. Sua fórmula à prova d'água garante longa duração.",
-                "foto":"https://m.media-amazon.com/images/I/61HLmRuVZvL._AC_UF1000,1000_QL80_.jpg"
-            },
-            {
-                "id": "6",
+                "id": "5",
                 "nome": "Victoria's Secret Cool Blooms",
                 "preco": "136.00",
                 "descricao": "Victoria's Secret Cool Blooms - Body Splash 250ml",
                 "foto":"https://acdn.mitiendanube.com/stores/002/240/964/products/40fe96bc-b06a-4fba-a6c1-130405ca6d121-43b894a8c7ff196f0516768977387638-640-0.jpeg"
             },
             {
-                "id": "7",
+                "id": "6",
                 "nome": "Lip Balm By Franciny Ehlke",
                 "preco": "33.90",
                 "descricao": "Lip Balm de Esfoliação Fran By Franciny Ehlke Scrub Stick um esfoliante com partículas naturais de bambu, enriquecido com Manteiga de Karité, Óleo de Rosa Mosqueta e Vitamina E.",

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-/*import 'package:flutterguys/pages/home.dart';
-import 'package:flutterguys/pages/perfil.dart';*/
+import 'package:flutterguys/pages/test.dart';
+import 'package:flutterguys/pages/home.dart';
+import 'package:flutterguys/pages/perfil.dart';
 
 AppBar appbar() {
     return AppBar(
@@ -57,6 +58,7 @@ AppBar appbar() {
         ],
       );
   }
+
   Container searchField() {
     return Container(
       margin: EdgeInsets.only(top: 40, left: 20, right: 20),
@@ -71,6 +73,8 @@ AppBar appbar() {
       ),
       height: 35,
       child: TextField(
+        
+        
         decoration: InputDecoration(
           filled: true,
           fillColor: const Color.fromARGB(255, 226, 226, 226),
@@ -99,14 +103,14 @@ AppBar appbar() {
             titulo, 
             style: TextStyle(
               color: Color(0xff16697A),
-                fontSize: 14,
+                fontSize: 17,
                 fontWeight: FontWeight.w600,
           ),),
           Text(
             'Ver mais', 
             style: TextStyle(
               color: Color(0xfffc444c),
-                fontSize: 14,
+                fontSize: 17,
                 fontWeight: FontWeight.w600,
           ),)
         ],
