@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutterguys/pages/perfil.dart';
 import 'package:flutterguys/pages/modules.dart';
 import 'package:flutterguys/pages/produtos.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+import 'package:flutterguys/pages/telaEspec.dart';
+
 void main() => runApp(HomePage());
 
 class HomePage extends StatefulWidget {
@@ -13,100 +13,30 @@ class HomePage extends StatefulWidget {
   HomePageState createState() => HomePageState();
 }
 
-class Produtos {
-  final String id;
-  final String nome;
-  final String preco;
-  final String descricao;
-  final String foto;
-
-  Produtos({required this.id, required this.nome, required this.preco, required this.descricao, required this.foto});
-
-  factory Produtos.fromJson(Map<String, dynamic> json) {
-    return Produtos(
-      id: json['id'],
-      nome: json['nome'],
-      preco: json['preco'],
-      descricao: json['descricao'] ?? '',
-      foto: json['foto']?? ''
-    );
-  }
-}
-
-class Categoria {
-  final String nome;
-  List<Produtos> produtos;
-  final String photo;
-
-  Categoria({required this.nome, required this.produtos, required this.photo});
-
-  factory Categoria.fromJson(Map<String, dynamic> json) {
-    var produtoList = json['produtos'] as List?;
-    List<Produtos> produtos = produtoList?.map((produtoJson) => Produtos.fromJson(produtoJson)).toList() ?? [];
-    return Categoria(
-      nome: json['nome'],
-      produtos: produtos,
-      photo: json['photo']?? ''
-    );
-  }
-}
-
 class HomePageState extends State<HomePage> {
   final SearchController controller = SearchController();
+  final TextEditingController textController = TextEditingController();
 
   List<String> allProdutosList = [];
+  String searchResult = '';
   int _selectedIndex = 0;
   @override
   void initState(){
-    controller.addListener(_filterItems);
     super.initState();
-    getallProdutos();
+    getallProdutos(allProdutosList);
   }
 
-  void _filterItems() {
+  void _filterItems(String query) {
   setState(() {
-    final query = controller.text.toLowerCase();
-    // Filtrar os produtos com base no texto digitado
-    allProdutosList
-        .where((item) => item.toLowerCase().contains(query))
-        .toList();
+    searchResult = allProdutosList.firstWhere((item) => item.toLowerCase().contains(query.toLowerCase()));
   });
 }
   @override
   void dispose() {
     controller.dispose();
+    textController.dispose();
     super.dispose();
   }
-
-  Future<List<Categoria>> fetchCategorias() async {
-  final response = await http.get(Uri.parse('https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/produtos.json'));
-  if (response.statusCode == 200) {
-    Map<String, dynamic> jsonData = json.decode(response.body);
-    List<dynamic> categoriasJson = jsonData['categoria'];
-    return categoriasJson.map((categoriaJson) => Categoria.fromJson(categoriaJson)).toList();
-  } else {
-    throw Exception('Falha de carregamento');
-  }
-}
-
-Future<List<Produtos>> getProdutos(String nomecategoria)async{
-  var categoria = await fetchCategorias();
-  var vereficador = categoria.where((categoria)=>categoria.nome == nomecategoria );
-  List<Produtos> produtosList = [];
-  for(var b in vereficador){
-     produtosList.addAll(b.produtos);
-  }
-  return produtosList;
-}
-
-Future<void> getallProdutos()async{
-  var categoria = await fetchCategorias();
-  allProdutosList.clear();
-  for(var b in categoria){
-     allProdutosList.addAll(b.produtos.map((produto) => 
-     produto.nome.toString()));
-  }
-}
 
   @override
   Widget build(BuildContext context) {
@@ -114,64 +44,26 @@ Future<void> getallProdutos()async{
       home: Scaffold(
         backgroundColor: Color(0xffF9FAFD),
         appBar: appbar(),
-        bottomNavigationBar: Builder(
-          builder: (BuildContext context) {
-            return BottomNavigationBar(
-              type: BottomNavigationBarType.fixed,
-              selectedItemColor: Color(0xff16697A),
-              backgroundColor: Color(0xffF9FAFD),
-              items: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home_filled, color: Color(0xff16697A),),
-                  label: 'Home',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.location_on, color: Color(0xff16697A)),
-                  label: 'Localização',
-                ),
-                BottomNavigationBarItem(
-                  icon: ImageIcon(
-                    AssetImage('assets/icons/tag.png'),
-                    color: Color(0xff16697A),
-                  ),
-                  label: 'Ofertas',
-                ),
-                BottomNavigationBarItem(
-                  icon: ImageIcon(
-                    AssetImage('assets/icons/profile_user.png'),
-                    color: Color(0xff16697A),
-                  ),
-                  label: 'Perfil',
-                ),
-              ],
-              currentIndex: _selectedIndex,
-              onTap: (index) {
-                setState(() {
-                  _selectedIndex = index;
-                });
-            
-                if (index == 1) {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));
-                }
-                else if (index == 2) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Perfil()),
-                  );
-                }
-                else if (index == 3) {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));
-                }
-                else Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));
-                },
-            );
-          }
-        ),
+        bottomNavigationBar: bottomNav(_selectedIndex, (index){
+           setState(() {
+          _selectedIndex = index;
+        });
+        switch (index) {
+          case 1:
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+            break;
+          case 2:
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));
+            break;
+          default:
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+        }
+        }),
         body: SingleChildScrollView(
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SearchAnchor(
+                    SearchAnchor(
                 viewHintText: 'Pesquise...',
                 searchController: controller,
                 builder: (context,controller){
@@ -188,6 +80,8 @@ Future<void> getallProdutos()async{
                     ),
                     height: 35,
                     child: TextField(
+                      controller: textController,
+                      onChanged: _filterItems,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: const Color.fromARGB(255, 226, 226, 226),
@@ -211,14 +105,112 @@ Future<void> getallProdutos()async{
                 },
                 suggestionsBuilder: (context, controller) {
                   return  List<ListTile>.generate(allProdutosList.length,(index){
-                    final text = allProdutosList[index];
+                      String text = '';
+                    setState(() {
+
+                      text = allProdutosList[index];
+                    });
                     return ListTile(
                       title: Text(text),
                     );
                   });
                 },
               ),
-              TitleProduct('Categorias'),
+                   
+              titleProduct('Ofertas', ''),
+              Container(
+                height: 164,
+                child: FutureBuilder(
+                  future: fetchCategorias(), 
+                  builder: (context,snapshot){
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text("Erro ao carregar categorias"));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text("Nenhuma categoria disponível"));
+          }
+            return  ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context,index){
+                return GestureDetector(
+              onTap: (){
+                //var cash = double.parse(snapshot.data![index].produtos[index].preco);
+                //var ofert = cash - 10;
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>ProdutosPage(
+                  desc: snapshot.data![index].produtos[index].descricao, 
+                  nome: snapshot.data![index].produtos[index].nome, 
+                  prec: snapshot.data![index].produtos[index].preco, 
+                  img: snapshot.data![index].produtos[index].foto)));
+              },
+              child:Container(
+                  margin: EdgeInsets.all(8.0),
+                  width: 95,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 12,top: 10),
+                        child: Image.network(
+                          alignment: Alignment.topRight, 
+                          'https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/tag.png',
+                        width: 15,
+                        fit: BoxFit.contain,
+                        ),
+                        ),
+                       Padding(
+                      padding: const EdgeInsets.only(left: 12,top: 10),
+                      child: Image.network(
+                        alignment: Alignment.center, 
+                          snapshot.data![index].produtos[index].foto, 
+                          height: 65,
+                          fit: BoxFit.contain,
+                          loadingBuilder: (context, child, loadingProgress) {
+                            return loadingProgress == null ? child : CircularProgressIndicator(); 
+                          },errorBuilder:(context, url, stackTrace) {
+                            return Icon(Icons.error);
+                          } ,),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: Text(
+                      snapshot.data![index].produtos[index].nome,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Color(0xff080F0F),
+                        fontSize: 9,
+                                      ),
+                                      ),
+                    ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 5.0),
+                  child: Text(
+                      'R\$${snapshot.data![index].produtos[index].preco}',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Color(0xfffc444c),
+                        fontSize: 10,
+                        
+                  ),
+                  ),
+                ),
+                    ],
+                  ),
+                  decoration: BoxDecoration(
+                  color: Color(0xffF9FAFD),
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(width: 1,color: Colors.grey)
+                ),
+                ));
+              }, 
+              separatorBuilder:  (context, index) => const Divider(), 
+              );
+                  }
+                  ),
+              ),
+              //
+              titleProduct('Categorias', ''),
               Container(
               height: 100,
               child: FutureBuilder(
@@ -236,7 +228,14 @@ Future<void> getallProdutos()async{
               itemCount: snapshot.data!.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                return Container(
+                return GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(
+                    builder: (context)=>telaEspec(
+                      categoria: snapshot.data![index].nome,state: 'A',nome: '',prec: '',desc: '',img: '',
+                  )));
+                  },
+                child: Container(
                   margin: EdgeInsets.all(10),
                   width: 100,
                   height: 5,
@@ -266,121 +265,90 @@ Future<void> getallProdutos()async{
                                           ),
                                           ),
                       ),
-
                     ] 
                   ),
                   decoration: BoxDecoration(
                     color: Color(0xffeeefe6),
                     borderRadius: BorderRadius.circular(10),
                   ),
+                )
                 );
                   },
                   separatorBuilder: (context, index) => const Divider(),
                 );
               }),
             ),
-              TitleProduct('Festival do bebê'),
-              Container(
-                height: 150,
-                child: BuilderCards('Higiene bebe'),
-                
+              GestureDetector(
+                child:titleProduct('Festival do bebê', 'Ver mais'), 
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context)=>telaEspec(
+                      categoria: 'Higiene bebe',state: 'A',nome: '',prec: '',desc: '',img: '',
+                  )));
+                },
+                ),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Container(
+                  height: 164,
+                  child: BuilderCards('Higiene bebe'),
+                  
+                ),
               ),
-              TitleProduct('Beleza'),
-              Container(
-                height: 150,
-                child: BuilderCards('Beleza'),
+              GestureDetector(
+                child:titleProduct('Beleza', 'Ver mais'), 
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context)=>telaEspec(
+                      categoria: 'Beleza',state: 'A',nome: '',prec: '',desc: '',img: '',
+                  )));
+                },
+                ),
+                Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Container(
+                  height: 164,
+                  child: BuilderCards('Beleza'),
+                  
+                ),
               ),
-              TitleProduct('Higiene'),
-              Container(
-                height: 150,
-                child: BuilderCards('Higiene'),
+              GestureDetector(
+                child:titleProduct('Higiene', 'Ver mais'), 
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context)=>telaEspec(
+                      categoria: 'Higiene',state: 'A',nome: '',prec: '',desc: '',img: '',
+                  )));
+                },
+                ),
+                Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Container(
+                  height: 164,
+                  child: BuilderCards('Higiene'),
+                  
+                ),
               ),
-              TitleProduct('Medicamentos'),
-              Container(
-                height: 150,
-                child: BuilderCards('Medicamentos'),
+              GestureDetector(
+                child:titleProduct('Medicamentos', 'Ver mais'), 
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context)=>telaEspec(
+                      categoria: 'Medicamentos',state: 'A',nome: '',prec: '',desc: '',img: '',
+                  )));
+                },
+                ),
+                Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Container(
+                  height: 164,
+                  child: BuilderCards('Medicamentos'),
+                  
+                ),
               ),
             ],
           )
         )
       ),
     );
-  }
-
-  FutureBuilder<List<Produtos>> BuilderCards(String fetchget) {
-    return FutureBuilder(
-              future: getProdutos(fetchget), 
-              builder: (context, snapshot){
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          return Center(child: Text("Erro ao carregar categorias"));
-        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return Center(child: Text("Nenhuma categoria disponível"));
-        }
-          return ListView.separated(
-            itemCount: 5,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: (){
-                   Navigator.push(context, MaterialPageRoute(builder: (context) => ProdutosPage(nome: snapshot.data![index].nome,desc: snapshot.data![index].descricao,prec: snapshot.data![index].preco,img:snapshot.data![index].foto)));
-                },
-              child: Container(
-                margin: EdgeInsets.all(8.0),
-                width: 95,
-                height: 5,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children:[
-                    Padding(
-                      padding: const EdgeInsets.only(left: 12,top: 10),
-                      child: Image.network(
-                        alignment: Alignment.center, 
-                          snapshot.data![index].foto, 
-                          width: 65,
-                          fit: BoxFit.contain,
-                          loadingBuilder: (context, child, loadingProgress) {
-                            return loadingProgress == null ? child : CircularProgressIndicator(); 
-                          },errorBuilder:(context, url, stackTrace) {
-                            return Icon(Icons.error);
-                          } ,),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 5),
-                      child: Text(
-                      snapshot.data![index].nome,
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        color: Color(0xff080F0F),
-                        fontSize: 9,
-                                      ),
-                                      ),
-                    ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 5.0),
-                  child: Text(
-                      'R\$${snapshot.data![index].preco}',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        color: Color(0xfffc444c),
-                        fontSize: 12,
-                        
-                  ),
-                  ),
-                ),
-                  ] 
-                ),
-                decoration: BoxDecoration(
-                  color: Color(0xffF9FAFD),
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(width: 1,color: Colors.grey)
-                ),
-              ));
-                },
-                separatorBuilder: (context, index) => const Divider(),
-              );
-            });
-  }
-
-}
+  }}

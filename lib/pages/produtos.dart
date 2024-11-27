@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterguys/pages/home.dart';
 import 'package:flutterguys/pages/perfil.dart';
 import 'package:flutterguys/pages/modules.dart';
+import 'package:flutterguys/pages/telaEspec.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
@@ -12,7 +13,7 @@ import 'package:flutter/services.dart';
 
 class ProdutosPage extends StatefulWidget {
   const ProdutosPage({super.key, required this.desc,required this.nome, required this.prec, required this.img});
-
+  
   final String desc;
   final String nome;
   final String prec;
@@ -23,6 +24,7 @@ class ProdutosPage extends StatefulWidget {
 }
 
 class ProdutosPageState extends State<ProdutosPage>{
+  String url = 'https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/coracao.png';
   int _selectedIndex = 0;
   void initState(){
     super.initState();
@@ -168,10 +170,22 @@ class ProdutosPageState extends State<ProdutosPage>{
             children: [
               IconButton(
                 onPressed: (){
-                  
+                  setState(() {
+                    url = 'https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/chupeta.png';
+                  });
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context)=>
+                    telaEspec(
+                      categoria: '', 
+                      state: 'B', 
+                      desc: widget.desc, 
+                      nome: widget.nome, 
+                      prec: widget.prec, 
+                      img: widget.img)));
                 }, 
+                
               icon: Image.network(
-                'https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/coracao.png',
+                url,
                   width: 34,
               )
               ),

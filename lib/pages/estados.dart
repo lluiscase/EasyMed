@@ -2,18 +2,29 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
 
-
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  _HomePageState createState() => _HomePageState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: const HomePage(),
+    );
+  }
 }
 
-enum ScreenState{stateA, stateB, stateC}
+enum ScreenState { stateA, stateB, stateC }
 
-class _HomePageState extends State<MyApp> {
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   ScreenState _currentState = ScreenState.stateA;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,11 +32,26 @@ class _HomePageState extends State<MyApp> {
         title: const Text('Mudança de Tela'),
       ),
       body: _buildContent(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            // Alterna entre os estados para teste
+            if (_currentState == ScreenState.stateA) {
+              _currentState = ScreenState.stateB;
+            } else if (_currentState == ScreenState.stateB) {
+              _currentState = ScreenState.stateC;
+            } else {
+              _currentState = ScreenState.stateA;
+            }
+          });
+        },
+        child: const Icon(Icons.refresh),
+      ),
     );
   }
-  
-    Widget _buildContent() {
-    switch(_currentState){
+
+  Widget _buildContent() {
+    switch (_currentState) {
       case ScreenState.stateA:
         return buildStateA();
       case ScreenState.stateB:
@@ -34,53 +60,58 @@ class _HomePageState extends State<MyApp> {
         return buildStateC();
     }
   }
-  
-Widget buildStateA() {
-  return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
+
+  Widget buildStateA() {
+    return Center(
+      child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text(
                 'Sua cesta está vazia...',
                 style: TextStyle(
                   fontSize: 24,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(35),
-                child: Image.network(
-                  'https://s3-alpha-sig.figma.com/img/44b1/9eae/018d5ac0085149065678b2ad96513192?Expires=1730073600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=HNjKrYdOD-YGd7e-tCoXojE-HrwOWZDP3Umgln8YqjDwfIV2cOVPMvJNHOJsL4zQL6~gpXxduyVWjMPhMgFwOpJdUEvHAOfUfYjXvG4eA7fsPhJ3kAgQRM3RjL-snX1RIHjhvfJTukp4gACUElQHONNiOYVMvpTFfACeKTUfbrV28zfYSSjCdxYCXsf10QumsrkATlPfe6LHjXvmE7YgpxO1fSczLY~4dYTDTsCfyI7o7378fj6uktPYssdH-LD8odgCmU9wP3yrP8gerHoQGITgtnOmyjdSHBBFiE1F91Yutc-VG6xe9ZwvabhwwAk-NWjNymrBmzfBk1oqZ4lAcw__',
-                ),
-              ),
-              ]
-  );
-}
-
-Widget buildStateC() {
-  return Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Container(
-        color: Colors.amber,
+        Padding(
+          padding: const EdgeInsets.all(35),
+          child: Image.network(
+            'https://via.placeholder.com/150', // Alterado para um link de exemplo
+          ),
+        ),
+      ],
       ),
-      ElevatedButton(onPressed: (){
-        setState(() {
-          _currentState = ScreenState.stateC;
-        });
-      },
-      child: Text('C'),
-      )
-    ],
-  );
-}
+    );
+  }
 
-Widget buildStateB() {
-  return Column(
-    children: [
-      Container(
-        color: Colors.grey,
-      )
-    ],
-  );
-}
+  Widget buildStateB() {
+    return Container(
+      color: Colors.grey,
+      alignment: Alignment.center,
+      child: const Text(
+        'Tela B',
+        style: TextStyle(fontSize: 24, color: Colors.white),
+      ),
+    );
+  }
 
+  Widget buildStateC() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          height: 100,
+          width: 100,
+          color: Colors.amber,
+        ),
+        ElevatedButton(
+          onPressed: () {
+            setState(() {
+              _currentState = ScreenState.stateA;
+            });
+          },
+          child: const Text('Voltar para A'),
+        ),
+      ],
+    );
+  }
 }
