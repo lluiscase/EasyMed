@@ -6,10 +6,11 @@ import 'package:flutterguys/pages/telaEspec.dart';
 
 
 
-void main() => runApp(HomePage());
+void main() => runApp(HomePage(state: 'a'));
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final String state;
+  const HomePage({super.key,required this.state});
 
   @override
   HomePageState createState() => HomePageState();
@@ -45,20 +46,20 @@ class HomePageState extends State<HomePage> {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Color(0xffF9FAFD),
-        appBar: appbar(),
+        appBar: appbar(widget.state),
         bottomNavigationBar: bottomNav(_selectedIndex, (index){
            setState(() {
           _selectedIndex = index;
         });
         switch (index) {
           case 1:
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(state: '',)));
             break;
           case 2:
             Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));
             break;
           default:
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(state: '',)));
         }
         }),
         body: SingleChildScrollView(
@@ -231,9 +232,10 @@ class HomePageState extends State<HomePage> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: (){
+                    print(snapshot.data![index].nome);
                     Navigator.push(context, MaterialPageRoute(
                     builder: (context)=>telaEspec(
-                      categoria: snapshot.data![index].nome,state: 'A',nome: '',prec: '',desc: '',img: '',
+                      categoria: snapshot.data![index].nome,state: 'Ver mais',nome: '',prec: '',desc: '',img: '',
                   )));
                   },
                 child: Container(
@@ -279,15 +281,19 @@ class HomePageState extends State<HomePage> {
                 );
               }),
             ),
-              GestureDetector(
-                child:titleProduct('Festival do bebê', 'Ver mais'), 
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context)=>telaEspec(
-                      categoria: 'Higiene bebe',state: 'A',nome: '',prec: '',desc: '',img: '',
-                  )));
-                },
-                ),
+              Builder(
+                builder: (context) {
+                  return GestureDetector(
+                    child:titleProduct('Festival do bebê', 'Ver mais'), 
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context)=>telaEspec(
+                          categoria: 'Higiene bebe',state: 'Ver Mais',nome: '',prec: '',desc: '',img: '',
+                      )));
+                    },
+                    );
+                }
+              ),
               Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Container(
@@ -296,15 +302,19 @@ class HomePageState extends State<HomePage> {
                   
                 ),
               ),
-              GestureDetector(
-                child:titleProduct('Beleza', 'Ver mais'), 
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context)=>telaEspec(
-                      categoria: 'Beleza',state: 'A',nome: '',prec: '',desc: '',img: '',
-                  )));
-                },
-                ),
+              Builder(
+                builder: (context) {
+                  return GestureDetector(
+                    child:titleProduct('Beleza', 'Ver mais'), 
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context)=>telaEspec(
+                          categoria: 'Beleza',state: 'Ver Mais',nome: '',prec: '',desc: '',img: '',
+                      )));
+                    },
+                    );
+                }
+              ),
                 Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Container(
@@ -313,15 +323,19 @@ class HomePageState extends State<HomePage> {
                   
                 ),
               ),
-              GestureDetector(
-                child:titleProduct('Higiene', 'Ver mais'), 
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context)=>telaEspec(
-                      categoria: 'Higiene',state: 'A',nome: '',prec: '',desc: '',img: '',
-                  )));
-                },
-                ),
+              Builder(
+                builder: (context) {
+                  return GestureDetector(
+                    child:titleProduct('Higiene', 'Ver mais'), 
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context)=>telaEspec(
+                          categoria: 'Higiene',state: 'Ver Mais',nome: '',prec: '',desc: '',img: '',
+                      )));
+                    },
+                    );
+                }
+              ),
                 Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Container(
@@ -330,15 +344,19 @@ class HomePageState extends State<HomePage> {
                   
                 ),
               ),
-              GestureDetector(
-                child:titleProduct('Medicamentos', 'Ver mais'), 
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context)=>telaEspec(
-                      categoria: 'Medicamentos',state: 'A',nome: '',prec: '',desc: '',img: '',
-                  )));
-                },
-                ),
+              Builder(
+                builder: (context) {
+                  return GestureDetector(
+                    child:titleProduct('Medicamentos', 'Ver mais'), 
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context)=>telaEspec(
+                          categoria: 'Medicamentos',state: 'A',nome: '',prec: '',desc: '',img: '',
+                      )));
+                    },
+                    );
+                }
+              ),
                 Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Container(

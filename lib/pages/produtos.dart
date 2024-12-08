@@ -4,8 +4,6 @@ import 'package:flutterguys/pages/home.dart';
 import 'package:flutterguys/pages/perfil.dart';
 import 'package:flutterguys/pages/modules.dart';
 import 'package:flutterguys/pages/telaEspec.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
 import 'package:flutterguys/pages/Cesta.dart';
 
@@ -72,7 +70,7 @@ class ProdutosPageState extends State<ProdutosPage>{
                   children: [
                     TextButton(
                   onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage(state: '',)));
                   }, 
                   child: Text(
                     '<',
@@ -105,61 +103,21 @@ class ProdutosPageState extends State<ProdutosPage>{
             ],
           )
           ),
-          bottomNavigationBar: Builder(
-          builder: (BuildContext context) {
-            return BottomNavigationBar(
-              type: BottomNavigationBarType.fixed,
-              selectedItemColor: Color(0xff16697A),
-              backgroundColor: Color(0xffF9FAFD),
-              items: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home_filled, color: Color(0xff16697A),),
-                  label: 'Home',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.location_on, color: Color(0xff16697A)),
-                  label: 'Localização',
-                ),
-                BottomNavigationBarItem(
-                  icon: ImageIcon(
-                    AssetImage('assets/icons/tag.png'),
-                    color: Color(0xff16697A),
-                  ),
-                  label: 'Ofertas',
-                ),
-                BottomNavigationBarItem(
-                  icon: ImageIcon(
-                    AssetImage('assets/icons/profile_user.png'),
-                    color: Color(0xff16697A),
-                  ),
-                  label: 'Perfil',
-                ),
-              ],
-              currentIndex: _selectedIndex,
-              onTap: (index) {
-                setState(() {
-                  _selectedIndex = index;
-                });
-                if(index == 0){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
-                }
-                else if (index == 1) {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));
-                }
-                else if (index == 2) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Perfil()),
-                  );
-                }
-                else if (index == 3) {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));
-                }
-                else Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));
-                },
-            );
-          }
-        ),
+          bottomNavigationBar: bottomNav(_selectedIndex, (index){
+           setState(() {
+          _selectedIndex = index;
+        });
+        switch (index) {
+          case 1:
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(state: '',)));
+            break;
+          case 2:
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));
+            break;
+          default:
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(state: '',)));
+        }
+        }),
         body:Expanded( 
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -171,13 +129,13 @@ class ProdutosPageState extends State<ProdutosPage>{
               IconButton(
                 onPressed: (){
                   setState(() {
-                    url = 'https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/chupeta.png';
+                    url = 'https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/heart.png';
                   });
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context)=>
                     telaEspec(
                       categoria: '', 
-                      state: 'B', 
+                      state: 'Favoritos', 
                       desc: widget.desc, 
                       nome: widget.nome, 
                       prec: widget.prec, 
@@ -225,7 +183,7 @@ class ProdutosPageState extends State<ProdutosPage>{
                   child: 
                     TextButton(
                       onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>CestaPage(img: widget.img,nome: widget.nome, preco: widget.prec,)));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>CestaPage(img: widget.img,nome: widget.nome, preco: widget.prec,state: 'b',)));
                       }, 
                       child: Text(
                         'Adicionar à cesta',

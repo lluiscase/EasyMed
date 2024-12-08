@@ -5,6 +5,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutterguys/pages/Cesta.dart';
 List<String> allProdutosList = [];
+
+
+
 class Produtos {
   final String id;
   final String nome;
@@ -74,7 +77,7 @@ Future<void> getallProdutos(List<String> h)async{
   }
 }
 // AppBar
-AppBar appbar() {
+AppBar appbar(String estado) {
   return AppBar(
     backgroundColor: Color(0xffF9FAFD),
     title: Text(
@@ -109,11 +112,11 @@ AppBar appbar() {
               margin: EdgeInsets.all(10),
               child: IconButton(
                 onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>CestaPage(img: '',nome: '',preco: '')));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>CestaPage(img: '',nome: '',preco: '',state:estado)));
                 },
                 icon:Image.asset(
                 'assets/icons/shopping_basket.png',
-                width: 50,
+                height:25,
               )),
               decoration: BoxDecoration(
                 color: Color(0xffF7f8f8),

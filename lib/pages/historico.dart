@@ -15,7 +15,7 @@ class HistoricoState extends State<Historico> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: appbar(),
+        appBar: appbar('a'),
         body: Center(
           child: Text(
             "Seu Historico Está vazio",

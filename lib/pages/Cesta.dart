@@ -5,7 +5,7 @@ import 'package:flutterguys/pages/home.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() => runApp(const CestaPage(img: '',nome: '',preco: ''));
+void main() => runApp(const CestaPage(img: '',nome: '',preco: '', state:''));
 
 class Cesta extends StatelessWidget {
   const Cesta({super.key});
@@ -13,7 +13,7 @@ class Cesta extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const CestaPage(img: '',nome: '',preco: ''),
+      home: const CestaPage(img: '',nome: '',preco: '',state:''),
     );
   }
 }
@@ -23,35 +23,58 @@ class Cesta extends StatelessWidget {
 String geradorQr(){
   var r = Random();
   String abcd = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789';
-  return List<String>.generate(5,(index)=>abcd[r.nextInt(10)]).join();
+  return List<String>.generate(8,(index)=>abcd[r.nextInt(10)]).join();
 }
 
-enum ScreenState { stateA, stateB, stateC }
+
 
 class CestaPage extends StatefulWidget {
   final String preco;
   final String img;
   final String nome;
-  const CestaPage({super.key, required this.img, required this.nome, required this.preco});
+  final String state;
+  const CestaPage({super.key, required this.state,required this.img, required this.nome, required this.preco});
   @override
   State<CestaPage> createState() => CestaPageState();
 }
 
 class CestaPageState extends State<CestaPage> {
-  ScreenState _currentState = ScreenState.stateB;
   String code = geradorQr();
-  int item = 1;
+  List<int> item = [];
   String total ='';
-
-  void calcularTotal(){
-  double e = double.parse(widget.preco);
-  double resultado = item *e;
-  total = resultado.toString();
-}
-
+  String estado= '';
   List<String> nome = [];
   List<String> preco = [];
   List<String> imgs = [];
+
+  Future<void> clearIndex(int index) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    List<String> nomesatual = prefs.getStringList('nomes') ?? [];
+    List<String> precoatual = prefs.getStringList('precos') ?? [];
+    List<String> imgatual = prefs.getStringList('imagens') ?? [];
+
+    if(index >= 0 && index < nomesatual.length){
+      nomesatual.removeAt(index);
+      precoatual.removeAt(index);
+      imgatual.removeAt(index);
+
+      await prefs.setStringList('nomes', nomesatual);
+      await prefs.setStringList('precos', precoatual);
+      await prefs.setStringList('imagens', imgatual);
+    }
+
+  }
+
+  void calcularTotal(){
+    double resultado = 0.0;
+    for(int i = 0;i< preco.length;i++){
+      double soma = double.tryParse(preco[i]) ?? 0.0;
+      resultado +=  item[i]*soma;
+    }
+    total = resultado.toStringAsFixed(2);
+}
+
 
 
   Future<void> addProduto() async {
@@ -71,11 +94,9 @@ class CestaPageState extends State<CestaPage> {
       imgatual.add(img);
     }
 
-
     await prefs.setStringList('nomes', nomesatual);
     await prefs.setStringList('precos', precoatual);
     await prefs.setStringList('imagens', imgatual);
-
 
     setState(() {
       this.nome = nomesatual;
@@ -84,25 +105,28 @@ class CestaPageState extends State<CestaPage> {
     });
   }
 
+Future<void> verItens() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
 
-  Future<void> verItens() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> nomesatual = prefs.getStringList('nomes') ?? [];
-    List<String> precoatual = prefs.getStringList('precos') ?? [];
-    List<String> imgatual = prefs.getStringList('imagens') ?? [];
+  List<String> nomesatual = prefs.getStringList('nomes') ?? [];
+  List<String> precoatual = prefs.getStringList('precos') ?? [];
+  List<String> imgatual = prefs.getStringList('imagens') ?? [];
 
-    setState(() {
-      nome = nomesatual;
-      preco = precoatual;
-      imgs = imgatual;
-    });
-  }
+  setState(() {
+    nome = nomesatual;
+    preco = precoatual;
+    imgs = imgatual;
+    item = List<int>.filled(preco.length, 1);
+  });
+}
+
 
   @override
   void initState() {
     super.initState();
     addProduto();
     verItens();
+    estado = widget.state;
   }
 
   
@@ -110,6 +134,9 @@ class CestaPageState extends State<CestaPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        scaffoldBackgroundColor: Color(0xffffffff)
+      ),
       debugShowCheckedModeBanner: true,
       home: Scaffold(
       appBar: AppBar(
@@ -124,7 +151,7 @@ class CestaPageState extends State<CestaPage> {
               padding: const EdgeInsets.only(right: 16.0),
               child: IconButton(
                 onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage(state:'b')));
                 }, 
                 icon: Icon(
                 Icons.keyboard_return, 
@@ -136,35 +163,20 @@ class CestaPageState extends State<CestaPage> {
             
           ] 
       ),
-      body: _buildContent(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            // Alterna entre os estados para teste
-            if (_currentState == ScreenState.stateA) {
-              _currentState = ScreenState.stateB;
-            } else if (_currentState == ScreenState.stateB) {
-              _currentState = ScreenState.stateC;
-            } else {
-              _currentState = ScreenState.stateA;
-            }
-          });
-        },
-        child: const Icon(Icons.refresh),
-      ),
+      body: changeScreen(),
     )
     ); 
   }
 
-  Widget _buildContent() {
-    switch (_currentState) {
-      case ScreenState.stateA:
-        return buildStateA();
-      case ScreenState.stateB:
-        return buildStateB();
-      case ScreenState.stateC:
-        return buildStateC();
-    }
+  Widget changeScreen(){
+  final String _currentState = estado;
+  if(_currentState == 'a'){
+    return buildStateA();
+  }else if(_currentState == 'b'){
+    return buildStateB();
+  }else{
+    return buildStateC();
+  }
   }
 
   Widget buildStateA() {
@@ -188,124 +200,248 @@ class CestaPageState extends State<CestaPage> {
   }
 
   Widget buildStateB() {
-    return ListView.builder(
+    return Column(
+      children: [
+        Text('Falta pouco, Visitante...', style: TextStyle(color: Color(0xff16697a),fontSize: 20),),
+        Expanded(child:
+          ListView.builder(
       itemCount: nome.length,
       itemBuilder: (context, index) {
         return Column(
           children: [
-        Text('Falta pouco, Visitante...'),
         Container(
           height: 163,
-          color: Color(0xffD9D9D9),
+          decoration: BoxDecoration(
+          color: Color.fromARGB(255, 238, 238, 238),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.4),
+                spreadRadius: 0.3,
+                blurRadius: 1,
+                offset: Offset(0, 3)
+              )
+            ]
+          ),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 10.0),
+                padding: const EdgeInsets.only(left: 10.0,top: 10 ),
                 child: Image.network(
                     height: 125,
                     imgs[index]),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0,top: 25.0),
-                child: Column(
+              Column(
                   children: [
-                    Text(nome[index],
+                    Padding(
+                      padding: EdgeInsets.only(top: 20,right: 20),
+                      child:Expanded(child: 
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(nome[index],
                         style:
-                            TextStyle(fontSize: 12, fontWeight: FontWeight.w500)),
+                            TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
                     Text(
                       'R\$' + preco[index],
                       style: TextStyle(
                           color: Color(0xff16697A),
-                          fontWeight: FontWeight.w700,
-                          fontSize: 17),
+                          fontWeight: FontWeight.w500,
+                          fontSize: 19),
                     ),
-                    Container(
-                      color: Colors.white,
-                      height: 35,
-                      child: Row(
-                        children: [
-                          IconButton(onPressed: (){}, icon: Icon(Icons.badge)),
-                          TextButton(onPressed: (){
-                            setState(() {
-                              item++;
-                              calcularTotal();
-                            });
-                          }, 
-                          child: Text('+', 
-                          style: TextStyle(fontSize: 15),)),
-                          Text(item.toString()),
-                          TextButton(onPressed: (){
-                            setState(() {
-                              if(item == 1){
-                                item = 1;
-                              }else{
-                                item--;
-                              }
-                              calcularTotal();
-                            });
-                          }, child: Text('-',style: TextStyle(fontSize: 15))),
-                          
-                        ],
+                        ],)
+                      ), 
+                      
+                      ),
+                    
+                    Padding(
+                      padding: const EdgeInsets.only(top:45,left: 45),
+                      child: Container(
+                        height: 35,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20)
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            IconButton(onPressed: ()async{
+                              await clearIndex(index);
+                              setState(() {
+                                nome.removeAt(index);
+                                preco.removeAt(index);
+                                imgs.removeAt(index);
+                              });
+                                calcularTotal();
+                            }, icon: Icon(Icons.delete, color: Color(0xfffc444c),size: 20,)),
+                            SizedBox(width: 0.8),
+                            TextButton(onPressed: (){
+                              setState(() {
+                                item[index]++;
+                                calcularTotal();
+                              });
+                            }, 
+                            child: Text('+', 
+                            style: TextStyle(fontSize: 15),)),
+                            Text(item[index].toString()),
+                            TextButton(onPressed: (){
+                              setState(() {
+                                if(item[index] == 1){
+                                  item[index]=1;
+                                }else{
+                                  item[index]--;
+                                }
+                                calcularTotal();
+                              });
+                            }, child: Text('-',style: TextStyle(fontSize: 15))),
+                            
+                          ],
+                        ),
                       ),
                     ),
-                    Text('Total: ' + total)
                   ],
                 ),
-              ),
             ],
           ),
+          
         ),
-        SizedBox(
-          width: 65,
+      ],
+      
+        );
+        
+      },
+      
+    ),
+         ),
+         Text('Total: ' + total, style: TextStyle(fontSize: 18,color: Color(0xfffc444c)),),
+         SizedBox(
+          width: 215,
           height: 54,
           child: TextButton(
-            onPressed: (){}, 
+            onPressed: (){
+              setState(() {
+                estado = 'c';
+              });
+              print(estado);
+              
+            }, 
             child: Text('Confirmar pedido', 
             style: TextStyle(
-              color: Colors.white),),
+              color: Colors.white,fontSize: 17),),
             style: TextButton.styleFrom(
               backgroundColor: Color(0xff16697a),
             ),
             ),
-        )
+        ),
+        
       ],
-        );
-      },
-      
     );
+    
   }
 
   Widget buildStateC() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('Oba!'),
-        Text('Seu pedido foi confirmado pela loja'),
-        Image.network(
-                  height: 125,
-                  widget.img),
+        Text('Oba!', style: TextStyle(fontSize: 16,color: Color(0xff16697a)),),
+        Text('Seu pedido foi confirmado pela loja', style: TextStyle(fontSize: 16,color: Color(0xff16697a))),
+        Expanded(child:
+          ListView.builder(
+      itemCount: nome.length,
+      itemBuilder: (context, index) {
+        return Column(
+          children: [
+        Container(
+          height: 163,
+          decoration: BoxDecoration(
+          color: Color.fromARGB(255, 238, 238, 238),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.4),
+                spreadRadius: 0.3,
+                blurRadius: 1,
+                offset: Offset(0, 3)
+              )
+            ]
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0,top: 10 ),
+                child: Image.network(
+                    height: 125,
+                    imgs[index]),
+              ),
               Column(
-                children: [
-                  Text(widget.nome,
-                      style:
-                          TextStyle(fontSize: 12, fontWeight: FontWeight.w500)),
-                  Text(
-                    'R\$' + widget.preco,
-                    style: TextStyle(
-                        color: Color(0xff16697A),
-                        fontWeight: FontWeight.w700,
-                        fontSize: 17),
-                  )
-                ],
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 20),
+                      child:Expanded(child: 
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(item[index].toString() + 'x',style: TextStyle(fontSize: 14,color: Color(0xffFC444C)),),
+                          Text(nome[index],
+                        style:
+                            TextStyle(fontSize: 12, 
+                            fontWeight: FontWeight.w500)),
+                          Text('EasyMeds - Morumbi',style: TextStyle(fontSize: 14,color: Color(0xffFC444C)),),
+                          Text('Rua das Magnólias, 222, Morumbi',style: TextStyle(fontSize: 10),)
+                        
+                        ],)
+                      ), 
+                      
+                      ),
+                    Padding(
+                      padding: const EdgeInsets.only(top:30,left: 115),
+                      child: Text(
+                        'R\$' + preco[index],
+                        style: TextStyle(
+                            color: Color(0xff16697A),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 19),
+                      ),
+                    ),
+
+                  ],
+                ),
+            ],
+          ),
+          
+        ),
+      ],
+      
+        );
+        
+      },
+      
+    ),
+         ),
+         Text(
+          'Total da compra: R\$' + total, 
+          style: TextStyle(
+            fontSize: 20, 
+            fontWeight: FontWeight.w800),
+            ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  margin: EdgeInsets.all(5),
+                  child: Text(
+                    'Lembre-se de levar um documento com foto e número de identificação para a retirada do produto.',
+                    style: TextStyle(fontSize: 16),),
+                ),
               ),
-              Text(
-                'Lembre-se de levar um documento com foto e número de identificação para a retirada do produto.'),
-              QrImageView(
-                data: code,
-                version: QrVersions.auto,
-                size: 150.0,
+              Container(
+                margin: EdgeInsets.all(8.0),
+                child: QrImageView(
+                  data: code,
+                  version: QrVersions.auto,
+                  size: 150.0,
+                ),
               ),
+              Text('Código de retirada:' + code, style: TextStyle(fontSize: 16, color: Color(0xffFC444C)),)
       ],
     );
   }
