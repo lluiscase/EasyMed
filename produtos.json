@@ -8,14 +8,14 @@
 
             "id":"1",
             "nome":"Ibuprofeno",
-            "preco":"R$ 6,38",
+            "preco":"6.38",
             "descricao":" O ibuprofeno é um medicamento anti-inflamatório não esteroide (AINE) amplamente utilizado para aliviar a dor,reduzir a inflamação e diminuir a febre. É um dos AINEs mais comuns e é vendido tanto com prescrição médica quanto sem ela.",
             "foto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLK4lqZKHVN2g5Ia3yIv-tP8hlHJdGbr1IvQ&s"
         },
         {
             "id":"2",
             "nome":"Aspirina",
-            "preco":"R$16,97",
+            "preco":"16.97",
             "descricao":"é um medicamento anti-inflamatório não esteroide (AINE) utilizado para aliviar a dor, reduzir a inflamação e diminuir a febre. É também conhecida por suas propriedades antiplaquetárias, ou seja, pode ajudar a prevenir a formação de coágulos sanguíneos.",
             "foto": "https://paguemenos.vtexassets.com/arquivos/ids/274392/Analgesico-Aspirina-500mg-a%E2%82%AC%E2%80%9C-caixa-com-20-comprimidos-Pague-Menos-43534-2.jpg?v=637305908740470000"
       
@@ -23,7 +23,7 @@
         {
             "id":"3",
             "nome":"Naproxeno ",
-            "preco":"R$24,29",
+            "preco":"24.29",
             "descricao":" O naproxeno é um medicamento anti-inflamatório não esteroide (AINE) utilizado para aliviar a dor-Moderada, reduzir a inflamação e diminuir a febre. É eficaz no tratamento de várias condições que envolvem dor e inflamação.",
             "foto": "https://www.drogarianovaesperanca.com.br/imagens/600x600/naproxeno-sodico-550mg-com-20-comprimidos-04f87525e1.jpg"
 
@@ -31,21 +31,21 @@
         {
             "id":"4",
             "nome":"Loratadina",
-            "preco":"R$11,99",
+            "preco":"11.99",
             "descricao":" A loratadina é um remédio antialérgico usado no alívio dos sintomas de rinite alérgica como coceira nasal, tosse alérgica, coriza, espirros, ardor e coceira nos olhos",
             "foto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmdLJv81rtubs4mxFJIkIe497s6EQ4f9Fhdw&s"
         },
         {
             "id":"5",
             "nome":"Dicloridrato de Cetirizina",
-            "preco":"R$25,76 ",
+            "preco":"25.76 ",
             "descricao":"O dicloridrato de cetirizina é um anti-histamínico de segunda geração utilizado para o alívio de sintomas alérgicos, como rinite alérgica (alergia sazonal ou perene) e urticária (erupções cutâneas com coceira). É conhecido por ser eficaz no controle dos sintomas sem causar sonolência significativa, ao contrário dos anti-histamínicos de primeira geração.",
             "foto": "https://drogariaglobo.vtexassets.com/arquivos/ids/1106828/Dicloridrato-de-Cetirizina-1mg-mL-Solucao-Oral-Generico-Medley-120ml.jpg?v=638279650373870000"
         },
         {
             "id":"5",
             "nome":"Furoato de Mometasona",
-            "preco":"R$68,83",
+            "preco":"68.83",
             "descricao":"O furoato de mometasona é um corticosteroide utilizado para tratar e controlar a inflamação e os sintomas associados a condições alérgicas e inflamatórias. Disponível principalmente em forma de spray nasal, é eficaz no tratamento da rinite alérgica e na redução dos sintomas inflamatórios nas vias nasais.",
             "foto":"https://bemol.vtexassets.com/arquivos/ids/287789-800-800?v=638554512600730000&width=800&height=800&aspect=true"
         }
@@ -176,35 +176,35 @@
             {
                 "id":"3",
                 "nome":"Escova de Dente Infantil Curaprox ",
-                "preco":"R$ 28,99",
+                "preco":"R$ 28.99",
                 "descricao":"Escova de dente infantil ultra macia",
                 "foto":"https://www.loja.curaprox.com.br/uploads/1684330726.jpg"
             },
             {
                 "id":"4",
                 "nome":"Chupeta NUK Space Boy",
-                "preco":"R$ 66,79",
+                "preco":"R$ 66.79",
                 "descricao":"A Chupeta NUK Space Silicone é leve e permite que a pele sensível do bebê respire e fique seca durante sua utilização. Possui bico Oral Fit 2.0 ortodôntico com topo curvado que se adapta ao céu da boca da criança, e sua base reta possibilita o melhor posicionamento da língua.",
                 "foto": "https://alexfarma.vteximg.com.br/arquivos/ids/157958-1000-1000/CHUP-NUK-SPACE-BOY-S2-REF-PA7333-2B-TAM2-min.jpg?v=638007629396770000"
             },
             {
                 "id":"5",
                 "nome":"Fórmula Infantil Ascenda Nestlé",
-                "preco":"R$ 101,99",
+                "preco":"R$ 101.99",
                 "descricao":"Fórmula pediátrica para nutrição enteral e oral,28 vitaminas e minerais essenciais.",
                 "foto":"https://images.tcdn.com.br/img/img_prod/1232250/ascenda_800g_315_1_d19cd40525cb8a45ebfb744be87cf0e7.png"
             },
             {
                 "id":"6",
                 "nome":"Sabonete Líquido Mãos e Corpo Trá Lá Lá",
-                "preco":"R$ 12,90",
+                "preco":"R$ 12.90",
                 "descricao":"Agora a Trá Lá Lá Kids está mais completa com os novos Sabonetes Líquidos Mãos e Corpo Trá Lá Lá Kids!",
                 "foto":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXOcMcLHYe5Nrww513ox1FJA_VZFSzK2_APg&s"
             },
             {
                 "id":"7",
                 "nome":"Kit Sabonete em Barra Pom Pom",
-                "preco":"R$ 16,39",
+                "preco":"R$ 16.39",
                 "descricao":"O Sabonete Pom Pom Loção Hidratante é um sabonete infantil que proporciona brilho e maciez. Minimiza o efeito ressecado da pele do seu bebê. Contém lanolina. Hipoalergênico.",
                 "foto":"https://a-static.mlcdn.com.br/450x450/kit-4-sabonete-em-barra-pom-pom-glicerina-70g/drogariaaraujosa/50001027/f30676f9756a033f37582bd8fd65df72.jpeg"
             }
