@@ -1,11 +1,9 @@
 // modules_widgets.dart
 import 'package:flutter/material.dart';
-import 'package:flutterguys/pages/perfil.dart';
 import 'package:flutterguys/pages/produtos.dart';
-import 'package:flutterguys/pages/home.dart';
-import 'package:flutterguys/pages/telaEspec.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:flutterguys/pages/Cesta.dart';
 List<String> allProdutosList = [];
 class Produtos {
   final String id;
@@ -56,6 +54,7 @@ Future<List<Categoria>> fetchCategorias() async {
   }
 }
 
+
 Future<List<Produtos>> getProdutos(String nomecategoria)async{
   var categoria = await fetchCategorias();
   var vereficador = categoria.where((categoria)=>categoria.nome == nomecategoria );
@@ -104,22 +103,25 @@ AppBar appbar() {
       ),
     ),
     actions: [
-      GestureDetector(
-        onTap: () {
-          print('Clicou no carrinho');
-        },
-        child: Container(
-          margin: EdgeInsets.all(10),
-          child: Image.asset(
-            'assets/icons/shopping_basket.png',
-            width: 50,
-          ),
-          decoration: BoxDecoration(
-            color: Color(0xffF7f8f8),
-            borderRadius: BorderRadius.circular(1),
-          ),
+        Builder(
+          builder: (context) {
+            return Container(
+              margin: EdgeInsets.all(10),
+              child: IconButton(
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>CestaPage(img: '',nome: '',preco: '')));
+                },
+                icon:Image.asset(
+                'assets/icons/shopping_basket.png',
+                width: 50,
+              )),
+              decoration: BoxDecoration(
+                color: Color(0xffF7f8f8),
+                borderRadius: BorderRadius.circular(1),
+              ),
+            );
+          }
         ),
-      ),
     ],
   );
 }

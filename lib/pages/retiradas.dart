@@ -12,7 +12,7 @@ class RetiradasState extends State<Retiradas>{
   Widget build(BuildContext context) {
     return MaterialApp(
     home: Scaffold(
-      appBar: appbar(),
+      
       ),
     );
   }

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutterguys/pages/home.dart';
 import 'package:flutterguys/pages/perfil.dart';
@@ -8,6 +7,7 @@ import 'package:flutterguys/pages/telaEspec.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
+import 'package:flutterguys/pages/Cesta.dart';
 
   void main() => runApp(const ProdutosPage(desc: '',nome: '',prec: '',img:''));
 
@@ -224,7 +224,9 @@ class ProdutosPageState extends State<ProdutosPage>{
                 child: Center(
                   child: 
                     TextButton(
-                      onPressed: (){}, 
+                      onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>CestaPage(img: widget.img,nome: widget.nome, preco: widget.prec,)));
+                      }, 
                       child: Text(
                         'Adicionar à cesta',
                       style: TextStyle(
@@ -242,9 +244,12 @@ class ProdutosPageState extends State<ProdutosPage>{
                     color: Colors.grey[300],
                     thickness: 2,
               ),
+
             ],
             ),
         ),
+
+
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

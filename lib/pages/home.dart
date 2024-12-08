@@ -4,6 +4,8 @@ import 'package:flutterguys/pages/modules.dart';
 import 'package:flutterguys/pages/produtos.dart';
 import 'package:flutterguys/pages/telaEspec.dart';
 
+
+
 void main() => runApp(HomePage());
 
 class HomePage extends StatefulWidget {
@@ -105,10 +107,9 @@ class HomePageState extends State<HomePage> {
                 },
                 suggestionsBuilder: (context, controller) {
                   return  List<ListTile>.generate(allProdutosList.length,(index){
-                      String text = '';
+                      String text = allProdutosList[index];
                     setState(() {
-
-                      text = allProdutosList[index];
+                      text = searchResult;
                     });
                     return ListTile(
                       title: Text(text),
