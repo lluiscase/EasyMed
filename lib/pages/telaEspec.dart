@@ -4,13 +4,13 @@ import 'package:flutterguys/pages/produtos.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(const telaEspec(
-      categoria: '',
-      state: '',
-      desc: '',
-      nome: '',
-      prec: '',
-      img: '',
-    ));
+  categoria: '',
+  state: '',
+  desc: '',
+  nome: '',
+  prec: '',
+  img: '',
+));
 
 class telaEspec extends StatefulWidget {
   final String categoria;
@@ -39,7 +39,7 @@ class telaEspecState extends State<telaEspec> {
   List<String> preco = [];
   List<String> imgs = [];
 
-  // Método para adicionar produto
+  // Método para adicionar produto aos favoritos
   Future<void> addProduto() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -126,11 +126,13 @@ class telaEspecState extends State<telaEspec> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => ProdutosPage(
-                                nome: snapshot.data![index].nome,
-                                desc: snapshot.data![index].descricao,
-                                prec: snapshot.data![index].preco,
-                                img: snapshot.data![index].foto,
-                              )));
+                            nome: snapshot.data![index].nome,
+                            desc: snapshot.data![index].descricao,
+                            prec: snapshot.data![index].preco,
+                            img: snapshot.data![index].foto,
+                          ))).then((_) {
+                    verItens();
+                  });
                 },
                 child: Container(
                   margin: const EdgeInsets.all(8.0),
@@ -181,7 +183,6 @@ class telaEspecState extends State<telaEspec> {
         });
   }
 
-  // Tela para o estado "B"
   Widget buildStateB() {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
