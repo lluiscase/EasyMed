@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutterguys/pages/Cesta.dart';
+import 'package:flutterguys/pages/home.dart';
+import 'package:flutterguys/pages/Perfil.dart';
+
+
 void main() => runApp(const LocalizacaoRuas());
 
 class LocalizacaoRuas extends StatefulWidget {
@@ -12,6 +16,7 @@ class LocalizacaoRuas extends StatefulWidget {
 
 class LocalizacaoRuasState extends State<LocalizacaoRuas> {
   String? _cepSalvo;
+  int _selectedIndex = 0;
 
   @override
   void initState() {
@@ -49,10 +54,11 @@ class LocalizacaoRuasState extends State<LocalizacaoRuas> {
                   borderRadius: BorderRadius.circular(15),
                 ),
               ),
-              onPressed: (){
+              onPressed: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const LocalizacaoRuas()));
+                  context,
+                  MaterialPageRoute(builder: (context) => const Cesta()),
+                );
               },
               child: const Text(
                 'Ir para seu Comprovante ',
@@ -63,6 +69,25 @@ class LocalizacaoRuasState extends State<LocalizacaoRuas> {
             ),
           ],
         ),
+        bottomNavigationBar: bottomNav(_selectedIndex, (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+          switch (index) {
+            case 0:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+              break;
+            case 1:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Cesta()));
+              break;
+            case 2:
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));
+              break;
+            default:
+            // Pode adicionar outra página se necessário
+              break;
+          }
+        }),
       ),
     );
   }
@@ -88,6 +113,27 @@ class LocalizacaoRuasState extends State<LocalizacaoRuas> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget bottomNav(int selectedIndex, ValueChanged<int> onTap) {
+    return BottomNavigationBar(
+      currentIndex: selectedIndex,
+      onTap: onTap,
+      items: const [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Home',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.shopping_basket),
+          label: 'Cesta',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person),
+          label: 'Perfil',
+        ),
+      ],
     );
   }
 }
@@ -140,4 +186,3 @@ AppBar appbar() {
     ],
   );
 }
-

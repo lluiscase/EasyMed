@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'localizacao_ruas.dart';
+import 'package:flutterguys/pages/home.dart';
+import 'package:flutterguys/pages/perfil.dart';
 
 void main() => runApp(const LocalizacaoCepApp());
 
@@ -29,6 +31,7 @@ class LocalizacaoCep extends StatefulWidget {
 
 class LocalizacaoCepState extends State<LocalizacaoCep> {
   final TextEditingController _cepController = TextEditingController();
+  int _selectedIndex = 1; // Para indicar a aba selecionada (Localização)
 
   Future<void> _salvarCepENavegar() async {
     final String cep = _cepController.text.trim();
@@ -57,6 +60,7 @@ class LocalizacaoCepState extends State<LocalizacaoCep> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            const SizedBox(height: 100,),
             const Text(
               "Encontre a EasyMed mais próxima de você e retire sua compra, sem custos adicionais.",
               textAlign: TextAlign.center,
@@ -94,6 +98,52 @@ class LocalizacaoCepState extends State<LocalizacaoCep> {
           ],
         ),
       ),
+      bottomNavigationBar: bottomNavBar(),
+    );
+  }
+
+  Widget bottomNavBar() {
+    return BottomNavigationBar(
+      currentIndex: _selectedIndex,
+      onTap: (index) {
+        setState(() {
+          _selectedIndex = index;
+        });
+        switch (index) {
+          case 0:
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const HomePage()),
+            );
+            break;
+          case 1:
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const LocalizacaoCep()),
+            );
+            break;
+          case 2:
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const Perfil()),
+            );
+            break;
+        }
+      },
+      items: const [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Início',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.location_on),
+          label: 'Localização',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person),
+          label: 'Perfil',
+        ),
+      ],
     );
   }
 }
