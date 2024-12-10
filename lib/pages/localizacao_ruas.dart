@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:flutterguys/pages/Cesta.dart';
 void main() => runApp(const LocalizacaoRuas());
 
 class LocalizacaoRuas extends StatefulWidget {
@@ -39,6 +39,28 @@ class LocalizacaoRuasState extends State<LocalizacaoRuas> {
             _buildLocationCard('EasyMeds - Vila Mariana', 'Avenida dos Manacás, 101, Vila Mariana', 'CEP: $_cepSalvo', '2.8 km'),
             _buildLocationCard('EasyMeds - Higienópolis', 'Rua do Pacaembu, 789, Higienópolis', 'CEP: $_cepSalvo', '950m'),
             _buildLocationCard('EasyMeds - Ibirapuera', 'Avenida Iepê Roxo, 465, Ibirapuera', 'CEP: $_cepSalvo', '2.3 km'),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue,
+                minimumSize: const Size(180, 51),
+                padding: const EdgeInsets.symmetric(vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+              ),
+              onPressed: (){
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LocalizacaoRuas()));
+              },
+              child: const Text(
+                'Ir para seu Comprovante ',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -118,3 +140,4 @@ AppBar appbar() {
     ],
   );
 }
+
