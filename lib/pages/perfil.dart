@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutterguys/pages/historico.dart';
 import 'package:flutterguys/pages/meusDados.dart';
+import 'package:flutterguys/pages/cuponsDesconto.dart';
+import 'package:flutterguys/pages/localizacao_cep.dart';
+import 'package:flutterguys/pages/favoritos.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutterguys/pages/retiradas.dart';
 import 'dart:io';
 
 void main() => runApp(const Perfil());
@@ -86,13 +87,13 @@ class PerfilState extends State<Perfil> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const Historico(),
+                            builder: (context) =>  TelaFavoritos()
                           ),
                         );
                       },
                       child: const ListTile(
                         title: Text(
-                          "Histórico",
+                          "Favoritos",
                           style: TextStyle(fontSize: 20),
                         ),
                       ),
@@ -124,23 +125,37 @@ class PerfilState extends State<Perfil> {
                       ),
                     ),
                     const Divider(),
-                    const ListTile(
-                      title: Text(
-                        "Cupons",
-                        style: TextStyle(fontSize: 20),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const TelaCupons(),
+                          ),
+                        );
+                      },
+                      child: const ListTile(
+                        title: Text(
+                          "Cupons",
+                          style: TextStyle(fontSize: 20),
+                        ),
                       ),
                     ),
                     const Divider(),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Retiradas()));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>  LocalizacaoCep(),
+                          ),
+                        );
                       },
                       child: const ListTile(
-                        title:
-                        Text("Retiradas", style: TextStyle(fontSize: 20)),
+                        title: Text(
+                          "Retiradas",
+                          style: TextStyle(fontSize: 20),
+                        ),
                       ),
                     ),
                     const Divider(),

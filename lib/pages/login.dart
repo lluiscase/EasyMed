@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutterguys/pages/historico.dart';
+import 'package:flutterguys/pages/cadastro.dart';
+import 'package:flutterguys/pages/validacaoCodigo.dart';
+import 'package:flutterguys/pages/home.dart';
 
 void main() => runApp(const MyApp());
 
@@ -110,7 +112,7 @@ class LoginState extends State<Login> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const Historico()),
+                      MaterialPageRoute(builder: (context) => Validacao()),
                     );
                   },
                   child: const Text(
@@ -136,6 +138,10 @@ class LoginState extends State<Login> {
                     _salvamentoNomeUsuario();
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Login realizado com sucesso')),
+                    );
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const HomePage()),
                     );
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -166,7 +172,7 @@ class LoginState extends State<Login> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const Historico()),
+                      MaterialPageRoute(builder: (context) => Cadastro()),
                     );
                   },
                   child: const Text(

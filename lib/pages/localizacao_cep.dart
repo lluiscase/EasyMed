@@ -3,10 +3,10 @@ import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'localizacao_ruas.dart';
 
-void main() => runApp(const LocalizacaoCep());
+void main() => runApp(const LocalizacaoCepApp());
 
-class LocalizacaoCep extends StatelessWidget {
-  const LocalizacaoCep({super.key});
+class LocalizacaoCepApp extends StatelessWidget {
+  const LocalizacaoCepApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,26 +15,26 @@ class LocalizacaoCep extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Historico(),
+      home: const LocalizacaoCep(),
     );
   }
 }
 
-class Historico extends StatefulWidget {
-  const Historico({super.key});
+class LocalizacaoCep extends StatefulWidget {
+  const LocalizacaoCep({super.key});
 
   @override
-  HistoricoState createState() => HistoricoState();
+  LocalizacaoCepState createState() => LocalizacaoCepState();
 }
 
-class HistoricoState extends State<Historico> {
+class LocalizacaoCepState extends State<LocalizacaoCep> {
   final TextEditingController _cepController = TextEditingController();
 
   Future<void> _salvarCepENavegar() async {
-    final String cep = _cepController.text;
+    final String cep = _cepController.text.trim();
     if (cep.isEmpty || cep.length < 9) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Por favor, insira um CEP válido.')),
+        const SnackBar(content: Text('Por favor, insira um CEP válido.')),
       );
       return;
     }
@@ -44,27 +44,27 @@ class HistoricoState extends State<Historico> {
 
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => LocalizacaoRuas()),
+      MaterialPageRoute(builder: (context) => const LocalizacaoRuas()),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appbar(context),
+      appBar: buildAppBar(context),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              "Encontre a EasyMeds mais próxima de você e retire sua compra, sem custos adicionais.",
+            const Text(
+              "Encontre a EasyMed mais próxima de você e retire sua compra, sem custos adicionais.",
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Image.asset('assets/icons/localizacao.png', height: 200),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container(
               padding: const EdgeInsets.all(16.0),
               color: Colors.grey[200],
@@ -72,21 +72,19 @@ class HistoricoState extends State<Historico> {
                 children: [
                   TextField(
                     controller: _cepController,
-                    keyboardType: TextInputType.numberWithOptions(decimal: false),
-                    inputFormatters: [
-                      MaskedInputFormatter('#####-###'),
-                    ],
-                    decoration: InputDecoration(
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [MaskedInputFormatter('#####-###')],
+                    decoration: const InputDecoration(
                       labelText: "Digite o CEP",
                       border: OutlineInputBorder(),
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: _salvarCepENavegar,
-                    child: Text('BUSCAR'),
+                    child: const Text('BUSCAR'),
                     style: ElevatedButton.styleFrom(
-                      minimumSize: Size(double.infinity, 50),
+                      minimumSize: const Size(double.infinity, 50),
                       backgroundColor: Colors.blue,
                     ),
                   ),
@@ -100,9 +98,9 @@ class HistoricoState extends State<Historico> {
   }
 }
 
-AppBar appbar(BuildContext context) {
+AppBar buildAppBar(BuildContext context) {
   return AppBar(
-    backgroundColor: Color(0xffF9FAFD),
+    backgroundColor: const Color(0xffF9FAFD),
     title: const Text(
       'EasyMed',
       style: TextStyle(
@@ -113,18 +111,19 @@ AppBar appbar(BuildContext context) {
     elevation: 0.0,
     leading: GestureDetector(
       onTap: () {
+        // Ação ao clicar no logo
         print('Logo clicado');
       },
       child: Container(
-        decoration: BoxDecoration(
-          color: const Color(0xffF7f8f8),
-          borderRadius: BorderRadius.circular(1),
-        ),
         margin: const EdgeInsets.all(10),
         child: Image.asset(
           'assets/icons/logo.png',
           fit: BoxFit.contain,
           width: 50,
+        ),
+        decoration: BoxDecoration(
+          color: const Color(0xffF7F8F8),
+          borderRadius: BorderRadius.circular(4),
         ),
       ),
     ),
@@ -140,8 +139,8 @@ AppBar appbar(BuildContext context) {
             width: 50,
           ),
           decoration: BoxDecoration(
-            color: const Color(0xffF7f8f8),
-            borderRadius: BorderRadius.circular(1),
+            color: const Color(0xffF7F8F8),
+            borderRadius: BorderRadius.circular(4),
           ),
         ),
       ),
