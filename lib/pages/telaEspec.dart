@@ -3,7 +3,18 @@ import 'package:flutterguys/pages/modules.dart';
 import 'package:flutterguys/pages/produtos.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+<<<<<<< HEAD
 void main() => runApp(const telaEspec(categoria: '', state: '', desc: '', nome: '', prec: '', img: ''));
+=======
+void main() => runApp(const telaEspec(
+  categoria: '',
+  state: '',
+  desc: '',
+  nome: '',
+  prec: '',
+  img: '',
+));
+>>>>>>> 673877df1dab6fd4eb50557f8708b029a5b19035
 
 class telaEspec extends StatefulWidget {
   final String categoria;
@@ -24,7 +35,11 @@ class telaEspecState extends State<telaEspec> {
   List<String> preco = [];
   List<String> imgs = [];
 
+<<<<<<< HEAD
 
+=======
+  // Método para adicionar produto aos favoritos
+>>>>>>> 673877df1dab6fd4eb50557f8708b029a5b19035
   Future<void> addProduto() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -119,6 +134,7 @@ Widget buildStateA() {
               ),
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
+<<<<<<< HEAD
               return Center(
                 child: GestureDetector(
                   
@@ -134,6 +150,22 @@ Widget buildStateA() {
                       )
                     );
                   },
+=======
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ProdutosPage(
+                            nome: snapshot.data![index].nome,
+                            desc: snapshot.data![index].descricao,
+                            prec: snapshot.data![index].preco,
+                            img: snapshot.data![index].foto,
+                          ))).then((_) {
+                    verItens();
+                  });
+                },
+>>>>>>> 673877df1dab6fd4eb50557f8708b029a5b19035
                 child: Container(
                   margin: EdgeInsets.all(8.0),
                   width: 109,

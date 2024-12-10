@@ -3,16 +3,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
-class MeusDados extends StatefulWidget {
-  final Function(String) onNomeSalvo;
 
-  const MeusDados({super.key, required this.onNomeSalvo});
+void main() => runApp(const Cadastro());
+class Cadastro extends StatefulWidget {
+
+
+  const Cadastro({super.key});
 
   @override
-  MeusDadosState createState() => MeusDadosState();
+  CadastroState createState() => CadastroState();
 }
 
-class MeusDadosState extends State<MeusDados> {
+class CadastroState extends State<Cadastro> {
   final TextEditingController nomeController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController telefoneController = TextEditingController();
@@ -69,8 +71,6 @@ class MeusDadosState extends State<MeusDados> {
       await prefs.setString('caminhoImagemPerfil', _caminhoImagemPerfil!);
     }
 
-    widget.onNomeSalvo(nomeController.text);
-
     setState(() {
       nomeExibido = nomeController.text.isNotEmpty ? nomeController.text : 'Visitante';
     });
@@ -93,7 +93,7 @@ class MeusDadosState extends State<MeusDados> {
         appBar: AppBar(
           backgroundColor: const Color(0xffF9FAFD),
           title: const Text(
-            'Meus Dados',
+            'Cadastro',
             style: TextStyle(
               color: Color(0xff080F0F),
               fontSize: 20,
@@ -217,7 +217,7 @@ class MeusDadosState extends State<MeusDados> {
                   ),
                   onPressed: _salvamentoDosDados,
                   child: const Text(
-                    'Salvar',
+                    'Criar Conta',
                     style: TextStyle(
                       color: Colors.white,
                     ),
