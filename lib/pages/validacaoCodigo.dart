@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterguys/pages/CodigoValidacao.dart';
 
 void main() => runApp(const MyApp());
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
@@ -12,14 +13,17 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 class Validacao extends StatefulWidget {
   const Validacao({super.key});
   @override
   ValidacaoState createState() => ValidacaoState();
 }
+
 class ValidacaoState extends State<Validacao> {
   final TextEditingController emailController = TextEditingController();
   bool _isChecked = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,14 +39,17 @@ class ValidacaoState extends State<Validacao> {
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center, // Centraliza a coluna
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 100),
               const Text(
                 'Código de validação',
                 style: TextStyle(
+                  fontFamily: 'Poppins',
                   fontSize: 25,
-                  color: Colors.blue,
+                  fontWeight: FontWeight.w400,
+                  color: Color(0xFF16697A),
                 ),
               ),
               const SizedBox(height: 80),
@@ -97,11 +104,11 @@ class ValidacaoState extends State<Validacao> {
                 ),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: const Color(0xFF16697A),
                     minimumSize: const Size(180, 51),
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(15),
                     ),
                   ),
                   onPressed: () {
@@ -122,7 +129,12 @@ class ValidacaoState extends State<Validacao> {
                   },
                   child: const Text(
                     'Enviar código',
-                    style: TextStyle(fontSize: 18, color: Colors.white),
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),

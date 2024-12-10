@@ -3,6 +3,7 @@ import 'package:flutterguys/pages/perfil.dart';
 import 'package:flutterguys/pages/modules.dart';
 import 'package:flutterguys/pages/produtos.dart';
 import 'package:flutterguys/pages/telaEspec.dart';
+import 'package:flutterguys/pages/localizacao_ruas.dart' as localizacao;
 
 
 
@@ -46,6 +47,7 @@ class HomePageState extends State<HomePage> {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Color(0xffF9FAFD),
+<<<<<<< HEAD
         appBar: appbar(widget.state),
         bottomNavigationBar: bottomNav(_selectedIndex, (index){
            setState(() {
@@ -62,6 +64,27 @@ class HomePageState extends State<HomePage> {
             Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(state: '',)));
         }
         }),
+=======
+        appBar: appbar() ,
+          bottomNavigationBar: bottomNav(_selectedIndex, (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+            switch (index) {
+              case 0:
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+                break;
+              case 1:
+                Navigator.push(context, MaterialPageRoute(builder: (context) => localizacao.LocalizacaoRuas()));
+                break;
+              case 2:
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));
+                break;
+              default:
+                break;
+            }
+          }),
+>>>>>>> 673877df1dab6fd4eb50557f8708b029a5b19035
         body: SingleChildScrollView(
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

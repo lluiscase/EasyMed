@@ -63,8 +63,10 @@ class CodigovalidacaoState extends State<Codigovalidacao> {
               const Text(
                 'Um código de verificação foi enviado para o seu e-mail, verifique a caixa spam ',
                 style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.blue,
+                  fontFamily: 'Poppins',
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xFF16697A),
                 ),
               ),
               const SizedBox(height: 80),
@@ -88,7 +90,12 @@ class CodigovalidacaoState extends State<Codigovalidacao> {
                 children: [
                   const Text(
                     'Código de validação:',
-                    style: TextStyle(fontSize: 18, color: Colors.blue),
+                      style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xFF16697A),
+                      ),
                   ),
                   const SizedBox(height: 10),
                   Row(
@@ -134,7 +141,7 @@ class CodigovalidacaoState extends State<Codigovalidacao> {
                 ),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Color(0xFF16697A),
                     minimumSize: const Size(180, 51),
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     shape: RoundedRectangleBorder(
@@ -162,7 +169,12 @@ class CodigovalidacaoState extends State<Codigovalidacao> {
 
                   child: const Text(
                     'Validar',
-                    style: TextStyle(fontSize: 18, color: Colors.white),
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
                   ),
                 ),
               ),

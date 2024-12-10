@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'localizacao_ruas.dart';
+import 'package:flutterguys/pages/home.dart';
+import 'package:flutterguys/pages/perfil.dart';
 
 void main() => runApp(const LocalizacaoCepApp());
 
@@ -14,6 +16,18 @@ class LocalizacaoCepApp extends StatelessWidget {
       title: 'EasyMed',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(
+            fontFamily: 'Montserrat',
+          ),
+        ),
+        appBarTheme: const AppBarTheme(
+          titleTextStyle: TextStyle(
+            fontFamily: 'Montserrat',
+            fontSize: 22,
+            color: Color(0xff080F0F),
+          ),
+        ),
       ),
       home: const LocalizacaoCep(),
     );
@@ -29,6 +43,7 @@ class LocalizacaoCep extends StatefulWidget {
 
 class LocalizacaoCepState extends State<LocalizacaoCep> {
   final TextEditingController _cepController = TextEditingController();
+  int _selectedIndex = 1;
 
   Future<void> _salvarCepENavegar() async {
     final String cep = _cepController.text.trim();
@@ -42,7 +57,7 @@ class LocalizacaoCepState extends State<LocalizacaoCep> {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('cep', cep);
 
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => const LocalizacaoRuas()),
     );
@@ -57,10 +72,12 @@ class LocalizacaoCepState extends State<LocalizacaoCep> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            const SizedBox(height: 100),
             const Text(
               "Encontre a EasyMed mais próxima de você e retire sua compra, sem custos adicionais.",
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16),
+              style: TextStyle(fontSize: 16,
+                  fontFamily: 'Montserrat', fontWeight: FontWeight.w400),
             ),
             const SizedBox(height: 20),
             Image.asset('assets/icons/localizacao.png', height: 200),
@@ -70,6 +87,8 @@ class LocalizacaoCepState extends State<LocalizacaoCep> {
               color: Colors.grey[200],
               child: Column(
                 children: [
+                  Text('Encontre unidades próximas', style: TextStyle(fontFamily: 'Montserrat', fontSize: 19,fontWeight: FontWeight.w500),),
+                  const SizedBox(height: 30 ,),
                   TextField(
                     controller: _cepController,
                     keyboardType: TextInputType.number,
@@ -82,7 +101,7 @@ class LocalizacaoCepState extends State<LocalizacaoCep> {
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: _salvarCepENavegar,
-                    child: const Text('BUSCAR'),
+                    child: const Text('BUSCAR',style: TextStyle(color: Colors.white, fontFamily: 'Montserrat', fontWeight:  FontWeight.w500, fontSize: 15),),
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(double.infinity, 50),
                       backgroundColor: Colors.blue,
@@ -94,6 +113,54 @@ class LocalizacaoCepState extends State<LocalizacaoCep> {
           ],
         ),
       ),
+      bottomNavigationBar: bottomNav(_selectedIndex, (index) {
+        setState(() {
+          _selectedIndex = index;
+        });
+        switch (index) {
+          case 0:
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const HomePage()),
+            );
+            break;
+          case 1:
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const LocalizacaoRuas()),
+            );
+            break;
+          case 2:
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const Perfil()),
+            );
+            break;
+          default:
+            break;
+        }
+      }),
+    );
+  }
+
+  Widget bottomNav(int selectedIndex, Function(int) onTap) {
+    return BottomNavigationBar(
+      currentIndex: selectedIndex,
+      onTap: onTap,
+      items: const [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Início',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.location_on),
+          label: 'Localização',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.person),
+          label: 'Perfil',
+        ),
+      ],
     );
   }
 }
@@ -104,14 +171,15 @@ AppBar buildAppBar(BuildContext context) {
     title: const Text(
       'EasyMed',
       style: TextStyle(
-        color: Color(0xff080F0F),
+        fontFamily: 'Montserrat',
         fontSize: 22,
+        fontWeight: FontWeight.w700,
+        color: Color(0xff080F0F),
       ),
     ),
     elevation: 0.0,
     leading: GestureDetector(
       onTap: () {
-        // Ação ao clicar no logo
         print('Logo clicado');
       },
       child: Container(
