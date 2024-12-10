@@ -3,6 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
+
+
 class MeusDados extends StatefulWidget {
   final Function(String) onNomeSalvo;
 
@@ -218,11 +220,10 @@ class MeusDadosState extends State<MeusDados> {
                   onPressed: _salvamentoDosDados,
                   child: const Text(
                     'Salvar',
-                    style: TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(fontSize: 15, color: Colors.white, fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w600),
                     ),
                   ),
-                ),
               ],
             ),
           ),

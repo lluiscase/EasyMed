@@ -3,6 +3,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
+
+void main() => runApp(const Cadastro());
 class Cadastro extends StatefulWidget {
 
 

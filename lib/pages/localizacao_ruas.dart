@@ -4,7 +4,6 @@ import 'package:flutterguys/pages/Cesta.dart';
 import 'package:flutterguys/pages/home.dart';
 import 'package:flutterguys/pages/Perfil.dart';
 
-
 void main() => runApp(const LocalizacaoRuas());
 
 class LocalizacaoRuas extends StatefulWidget {
@@ -39,6 +38,16 @@ class LocalizacaoRuasState extends State<LocalizacaoRuas> {
         body: ListView(
           padding: const EdgeInsets.all(16.0),
           children: [
+            const SizedBox(height: 20),
+            const Padding(
+              padding: EdgeInsets.only(bottom: 16.0),
+              child: Center(
+                child: Text(
+                  'EasyMeds próximas a você!',
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500, fontFamily: 'Poppins', color: Colors.blue),
+                ),
+              ),
+            ),
             _buildLocationCard('EasyMeds - Morumbi', 'Rua das Magnólias, 222, Morumbi', 'CEP: $_cepSalvo', '800m'),
             _buildLocationCard('EasyMeds - Alto de Pinheiros', 'Avenida Brasil, 55, Alto de Pinheiros', 'CEP: $_cepSalvo', '1.6 km'),
             _buildLocationCard('EasyMeds - Vila Mariana', 'Avenida dos Manacás, 101, Vila Mariana', 'CEP: $_cepSalvo', '2.8 km'),
@@ -61,7 +70,7 @@ class LocalizacaoRuasState extends State<LocalizacaoRuas> {
                 );
               },
               child: const Text(
-                'Ir para seu Comprovante ',
+                'Ir para seu comprovante ',
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -84,7 +93,6 @@ class LocalizacaoRuasState extends State<LocalizacaoRuas> {
               Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));
               break;
             default:
-            // Pode adicionar outra página se necessário
               break;
           }
         }),
@@ -93,28 +101,49 @@ class LocalizacaoRuasState extends State<LocalizacaoRuas> {
   }
 
   Widget _buildLocationCard(String name, String address, String cep, String distance) {
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              name,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 6),
-            Text(address),
-            const SizedBox(height: 4),
-            Text(cep, style: const TextStyle(color: Colors.grey)),
-            const SizedBox(height: 8),
-            Text(distance, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.teal)),
-          ],
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Card(
+        margin: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                name,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                  fontFamily: 'Montserrat',
+                  color: Color(0xFFFC444C),
+                ),
+              ),
+              const SizedBox(height: 6),
+              Text(address,
+              style: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w300,
+                fontFamily: 'NunitoSans',
+                color: Colors.grey
+              ),),
+              const SizedBox(height: 4),
+              Text(cep,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w300,
+                    fontFamily: 'NunitoSans',)),
+              const SizedBox(height: 8),
+              Text(distance, style: const TextStyle(fontWeight: FontWeight.w300, fontSize: 15, fontFamily: 'NunitoSans', color: Color(0xFF16697A))),
+            ],
+          ),
         ),
       ),
     );
   }
+
+
 
   Widget bottomNav(int selectedIndex, ValueChanged<int> onTap) {
     return BottomNavigationBar(
@@ -144,8 +173,9 @@ AppBar appbar() {
     title: const Text(
       'EasyMed',
       style: TextStyle(
-        color: Color(0xff080F0F),
-        fontSize: 22,
+          color: Color(0xff080F0F),
+          fontSize: 22,
+          fontFamily: 'Poppins'
       ),
     ),
     elevation: 0.0,

@@ -77,14 +77,17 @@ class LoginState extends State<Login> {
                 child: Icon(
                   Icons.person,
                   size: 50,
+                  color: Colors.white,
                 ),
               ),
               const SizedBox(height: 20),
               const Text(
                 'Faça Seu Login',
                 style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.blue,
+                  fontSize: 24,
+                  color: Color(0xFF16697A),
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w700
                 ),
               ),
               const SizedBox(height: 30),
@@ -118,7 +121,10 @@ class LoginState extends State<Login> {
                   child: const Text(
                     'Esqueci minha senha',
                     style: TextStyle(
-                      color: Colors.red,
+                      color: Color(0xFFFC444C),
+                      fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w700
+
                     ),
                   ),
                 ),
@@ -126,11 +132,11 @@ class LoginState extends State<Login> {
               const SizedBox(height: 50),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: Color(0xFF16697A),
                   minimumSize: const Size(180, 51),
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(15),
                   ),
                 ),
                 onPressed: () {
@@ -151,14 +157,15 @@ class LoginState extends State<Login> {
                 },
                 child: const Text(
                   'Login',
-                  style: TextStyle(fontSize: 18, color: Colors.white),
+                  style: TextStyle(fontSize: 24, color: Colors.white, fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w700),
                 ),
               ),
               const SizedBox(height: 30),
               Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(15),
                   border: Border.all(color: Colors.blue, width: 2)
                 ),
                 child: ElevatedButton(
@@ -177,7 +184,8 @@ class LoginState extends State<Login> {
                   },
                   child: const Text(
                     'Cadastro',
-                    style: TextStyle(fontSize: 18, color: Colors.black),
+                    style: TextStyle(fontSize: 18, color: Colors.black,fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
