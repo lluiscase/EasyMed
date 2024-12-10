@@ -21,14 +21,14 @@ class AlterarSenhaState extends State<AlterarSenhaApp> {
     _carregarSenhaUsuario();
   }
 
-  // Carregar as senhas do SharedPreferences
+
   Future<void> _carregarSenhaUsuario() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     novaSenhaController.text = prefs.getString('novaSenha') ?? '';
     novaSenhaController1.text = prefs.getString('novaSenha1') ?? '';
   }
 
-  // Salvar as senhas no SharedPreferences
+
   Future<void> _salvarSenhaUsuario() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('novaSenha', novaSenhaController.text);

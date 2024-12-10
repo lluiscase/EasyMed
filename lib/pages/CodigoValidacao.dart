@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterguys/pages/historico.dart';
+import 'package:flutterguys/pages/alterarSenhar.dart';
 
 void main() => runApp(const MyApp());
 
@@ -24,7 +24,7 @@ class Codigovalidacao extends StatefulWidget {
 
 class CodigovalidacaoState extends State<Codigovalidacao> {
   final TextEditingController emailController = TextEditingController();
-  bool _isChecked = false;
+
 
   final List<FocusNode> _focusNodes = [
     FocusNode(),
@@ -61,7 +61,7 @@ class CodigovalidacaoState extends State<Codigovalidacao> {
             children: [
               const SizedBox(height: 100),
               const Text(
-                'Código de validação',
+                'Um código de verificação foi enviado para o seu e-mail, verifique a caixa spam ',
                 style: TextStyle(
                   fontSize: 25,
                   color: Colors.blue,
@@ -142,13 +142,26 @@ class CodigovalidacaoState extends State<Codigovalidacao> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const Historico()),
-                    );
+                    if (emailController.text.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Por favor, preencha o email')),
+                      );
+                    }
+                    else if (_textControllers.any((controller) => controller.text.isEmpty)) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Por favor, preencha todas as caixas de código')),
+                      );
+                    }
+                    else {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const AlterarSenhaApp()),
+                      );
+                    }
                   },
+
                   child: const Text(
-                    'Enviar código',
+                    'Validar',
                     style: TextStyle(fontSize: 18, color: Colors.white),
                   ),
                 ),
