@@ -3,6 +3,7 @@ import 'package:flutterguys/pages/perfil.dart';
 import 'package:flutterguys/pages/modules.dart';
 import 'package:flutterguys/pages/produtos.dart';
 import 'package:flutterguys/pages/telaEspec.dart';
+import 'package:flutterguys/pages/localizacao_ruas.dart' as localizacao;
 
 
 
@@ -45,22 +46,25 @@ class HomePageState extends State<HomePage> {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Color(0xffF9FAFD),
-        appBar: appbar(),
-        bottomNavigationBar: bottomNav(_selectedIndex, (index){
-           setState(() {
-          _selectedIndex = index;
-        });
-        switch (index) {
-          case 1:
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
-            break;
-          case 2:
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));
-            break;
-          default:
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
-        }
-        }),
+        appBar: appbar() ,
+          bottomNavigationBar: bottomNav(_selectedIndex, (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+            switch (index) {
+              case 0:
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+                break;
+              case 1:
+                Navigator.push(context, MaterialPageRoute(builder: (context) => localizacao.LocalizacaoRuas()));
+                break;
+              case 2:
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));
+                break;
+              default:
+                break;
+            }
+          }),
         body: SingleChildScrollView(
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
