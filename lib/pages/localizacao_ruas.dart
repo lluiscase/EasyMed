@@ -84,7 +84,7 @@ class LocalizacaoRuasState extends State<LocalizacaoRuas> {
           });
           switch (index) {
             case 0:
-              Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(state: 'a',)));
               break;
             case 1:
               Navigator.push(context, MaterialPageRoute(builder: (context) => Cesta()));
