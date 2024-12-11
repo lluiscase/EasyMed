@@ -84,11 +84,10 @@ class LoginState extends State<Login> {
               const Text(
                 'Faça Seu Login',
                 style: TextStyle(
-                  fontSize: 24,
-                  color: Color(0xFF16697A),
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.w700
-                ),
+                    fontSize: 24,
+                    color: Color(0xFF16697A),
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w700),
               ),
               const SizedBox(height: 30),
               TextFormField(
@@ -121,11 +120,9 @@ class LoginState extends State<Login> {
                   child: const Text(
                     'Esqueci minha senha',
                     style: TextStyle(
-                      color: Color(0xFFFC444C),
-                      fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w700
-
-                    ),
+                        color: Color(0xFFFC444C),
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w700),
                   ),
                 ),
               ),
@@ -140,14 +137,16 @@ class LoginState extends State<Login> {
                   ),
                 ),
                 onPressed: () {
-                  if (emailController.text.isNotEmpty && senhaController.text.isNotEmpty) {
+                  if (emailController.text.isNotEmpty &&
+                      senhaController.text.isNotEmpty) {
                     _salvamentoNomeUsuario();
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Login realizado com sucesso')),
+                      const SnackBar(
+                          content: Text('Login realizado com sucesso')),
                     );
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => const HomePage(state: 'a',)),
+                      MaterialPageRoute(builder: (context) => const HomePage()),
                     );
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -157,17 +156,19 @@ class LoginState extends State<Login> {
                 },
                 child: const Text(
                   'Login',
-                  style: TextStyle(fontSize: 24, color: Colors.white, fontFamily: 'Poppins',
+                  style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.white,
+                      fontFamily: 'Poppins',
                       fontWeight: FontWeight.w700),
                 ),
               ),
               const SizedBox(height: 30),
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(color: Colors.blue, width: 2)
-                ),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(color: Colors.blue, width: 2)),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(180, 51),
@@ -184,7 +185,10 @@ class LoginState extends State<Login> {
                   },
                   child: const Text(
                     'Cadastro',
-                    style: TextStyle(fontSize: 18, color: Colors.black,fontFamily: 'Montserrat',
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.black,
+                        fontFamily: 'Montserrat',
                         fontWeight: FontWeight.w600),
                   ),
                 ),
