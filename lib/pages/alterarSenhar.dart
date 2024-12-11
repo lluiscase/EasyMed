@@ -70,6 +70,7 @@ class AlterarSenhaState extends State<AlterarSenhaApp> {
                   style: TextStyle(
                     fontSize: 24,
                     color: Colors.blue,
+                    fontFamily: 'Poppins'
                   ),
                 ),
                 const SizedBox(height: 30),
@@ -121,7 +122,7 @@ class AlterarSenhaState extends State<AlterarSenhaApp> {
                   ),
                   child: const Text(
                     'Salvar Senha',
-                    style: TextStyle(fontSize: 18, color: Colors.white),
+                    style: TextStyle(fontSize: 18, color: Colors.white, fontFamily: 'Poppins'),
                   ),
                 ),
               ],

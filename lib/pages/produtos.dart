@@ -180,7 +180,7 @@ class ProdutosPageState extends State<ProdutosPage> {
                           widget.nome,
                           textAlign: TextAlign.start,
                           style: const TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w500),
+                              fontSize: 15, fontWeight: FontWeight.w500, fontFamily: 'Montserrat'),
                         ),
                       ),
                     ),
@@ -195,6 +195,7 @@ class ProdutosPageState extends State<ProdutosPage> {
                             fontSize: 17,
                             color: Color(0xffFC444C),
                             fontWeight: FontWeight.w700,
+                            fontFamily: 'Montserrat'
                           ),
                         ),
                       ),
@@ -218,7 +219,7 @@ class ProdutosPageState extends State<ProdutosPage> {
                           },
                           child: const Text(
                             'Adicionar à cesta',
-                            style: TextStyle(color: Color(0xffFFFFFF)),
+                            style: TextStyle(color: Color(0xffFFFFFF), fontFamily: 'Poppins', fontSize: 16),
                           ),
                           style: ButtonStyle(
                             padding: MaterialStateProperty.all(
@@ -248,6 +249,7 @@ class ProdutosPageState extends State<ProdutosPage> {
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
+                          fontFamily: 'Montserrat'
                         ),
                       ),
                     ),
@@ -258,6 +260,7 @@ class ProdutosPageState extends State<ProdutosPage> {
                         style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
+                          fontFamily: 'Montserrat'
                         ),
                       ),
                     ),

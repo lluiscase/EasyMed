@@ -165,6 +165,8 @@ class CestaPageState extends State<CestaPage> {
             'Sua cesta está vazia...',
             style: TextStyle(
               fontSize: 24,
+              fontWeight: FontWeight.w400,
+              fontFamily: 'Poppins'
             ),
           ),
           Image.network(
@@ -180,7 +182,7 @@ class CestaPageState extends State<CestaPage> {
       children: [
         Text(
           'Falta pouco, Visitante...',
-          style: TextStyle(color: Color(0xff16697a), fontSize: 20),
+          style: TextStyle(color: Color(0xff16697a), fontSize: 20, fontFamily: 'Montserrat', fontWeight: FontWeight.w400),
         ),
         Expanded(
           child: ListView.builder(
@@ -228,7 +230,7 @@ class CestaPageState extends State<CestaPage> {
                                     style: TextStyle(
                                         color: Color(0xff16697A),
                                         fontWeight: FontWeight.w500,
-                                        fontSize: 19),
+                                        fontSize: 19, fontFamily: 'Montserrat'),
                                   ),
                                 ],
                               ),
@@ -303,7 +305,7 @@ class CestaPageState extends State<CestaPage> {
         ),
         Text(
           'Total: ' + total,
-          style: TextStyle(fontSize: 18, color: Color(0xfffc444c)),
+          style: TextStyle(fontSize: 18, color: Color(0xfffc444c), fontFamily: 'Montserrat', fontWeight: FontWeight.w400),
         ),
         SizedBox(
           width: 215,
@@ -318,7 +320,7 @@ class CestaPageState extends State<CestaPage> {
             },
             child: Text(
               'Confirmar pedido',
-              style: TextStyle(color: Colors.white, fontSize: 17),
+              style: TextStyle(color: Colors.white, fontSize: 17, fontFamily: 'Poppins', fontWeight: FontWeight.w700),
             ),
             style: TextButton.styleFrom(
               backgroundColor: Color(0xff16697a),
