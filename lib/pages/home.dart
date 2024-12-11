@@ -4,16 +4,6 @@ import 'package:flutterguys/pages/modules.dart';
 import 'package:flutterguys/pages/produtos.dart';
 void main() => runApp(HomePage());
 
-Future<void> passagemItens(List<List<dynamic>> h)async{
-  var categoria = await fetchCategorias();
-  h.clear();
-  for(var b in categoria){
-     h.addAll(b.produtos.map((produto) => 
-      [produto.nome,produto.descricao,produto.foto,produto.preco]
-     ));
-  }
-}
-
 class HomePage extends StatefulWidget {
   
   const HomePage({super.key});
@@ -44,7 +34,6 @@ class HomePageState extends State<HomePage> {
 
  Future<void> _load()async{
     await getallProdutos(allProdutosList);
-    await passagemItens(passagem);
     setState(() {
       searchResult = allProdutosList;
     });
@@ -56,11 +45,6 @@ class HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  void _filterItems(String query) {
-  setState(() {
-    
-  });
-}
   @override
   void dispose() {
     controller.removeListener(listener);
@@ -244,7 +228,6 @@ class HomePageState extends State<HomePage> {
               )
               )
               ),
-            
           ]
             ),
         )

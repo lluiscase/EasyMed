@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'localizacao_ruas.dart';
 import 'package:flutterguys/pages/home.dart';
 import 'package:flutterguys/pages/perfil.dart';
+import 'package:flutterguys/pages/Cesta.dart';
 
 void main() => runApp(const LocalizacaoCepApp());
 
@@ -121,7 +122,7 @@ class LocalizacaoCepState extends State<LocalizacaoCep> {
           case 0:
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const HomePage()),
+              MaterialPageRoute(builder: (context) => const HomePage(state: 'a',)),
             );
             break;
           case 1:
