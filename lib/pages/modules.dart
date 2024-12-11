@@ -4,7 +4,10 @@ import 'package:flutterguys/pages/produtos.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutterguys/pages/Cesta.dart';
-List<String> allProdutosList = [];
+import 'package:flutterguys/pages/telaEspec.dart';
+import 'package:flutterguys/pages/home.dart';
+
+
 
 
 
@@ -68,20 +71,19 @@ Future<List<Produtos>> getProdutos(String nomecategoria)async{
   return produtosList;
 }
 
-Future<void> getallProdutos(List<String> h)async{
+Future<void> getallProdutos(List<Produtos> h)async{
   var categoria = await fetchCategorias();
   h.clear();
   for(var b in categoria){
-     h.addAll(b.produtos.map((produto) => 
-     produto.nome.toString()));
+     h.addAll(b.produtos);
   }
 }
 // AppBar
-AppBar appbar(String estado) {
+AppBar appbar(String estado, titulo) {
   return AppBar(
     backgroundColor: Color(0xffF9FAFD),
     title: Text(
-      'Olá Visitante',
+      titulo,
       style: TextStyle(
         color: const Color(0xff080F0F),
         fontSize: 22,
@@ -191,7 +193,6 @@ Padding titleProduct(String titulo, String plus) {
     ),
   );
 }
-
 // Bottom Navigation Bar
 BottomNavigationBar bottomNav(int _selectedIndex, Function(int) onTap) {
   return BottomNavigationBar(
@@ -306,3 +307,127 @@ FutureBuilder<List<Produtos>> BuilderCards(String fetchget) {
               );
             });
   }
+
+  Builder builderProd(titleListProduct,categoria) {
+    return Builder(
+              builder: (context) {
+                return GestureDetector(
+                  child:titleProduct('Festival do bebê', 'Ver mais'), 
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context)=>telaEspec(
+                        categoria: 'Higiene bebe',state: 'Ver Mais',nome: '',prec: '',desc: '',img: '',
+                    )));
+                  },
+                  );
+              }
+            );
+  }
+
+  Container categorias() {
+    return Container(
+            height: 100,
+            child: FutureBuilder(
+              future: fetchCategorias(), 
+              builder: (context, snapshot){
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text("Erro ao carregar categorias"));
+        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return Center(child: Text("Nenhuma categoria disponível"));
+        }
+          return ListView.separated(
+                    
+            itemCount: snapshot.data!.length,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: (){
+                  print(snapshot.data![index].nome);
+                  Navigator.push(context, MaterialPageRoute(
+                  builder: (context)=>telaEspec(
+                    categoria: snapshot.data![index].nome,state: 'Ver mais',nome: '',prec: '',desc: '',img: '',
+                )));
+                },
+              child: Container(
+                margin: EdgeInsets.all(10),
+                width: 100,
+                height: 5,
+                child: Column(
+                  children:[
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15),
+                      child: Image.network(
+                        snapshot.data![index].photo, 
+                        width: 35,
+                        fit: BoxFit.contain,
+                        color: Color(0xff16697A),
+                        loadingBuilder: (context, child, loadingProgress) {
+                          return loadingProgress == null ? child : CircularProgressIndicator(); 
+                        },errorBuilder:(context, url, stackTrace) {
+                          return Icon(Icons.error);
+                        } ,),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(0.5),
+                      child: Text(
+                      snapshot.data![index].nome,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xff16697A),
+                        fontSize: 12,
+                                        ),
+                                        ),
+                    ),
+                  ] 
+                ),
+                decoration: BoxDecoration(
+                  color: Color(0xffeeefe6),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              )
+              );
+                },
+                separatorBuilder: (context, index) => const Divider(),
+              );
+            }),
+          );
+  }
+
+  Padding Padbuildercards(entrada) {
+    return Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Container(
+                height: 164,
+                child: BuilderCards(entrada),
+              ),
+            );
+  }
+
+  AppBar appBarReturn(BuildContext context) {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      title: Image.network(
+        'https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/logo_easyMeds.png',
+        fit: BoxFit.contain,
+        height: 68,
+        ),
+        actions:[
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: IconButton(
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
+              }, 
+              icon: Icon(
+              Icons.keyboard_return, 
+              color: Colors.red,
+              ),
+              iconSize: 39,
+              ),
+          )
+        ] 
+    );
+  }
+  

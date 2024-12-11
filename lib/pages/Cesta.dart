@@ -1,7 +1,6 @@
 import 'dart:math';
-
+import 'package:flutterguys/pages/modules.dart';
 import 'package:flutter/material.dart';
-import 'package:flutterguys/pages/home.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -105,19 +104,24 @@ class CestaPageState extends State<CestaPage> {
     });
   }
 
-Future<void> verItens() async {
+Future<void> carregar() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-
+  try{
   List<String> nomesatual = prefs.getStringList('nomes') ?? [];
   List<String> precoatual = prefs.getStringList('precos') ?? [];
   List<String> imgatual = prefs.getStringList('imagens') ?? [];
 
+  
   setState(() {
     nome = nomesatual;
     preco = precoatual;
     imgs = imgatual;
     item = List<int>.filled(preco.length, 1);
   });
+  }catch(e){
+    await prefs.clear();
+  }
+  
 }
 
 
@@ -125,7 +129,7 @@ Future<void> verItens() async {
   void initState() {
     super.initState();
     addProduto();
-    verItens();
+    carregar();
     estado = widget.state;
   }
 
@@ -139,30 +143,7 @@ Future<void> verItens() async {
       ),
       debugShowCheckedModeBanner: true,
       home: Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: Image.network(
-          'https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/logo_easyMeds.png',
-          fit: BoxFit.contain,
-          height: 68,
-          ),
-          actions:[
-            Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: IconButton(
-                onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage(state:'b')));
-                }, 
-                icon: Icon(
-                Icons.keyboard_return, 
-                color: Colors.red,
-                ),
-                iconSize: 39,
-                ),
-            )
-            
-          ] 
-      ),
+      appBar: appBarReturn(context),
       body: changeScreen(),
     )
     ); 
@@ -235,7 +216,7 @@ Future<void> verItens() async {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(top: 20,right: 20),
-                      child:Expanded(child: 
+                      child: 
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -250,7 +231,8 @@ Future<void> verItens() async {
                           fontSize: 19),
                     ),
                         ],)
-                      ), 
+                      , 
+
                       
                       ),
                     

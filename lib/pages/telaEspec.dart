@@ -3,18 +3,7 @@ import 'package:flutterguys/pages/modules.dart';
 import 'package:flutterguys/pages/produtos.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-<<<<<<< HEAD
 void main() => runApp(const telaEspec(categoria: '', state: '', desc: '', nome: '', prec: '', img: ''));
-=======
-void main() => runApp(const telaEspec(
-  categoria: '',
-  state: '',
-  desc: '',
-  nome: '',
-  prec: '',
-  img: '',
-));
->>>>>>> 673877df1dab6fd4eb50557f8708b029a5b19035
 
 class telaEspec extends StatefulWidget {
   final String categoria;
@@ -35,11 +24,6 @@ class telaEspecState extends State<telaEspec> {
   List<String> preco = [];
   List<String> imgs = [];
 
-<<<<<<< HEAD
-
-=======
-  // Método para adicionar produto aos favoritos
->>>>>>> 673877df1dab6fd4eb50557f8708b029a5b19035
   Future<void> addProduto() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -73,7 +57,7 @@ class telaEspecState extends State<telaEspec> {
   }
 
 
-  Future<void> verItens() async {
+  Future<void> carregar() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> nomesatual = prefs.getStringList('nomes') ?? [];
     List<String> precoatual = prefs.getStringList('precos') ?? [];
@@ -90,7 +74,7 @@ class telaEspecState extends State<telaEspec> {
   void initState() {
     super.initState();
     addProduto();
-    verItens();
+    carregar();
   }
 
    Widget changeScreen(){
@@ -106,6 +90,7 @@ class telaEspecState extends State<telaEspec> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffF9FAFD),
       appBar: AppBar(title: Text(widget.state),),
       body: widget.state.isNotEmpty
           ? changeScreen()
@@ -114,7 +99,6 @@ class telaEspecState extends State<telaEspec> {
   }
 
 Widget buildStateA() {
-  
     return FutureBuilder(
               future: getProdutos(widget.categoria), 
               builder: (context, snapshot){
@@ -134,12 +118,9 @@ Widget buildStateA() {
               ),
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
-<<<<<<< HEAD
               return Center(
                 child: GestureDetector(
-                  
                   onTap: (){
-                    print("fon fon" + widget.categoria);
                      Navigator.push(context, MaterialPageRoute(builder: (context) => 
                      ProdutosPage(
                       nome: snapshot.data![index].nome,
@@ -150,22 +131,6 @@ Widget buildStateA() {
                       )
                     );
                   },
-=======
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ProdutosPage(
-                            nome: snapshot.data![index].nome,
-                            desc: snapshot.data![index].descricao,
-                            prec: snapshot.data![index].preco,
-                            img: snapshot.data![index].foto,
-                          ))).then((_) {
-                    verItens();
-                  });
-                },
->>>>>>> 673877df1dab6fd4eb50557f8708b029a5b19035
                 child: Container(
                   margin: EdgeInsets.all(8.0),
                   width: 109,
@@ -234,7 +199,15 @@ Widget buildStateA() {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
-            print('Produto ${nome[index]} clicado');
+            Navigator.push(context, MaterialPageRoute(builder: (context) => 
+                     ProdutosPage(
+                      nome: nome[index],
+                      desc: widget.desc,
+                      prec: preco[index],
+                      img:  imgs[index]
+                        )
+                      )
+                    );
           },
           child: Container(
             margin: EdgeInsets.all(8.0),
