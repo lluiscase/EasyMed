@@ -72,7 +72,7 @@ class CestaPageState extends State<CestaPage> {
       resultado +=  item[i]*soma;
     }
     total = resultado.toStringAsFixed(2);
-}
+  }
 
 
 
@@ -104,25 +104,25 @@ class CestaPageState extends State<CestaPage> {
     });
   }
 
-Future<void> carregar() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  try{
-  List<String> nomesatual = prefs.getStringList('nomes') ?? [];
-  List<String> precoatual = prefs.getStringList('precos') ?? [];
-  List<String> imgatual = prefs.getStringList('imagens') ?? [];
+  Future<void> carregar() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    try{
+      List<String> nomesatual = prefs.getStringList('nomes') ?? [];
+      List<String> precoatual = prefs.getStringList('precos') ?? [];
+      List<String> imgatual = prefs.getStringList('imagens') ?? [];
 
-  
-  setState(() {
-    nome = nomesatual;
-    preco = precoatual;
-    imgs = imgatual;
-    item = List<int>.filled(preco.length, 1);
-  });
-  }catch(e){
-    await prefs.clear();
+
+      setState(() {
+        nome = nomesatual;
+        preco = precoatual;
+        imgs = imgatual;
+        item = List<int>.filled(preco.length, 1);
+      });
+    }catch(e){
+      var pres = await prefs.clear();  await prefs.clear();
+    }
+
   }
-  
-}
 
 
   @override
@@ -133,31 +133,31 @@ Future<void> carregar() async {
     estado = widget.state;
   }
 
-  
+
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        scaffoldBackgroundColor: Color(0xffffffff)
-      ),
-      debugShowCheckedModeBanner: true,
-      home: Scaffold(
-      appBar: appBarReturn(context),
-      body: changeScreen(),
-    )
-    ); 
+        theme: ThemeData(
+            scaffoldBackgroundColor: Color(0xffffffff)
+        ),
+        debugShowCheckedModeBanner: true,
+        home: Scaffold(
+          appBar: appBarReturn(context),
+          body: changeScreen(),
+        )
+    );
   }
 
   Widget changeScreen(){
-  final String _currentState = estado;
-  if(_currentState == 'a'){
-    return buildStateA();
-  }else if(_currentState == 'b'){
-    return buildStateB();
-  }else{
-    return buildStateC();
-  }
+    final String _currentState = estado;
+    if(_currentState == 'a'){
+      return buildStateA();
+    }else if(_currentState == 'b'){
+      return buildStateB();
+    }else{
+      return buildStateC();
+    }
   }
 
   Widget buildStateA() {
@@ -170,11 +170,11 @@ Future<void> carregar() async {
             style: TextStyle(
               fontSize: 24,
             ),
-          ), 
+          ),
           Image.network(
-              'https://s3-alpha-sig.figma.com/img/44b1/9eae/018d5ac0085149065678b2ad96513192?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=knEq75CtSLQfcUCR4QqXn0GTb0tVBUqwr8cpKLmeWzS-60G~BVg46VOWih0RZkM6kHwKghQ0Lj-Kb0OGwHRDU9fMp5aKkQj6oi7JoOcKFR37hmUK8NN7j0d64ivsghEO68cu7liEQ5CwiFVpjWFK5F8zuJiWReVafszX2R92BAToMSfbMNoPp0O2wW9zOuel-6fPBPGxAiGCnn1~cS2-JU5VZOOq2Rmgsdx49cFQ4xYLc6D4Q0hzFNzVd0lmrZro5p6jpplmOl0nLxG7uod23M-~MWBY2GwuXlLMiWFZONys3BiBQAlKTw1dg1glJIERFZHo2JfwLjzySGJkA8629g__',
-              
-            ),
+            'https://s3-alpha-sig.figma.com/img/44b1/9eae/018d5ac0085149065678b2ad96513192?Expires=1734307200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=knEq75CtSLQfcUCR4QqXn0GTb0tVBUqwr8cpKLmeWzS-60G~BVg46VOWih0RZkM6kHwKghQ0Lj-Kb0OGwHRDU9fMp5aKkQj6oi7JoOcKFR37hmUK8NN7j0d64ivsghEO68cu7liEQ5CwiFVpjWFK5F8zuJiWReVafszX2R92BAToMSfbMNoPp0O2wW9zOuel-6fPBPGxAiGCnn1~cS2-JU5VZOOq2Rmgsdx49cFQ4xYLc6D4Q0hzFNzVd0lmrZro5p6jpplmOl0nLxG7uod23M-~MWBY2GwuXlLMiWFZONys3BiBQAlKTw1dg1glJIERFZHo2JfwLjzySGJkA8629g__',
+
+          ),
         ],
       ),
     );
@@ -185,118 +185,118 @@ Future<void> carregar() async {
       children: [
         Text('Falta pouco, Visitante...', style: TextStyle(color: Color(0xff16697a),fontSize: 20),),
         Expanded(child:
-          ListView.builder(
-      itemCount: nome.length,
-      itemBuilder: (context, index) {
-        return Column(
-          children: [
-        Container(
-          height: 163,
-          decoration: BoxDecoration(
-          color: Color.fromARGB(255, 238, 238, 238),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.4),
-                spreadRadius: 0.3,
-                blurRadius: 1,
-                offset: Offset(0, 3)
-              )
-            ]
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0,top: 10 ),
-                child: Image.network(
-                    height: 125,
-                    imgs[index]),
-              ),
-              Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 20,right: 20),
-                      child: 
+        ListView.builder(
+          itemCount: nome.length,
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                Container(
+                  height: 163,
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 238, 238, 238),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(0.4),
+                            spreadRadius: 0.3,
+                            blurRadius: 1,
+                            offset: Offset(0, 3)
+                        )
+                      ]
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0,top: 10 ),
+                        child: Image.network(
+                            height: 125,
+                            imgs[index]),
+                      ),
                       Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(nome[index],
-                        style:
-                            TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
-                    Text(
-                      'R\$' + preco[index],
-                      style: TextStyle(
-                          color: Color(0xff16697A),
-                          fontWeight: FontWeight.w500,
-                          fontSize: 19),
-                    ),
-                        ],)
-                      , 
+                          Padding(
+                            padding: EdgeInsets.only(top: 20,right: 20),
+                            child:
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(nome[index],
+                                    style:
+                                    TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
+                                Text(
+                                  'R\$' + preco[index],
+                                  style: TextStyle(
+                                      color: Color(0xff16697A),
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 19),
+                                ),
+                              ],)
+                            ,
 
-                      
+
+                          ),
+
+                          Padding(
+                            padding: const EdgeInsets.only(top:45,left: 45),
+                            child: Container(
+                              height: 35,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(20)
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  IconButton(onPressed: ()async{
+                                    await clearIndex(index);
+                                    setState(() {
+                                      nome.removeAt(index);
+                                      preco.removeAt(index);
+                                      imgs.removeAt(index);
+                                    });
+                                    calcularTotal();
+                                  }, icon: Icon(Icons.delete, color: Color(0xfffc444c),size: 20,)),
+                                  SizedBox(width: 0.8),
+                                  TextButton(onPressed: (){
+                                    setState(() {
+                                      item[index]++;
+                                      calcularTotal();
+                                    });
+                                  },
+                                      child: Text('+',
+                                        style: TextStyle(fontSize: 15),)),
+                                  Text(item[index].toString()),
+                                  TextButton(onPressed: (){
+                                    setState(() {
+                                      if(item[index] == 1){
+                                        item[index]=1;
+                                      }else{
+                                        item[index]--;
+                                      }
+                                      calcularTotal();
+                                    });
+                                  }, child: Text('-',style: TextStyle(fontSize: 15))),
+
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    
-                    Padding(
-                      padding: const EdgeInsets.only(top:45,left: 45),
-                      child: Container(
-                        height: 35,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20)
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            IconButton(onPressed: ()async{
-                              await clearIndex(index);
-                              setState(() {
-                                nome.removeAt(index);
-                                preco.removeAt(index);
-                                imgs.removeAt(index);
-                              });
-                                calcularTotal();
-                            }, icon: Icon(Icons.delete, color: Color(0xfffc444c),size: 20,)),
-                            SizedBox(width: 0.8),
-                            TextButton(onPressed: (){
-                              setState(() {
-                                item[index]++;
-                                calcularTotal();
-                              });
-                            }, 
-                            child: Text('+', 
-                            style: TextStyle(fontSize: 15),)),
-                            Text(item[index].toString()),
-                            TextButton(onPressed: (){
-                              setState(() {
-                                if(item[index] == 1){
-                                  item[index]=1;
-                                }else{
-                                  item[index]--;
-                                }
-                                calcularTotal();
-                              });
-                            }, child: Text('-',style: TextStyle(fontSize: 15))),
-                            
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
+
                 ),
-            ],
-          ),
-          
+              ],
+
+            );
+
+          },
+
         ),
-      ],
-      
-        );
-        
-      },
-      
-    ),
-         ),
-         Text('Total: ' + total, style: TextStyle(fontSize: 18,color: Color(0xfffc444c)),),
-         SizedBox(
+        ),
+        Text('Total: ' + total, style: TextStyle(fontSize: 18,color: Color(0xfffc444c)),),
+        SizedBox(
           width: 215,
           height: 54,
           child: TextButton(
@@ -305,20 +305,20 @@ Future<void> carregar() async {
                 estado = 'c';
               });
               print(estado);
-              
-            }, 
-            child: Text('Confirmar pedido', 
-            style: TextStyle(
-              color: Colors.white,fontSize: 17),),
+
+            },
+            child: Text('Confirmar pedido',
+              style: TextStyle(
+                  color: Colors.white,fontSize: 17),),
             style: TextButton.styleFrom(
               backgroundColor: Color(0xff16697a),
             ),
-            ),
+          ),
         ),
-        
+
       ],
     );
-    
+
   }
 
   Widget buildStateC() {
@@ -328,102 +328,102 @@ Future<void> carregar() async {
         Text('Oba!', style: TextStyle(fontSize: 16,color: Color(0xff16697a)),),
         Text('Seu pedido foi confirmado pela loja', style: TextStyle(fontSize: 16,color: Color(0xff16697a))),
         Expanded(child:
-          ListView.builder(
-      itemCount: nome.length,
-      itemBuilder: (context, index) {
-        return Column(
-          children: [
-        Container(
-          height: 163,
-          decoration: BoxDecoration(
-          color: Color.fromARGB(255, 238, 238, 238),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.4),
-                spreadRadius: 0.3,
-                blurRadius: 1,
-                offset: Offset(0, 3)
-              )
-            ]
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 10.0,top: 10 ),
-                child: Image.network(
-                    height: 125,
-                    imgs[index]),
-              ),
-              Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 20),
-                      child:Expanded(child: 
+        ListView.builder(
+          itemCount: nome.length,
+          itemBuilder: (context, index) {
+            return Column(
+              children: [
+                Container(
+                  height: 163,
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 238, 238, 238),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.withOpacity(0.4),
+                            spreadRadius: 0.3,
+                            blurRadius: 1,
+                            offset: Offset(0, 3)
+                        )
+                      ]
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0,top: 10 ),
+                        child: Image.network(
+                            height: 125,
+                            imgs[index]),
+                      ),
                       Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(item[index].toString() + 'x',style: TextStyle(fontSize: 14,color: Color(0xffFC444C)),),
-                          Text(nome[index],
-                        style:
-                            TextStyle(fontSize: 12, 
-                            fontWeight: FontWeight.w500)),
-                          Text('EasyMeds - Morumbi',style: TextStyle(fontSize: 14,color: Color(0xffFC444C)),),
-                          Text('Rua das Magnólias, 222, Morumbi',style: TextStyle(fontSize: 10),)
-                        
-                        ],)
-                      ), 
-                      
-                      ),
-                    Padding(
-                      padding: const EdgeInsets.only(top:30,left: 115),
-                      child: Text(
-                        'R\$' + preco[index],
-                        style: TextStyle(
-                            color: Color(0xff16697A),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 19),
-                      ),
-                    ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 20),
+                            child:Expanded(child:
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(item[index].toString() + 'x',style: TextStyle(fontSize: 14,color: Color(0xffFC444C)),),
+                                Text(nome[index],
+                                    style:
+                                    TextStyle(fontSize: 12,
+                                        fontWeight: FontWeight.w500)),
+                                Text('EasyMeds - Morumbi',style: TextStyle(fontSize: 14,color: Color(0xffFC444C)),),
+                                Text('Rua das Magnólias, 222, Morumbi',style: TextStyle(fontSize: 10),)
 
-                  ],
+                              ],)
+                            ),
+
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top:30,left: 115),
+                            child: Text(
+                              'R\$' + preco[index],
+                              style: TextStyle(
+                                  color: Color(0xff16697A),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 19),
+                            ),
+                          ),
+
+                        ],
+                      ),
+                    ],
+                  ),
+
                 ),
-            ],
-          ),
-          
+              ],
+
+            );
+
+          },
+
         ),
-      ],
-      
-        );
-        
-      },
-      
-    ),
-         ),
-         Text(
-          'Total da compra: R\$' + total, 
+        ),
+        Text(
+          'Total da compra: R\$' + total,
           style: TextStyle(
-            fontSize: 20, 
-            fontWeight: FontWeight.w800),
-            ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  margin: EdgeInsets.all(5),
-                  child: Text(
-                    'Lembre-se de levar um documento com foto e número de identificação para a retirada do produto.',
-                    style: TextStyle(fontSize: 16),),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.all(8.0),
-                child: QrImageView(
-                  data: code,
-                  version: QrVersions.auto,
-                  size: 150.0,
-                ),
-              ),
-              Text('Código de retirada:' + code, style: TextStyle(fontSize: 16, color: Color(0xffFC444C)),)
+              fontSize: 20,
+              fontWeight: FontWeight.w800),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            margin: EdgeInsets.all(5),
+            child: Text(
+              'Lembre-se de levar um documento com foto e número de identificação para a retirada do produto.',
+              style: TextStyle(fontSize: 16),),
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.all(8.0),
+          child: QrImageView(
+            data: code,
+            version: QrVersions.auto,
+            size: 150.0,
+          ),
+        ),
+        Text('Código de retirada:' + code, style: TextStyle(fontSize: 16, color: Color(0xffFC444C)),)
       ],
     );
   }

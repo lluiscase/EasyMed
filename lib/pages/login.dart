@@ -4,21 +4,20 @@ import 'package:flutterguys/pages/cadastro.dart';
 import 'package:flutterguys/pages/validacaoCodigo.dart';
 import 'package:flutterguys/pages/home.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(
+  MaterialApp(
+    scaffoldMessengerKey: scaffoldMessengerKey,
+    debugShowCheckedModeBanner: false,
+    home: Login(nomeUsuario: 'Visitante'),
+  ),
+);
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: const Login(),
-    );
-  }
-}
+final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>(); // Chave global
 
 class Login extends StatefulWidget {
-  const Login({super.key});
+  const Login({super.key, required this.nomeUsuario});
+
+  final String nomeUsuario;
 
   @override
   LoginState createState() => LoginState();
@@ -27,6 +26,9 @@ class Login extends StatefulWidget {
 class LoginState extends State<Login> {
   final TextEditingController senhaController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController nomeController = TextEditingController();
+
+  String nomeExibido = "Faça Seu Login"; // Valor padrão
 
   @override
   void initState() {
@@ -38,18 +40,25 @@ class LoginState extends State<Login> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     senhaController.text = prefs.getString('senhaUsuario') ?? '';
     emailController.text = prefs.getString('emailUsuario') ?? '';
+    nomeController.text = prefs.getString('nomeUsuario') ?? '';
+
+    setState(() {
+      nomeExibido = nomeController.text.isNotEmpty ? nomeController.text : "Faça Seu Login";
+    });
   }
 
-  Future<void> _salvamentoNomeUsuario() async {
+  Future<void> _salvarNomeUsuario() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('nomeUsuario', senhaController.text);
+    await prefs.setString('nomeUsuario', nomeController.text);
     await prefs.setString('emailUsuario', emailController.text);
+    await prefs.setString('senhaUsuario', senhaController.text);
   }
 
   @override
   void dispose() {
     senhaController.dispose();
     emailController.dispose();
+    nomeController.dispose();
     super.dispose();
   }
 
@@ -81,13 +90,14 @@ class LoginState extends State<Login> {
                 ),
               ),
               const SizedBox(height: 20),
-              const Text(
-                'Faça Seu Login',
-                style: TextStyle(
-                    fontSize: 24,
-                    color: Color(0xFF16697A),
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w700),
+              Text(
+                nomeExibido,
+                style: const TextStyle(
+                  fontSize: 24,
+                  color: Color(0xFF16697A),
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w700,
+                ),
               ),
               const SizedBox(height: 30),
               TextFormField(
@@ -120,16 +130,17 @@ class LoginState extends State<Login> {
                   child: const Text(
                     'Esqueci minha senha',
                     style: TextStyle(
-                        color: Color(0xFFFC444C),
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w700),
+                      color: Color(0xFFFC444C),
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
               ),
               const SizedBox(height: 50),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF16697A),
+                  backgroundColor: const Color(0xFF16697A),
                   minimumSize: const Size(180, 51),
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   shape: RoundedRectangleBorder(
@@ -137,59 +148,68 @@ class LoginState extends State<Login> {
                   ),
                 ),
                 onPressed: () {
-                  if (emailController.text.isNotEmpty &&
-                      senhaController.text.isNotEmpty) {
-                    _salvamentoNomeUsuario();
-                    ScaffoldMessenger.of(context).showSnackBar(
+                  if (emailController.text.isNotEmpty && senhaController.text.isNotEmpty) {
+                    _salvarNomeUsuario();
+                    scaffoldMessengerKey.currentState?.showSnackBar(
                       const SnackBar(
-                          content: Text('Login realizado com sucesso')),
+                        content: Text('Login realizado com sucesso'),
+                      ),
                     );
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => const HomePage()),
+                      MaterialPageRoute(
+                        builder: (context) => const HomePage(),
+                      ),
                     );
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Preencha todos os campos')),
+                    scaffoldMessengerKey.currentState?.showSnackBar(
+                      const SnackBar(
+                        content: Text('Preencha todos os campos'),
+                      ),
                     );
                   }
                 },
                 child: const Text(
                   'Login',
                   style: TextStyle(
-                      fontSize: 24,
-                      color: Colors.white,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w700),
+                    fontSize: 24,
+                    color: Colors.white,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
               const SizedBox(height: 30),
               Container(
                 decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(color: Colors.blue, width: 2)),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(color: Colors.blue, width: 2),
+                ),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.transparent,
+                    shadowColor: Colors.transparent,
                     minimumSize: const Size(180, 51),
                     padding: const EdgeInsets.symmetric(vertical: 15),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(15),
                     ),
                   ),
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Cadastro()),
+                      MaterialPageRoute(builder: (context) => const Cadastro()),
                     );
                   },
                   child: const Text(
                     'Cadastro',
                     style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.black,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w600),
+                      fontSize: 18,
+                      color: Colors.black,
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),

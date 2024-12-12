@@ -44,7 +44,6 @@ class MeusDadosState extends State<MeusDados> {
 
   Future<void> _carregamentoDados() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    nomeController.text = prefs.getString('nomeUsuario') ?? '';
     emailController.text = prefs.getString('emailUsuario') ?? '';
     telefoneController.text = prefs.getString('telefoneUsuario') ?? '';
     cpfController.text = prefs.getString('cpfUsuario') ?? '';
@@ -61,21 +60,34 @@ class MeusDadosState extends State<MeusDados> {
 
   Future<void> _salvamentoDosDados() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    // Salvando os dados no SharedPreferences
     await prefs.setString('nomeUsuario', nomeController.text);
     await prefs.setString('emailUsuario', emailController.text);
     await prefs.setString('telefoneUsuario', telefoneController.text);
     await prefs.setString('cpfUsuario', cpfController.text);
     await prefs.setString('enderecoUsuario', enderecoController.text);
 
-    if (_caminhoImagemPerfil != null) {
-      await prefs.setString('caminhoImagemPerfil', _caminhoImagemPerfil!);
-    }
+
+    await _updateUserName(nomeController.text);
+
 
     widget.onNomeSalvo(nomeController.text);
 
+
+    if (_caminhoImagemPerfil != null) {
+      await prefs.setString('caminhoImagemPerfil', _caminhoImagemPerfil!);
+    }
     setState(() {
       nomeExibido = nomeController.text.isNotEmpty ? nomeController.text : 'Visitante';
     });
+  }
+
+  Future<void> _updateUserName(String novoNome) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('nomeUsuario', novoNome);
+    Navigator.of(context).pop();
+
   }
 
   @override

@@ -2,9 +2,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutterguys/pages/home.dart';
 import 'package:flutterguys/pages/perfil.dart';
-import 'package:flutterguys/pages/modules.dart';
 import 'package:flutterguys/pages/telaEspec.dart' as telaEspc;
 import 'package:flutterguys/pages/cesta.dart';
+import 'package:flutterguys/pages/localizacao_ruas.dart';
 
 void main() => runApp(
     const ProdutosPage(desc: '', nome: '', prec: '', img: '')
@@ -116,17 +116,17 @@ class ProdutosPageState extends State<ProdutosPage> {
             _selectedIndex = index;
           });
           switch (index) {
-            case 1:
+            case 0:
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => HomePage()));
+              break;
+            case 1:
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => LocalizacaoRuas()));
               break;
             case 2:
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Perfil()));
-              break;
-            default:
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => HomePage()));
+                  MaterialPageRoute(builder: (context) => Perfil()));
           }
         }),
         body: Expanded(
