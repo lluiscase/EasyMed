@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutterguys/pages/perfil.dart';
 import 'package:flutterguys/pages/modules.dart';
-import 'package:flutterguys/pages/produtos.dart';
+import 'package:flutterguys/pages/produtos.dart' as produtos;
 void main() => runApp(HomePage());
 
 Future<void> passagemItens(List<List<dynamic>> h)async{
@@ -27,6 +27,7 @@ class HomePageState extends State<HomePage> {
   List<List<dynamic>> passagem = [];
   int _selectedIndex = 0;
   final TextEditingController controller = TextEditingController();
+  final TextEditingController nomeUsuarioController = TextEditingController();
   void listener(){
     search(controller.text);
   }
@@ -124,7 +125,7 @@ class HomePageState extends State<HomePage> {
                     child: ListTile(
                         title: Text(item.nome),
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ProdutosPage(
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>produtos.ProdutosPage(
                       desc: item.descricao, 
                       nome: item.nome, 
                       prec: item.preco, 
@@ -159,7 +160,7 @@ class HomePageState extends State<HomePage> {
                   itemBuilder: (context,index){
                     return GestureDetector(
                   onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>ProdutosPage(
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>produtos.ProdutosPage(
                       desc: snapshot.data![index].produtos[index].descricao, 
                       nome: snapshot.data![index].produtos[index].nome, 
                       prec: snapshot.data![index].produtos[index].preco, 
