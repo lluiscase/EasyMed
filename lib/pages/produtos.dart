@@ -78,6 +78,10 @@ class ProdutosPageState extends State<ProdutosPage> {
                 child: Row(
                   children: [
                     TextButton(
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f891f5c0587c6f0f005e2d2aabb21a175955cd68
                   onPressed: (){
                     Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
                   }, 
@@ -85,6 +89,31 @@ class ProdutosPageState extends State<ProdutosPage> {
                     '<',
                     style: TextStyle(
                       fontSize: 35
+<<<<<<< HEAD
+=======
+=======
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomePage()),
+                          );
+                        },
+                        child: const Text(
+                          '<',
+                          style: TextStyle(fontSize: 35),
+                        )),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 60),
+                      child: const Text(
+                        'Detalhes do produto',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 17,
+                          color: Color(0xff16697A),
+                        ),
+                      ),
+>>>>>>> 41d4549ebfcc89a5d882ce319214181fa4cffa84
+>>>>>>> f891f5c0587c6f0f005e2d2aabb21a175955cd68
                     ),
                     const Divider(
                       color: Colors.grey,
@@ -95,6 +124,10 @@ class ProdutosPageState extends State<ProdutosPage> {
               ),
             ],
           ),
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> f891f5c0587c6f0f005e2d2aabb21a175955cd68
           bottomNavigationBar: bottomNav(_selectedIndex, (index){
            setState(() {
           _selectedIndex = index;
@@ -197,6 +230,11 @@ class ProdutosPageState extends State<ProdutosPage> {
 
             ],
             ),
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 41d4549ebfcc89a5d882ce319214181fa4cffa84
+>>>>>>> f891f5c0587c6f0f005e2d2aabb21a175955cd68
         ),
         bottomNavigationBar: bottomNav(
           _selectedIndex,

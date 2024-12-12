@@ -25,6 +25,7 @@ class HomePageState extends State<HomePage> {
   List<Produtos> allProdutosList = [];
   List<Produtos> searchResult = [];
   List<List<dynamic>> passagem = [];
+  String estado = 'a';
   int _selectedIndex = 0;
   final TextEditingController controller = TextEditingController();
   void listener(){
@@ -73,7 +74,7 @@ class HomePageState extends State<HomePage> {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Color(0xffF9FAFD),
-        appBar: appbar('a','Olá Visitante'),
+        appBar: appbar(estado,'Olá Visitante'),
         bottomNavigationBar: bottomNav(_selectedIndex, (index){
            setState(() {
           _selectedIndex = index;
@@ -124,6 +125,9 @@ class HomePageState extends State<HomePage> {
                     child: ListTile(
                         title: Text(item.nome),
                         onTap: (){
+                          setState(() {
+                            estado = 'b';
+                          });
                           Navigator.push(context, MaterialPageRoute(builder: (context)=>ProdutosPage(
                       desc: item.descricao, 
                       nome: item.nome, 

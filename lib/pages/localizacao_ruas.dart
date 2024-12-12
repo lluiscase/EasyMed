@@ -88,7 +88,7 @@ class LocalizacaoRuasState extends State<LocalizacaoRuas> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const Cesta(),
+                      builder: (context) => const CestaPage(img: '',nome: '',preco: '',state:'c'),
                     ));
               },
               child: const Text(
@@ -106,7 +106,8 @@ class LocalizacaoRuasState extends State<LocalizacaoRuas> {
           });
           switch (index) {
             case 0:
-              Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => HomePage()));
               break;
             case 1:
               Navigator.push(
