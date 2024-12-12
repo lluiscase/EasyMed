@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'login.dart';
+
 class Cadastro extends StatefulWidget {
   const Cadastro({super.key});
 
@@ -45,7 +46,7 @@ class CadastroState extends State<Cadastro> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(height: 30),
+              const SizedBox(height: 70),
               TextFormField(
                 controller: nomeController,
                 decoration: const InputDecoration(

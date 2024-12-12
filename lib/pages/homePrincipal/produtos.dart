@@ -1,14 +1,13 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutterguys/pages/home.dart';
-import 'package:flutterguys/pages/perfil.dart';
-import 'package:flutterguys/pages/telaEspec.dart' as telaEspc;
-import 'package:flutterguys/pages/cesta.dart';
-import 'package:flutterguys/pages/localizacao_ruas.dart';
+import 'package:flutterguys/pages/homePrincipal/home.dart';
+import 'package:flutterguys/pages/perfil/perfil.dart';
+import 'package:flutterguys/pages/homePrincipal/telaEspec.dart' as telaEspc;
+import 'package:flutterguys/pages/homePrincipal//cesta.dart';
+import 'package:flutterguys/pages/Local/localizacao_ruas.dart';
 
-void main() => runApp(
-    const ProdutosPage(desc: '', nome: '', prec: '', img: '')
-);
+void main() =>
+    runApp(const ProdutosPage(desc: '', nome: '', prec: '', img: ''));
 
 class ProdutosPage extends StatefulWidget {
   const ProdutosPage({
@@ -85,7 +84,8 @@ class ProdutosPageState extends State<ProdutosPage> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => HomePage()),
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()),
                             );
                           },
                           child: const Text(
@@ -121,16 +121,16 @@ class ProdutosPageState extends State<ProdutosPage> {
           });
           switch (index) {
             case 0:
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => HomePage()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => HomePage()));
               break;
             case 1:
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => LocalizacaoRuas()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => LocalizacaoRuas()));
               break;
             case 2:
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Perfil()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Perfil()));
           }
         }),
         body: SingleChildScrollView(
@@ -144,19 +144,20 @@ class ProdutosPageState extends State<ProdutosPage> {
                     IconButton(
                       onPressed: () {
                         setState(() {
-                          url = 'https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/heart.png';
+                          url =
+                              'https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/heart.png';
                         });
-                        Navigator.push(context, MaterialPageRoute(
-                            builder: (context) =>
-                                telaEspc.telaEspec(
-                                  categoria: '',
-                                  state: 'Favoritos',
-                                  desc: widget.desc,
-                                  nome: widget.nome,
-                                  prec: widget.prec,
-                                  img: widget.img,
-                                )
-                        ));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => telaEspc.telaEspec(
+                                      categoria: '',
+                                      state: 'Favoritos',
+                                      desc: widget.desc,
+                                      nome: widget.nome,
+                                      prec: widget.prec,
+                                      img: widget.img,
+                                    )));
                       },
                       icon: Image.network(
                         url,
@@ -211,15 +212,15 @@ class ProdutosPageState extends State<ProdutosPage> {
                 child: Center(
                   child: TextButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) =>
-                              CestaPage(
-                                img: widget.img,
-                                nome: widget.nome,
-                                preco: widget.prec,
-                                state: 'b',
-                              )
-                          ));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CestaPage(
+                                    img: widget.img,
+                                    nome: widget.nome,
+                                    preco: widget.prec,
+                                    state: 'b',
+                                  )));
                     },
                     child: const Text(
                       'Adicionar à cesta',
@@ -229,7 +230,8 @@ class ProdutosPageState extends State<ProdutosPage> {
                     ),
                     style: ButtonStyle(
                       padding: MaterialStateProperty.all(
-                          const EdgeInsets.symmetric(horizontal: 40, vertical: 15)),
+                          const EdgeInsets.symmetric(
+                              horizontal: 40, vertical: 15)),
                       backgroundColor: MaterialStateProperty.all<Color>(
                         const Color(0xff16697A),
                       ),

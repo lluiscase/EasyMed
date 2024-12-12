@@ -1,10 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutterguys/pages/localizacao_cep.dart';
-import 'package:qr_flutter/qr_flutter.dart';
+import 'package:flutterguys/pages/Local/localizacao_cep.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutterguys/pages/modules.dart';
-import 'localizacao_ruas.dart'; // Importando a página de localização
+import'package:flutterguys/pages/test/modules.dart';
 
 void main() => runApp(const CestaPage(img: '', nome: '', preco: '', state: ''));
 
@@ -75,7 +73,7 @@ class CestaPageState extends State<CestaPage> {
       this.nome = nomesatual;
       this.preco = precoatual;
       this.imgs = imgatual;
-      item = List<int>.filled(preco.length, 1); // Ensure the 'item' list is consistent
+      item = List<int>.filled(preco.length, 1);
     });
   }
 
@@ -99,7 +97,7 @@ class CestaPageState extends State<CestaPage> {
         nome = nomesatual;
         preco = precoatual;
         imgs = imgatual;
-        item.removeAt(index);  // Ensure you update 'item' list accordingly
+        item.removeAt(index);
       });
     }
   }
@@ -278,7 +276,6 @@ class CestaPageState extends State<CestaPage> {
           height: 54,
           child: TextButton(
             onPressed: () {
-              // Navegar para a página de localização primeiro
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => LocalizacaoCep()),

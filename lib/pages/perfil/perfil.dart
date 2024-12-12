@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutterguys/pages/localizacao_ruas.dart';
-import 'package:flutterguys/pages/meusDados.dart';
-import 'package:flutterguys/pages/cuponsDesconto.dart';
-import 'package:flutterguys/pages/localizacao_cep.dart';
-import 'package:flutterguys/pages/favoritos.dart';
+import 'package:flutterguys/pages/Local/localizacao_ruas.dart';
+import 'package:flutterguys/pages/perfil/meusDados.dart';
+import 'package:flutterguys/pages/homePrincipal/cuponsDesconto.dart';
+import 'package:flutterguys/pages/homePrincipal/favoritos.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutterguys/pages/perfil/login.dart';
 import 'dart:io';
 
 void main() => runApp(const Perfil());
@@ -74,7 +74,7 @@ class PerfilState extends State<Perfil> {
               const SizedBox(height: 20),
               Text(
                 nomeUsuario,
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: 'Poppins',
                   fontSize: 22,
                   fontWeight: FontWeight.w700,
@@ -187,16 +187,26 @@ class PerfilState extends State<Perfil> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    const ListTile(
-                      title: Text(
-                        "Sair",
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.black,
-                          fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.w400,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                            builder: (context) => Login(nomeUsuario: nomeUsuario),
                         ),
-                        textAlign: TextAlign.center,
+                        );
+                      },
+                      child: const ListTile(
+                        title: Text(
+                          "Sair",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.black,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w400,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     ),
                   ],

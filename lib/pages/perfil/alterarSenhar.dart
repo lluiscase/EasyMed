@@ -21,20 +21,19 @@ class AlterarSenhaState extends State<AlterarSenhaApp> {
     _carregarSenhaUsuario();
   }
 
-
   Future<void> _carregarSenhaUsuario() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     novaSenhaController.text = prefs.getString('novaSenha') ?? '';
     novaSenhaController1.text = prefs.getString('novaSenha1') ?? '';
   }
 
-
   Future<void> _salvarSenhaUsuario() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('novaSenha', novaSenhaController.text);
     await prefs.setString('novaSenha1', novaSenhaController1.text);
     await prefs.setString('senhaUsuario', novaSenhaController.text);
-    await prefs.setString('confirmarSenhaUsuario', confirmaSenhaController.text);
+    await prefs.setString(
+        'confirmarSenhaUsuario', confirmaSenhaController.text);
   }
 
   @override
@@ -68,10 +67,7 @@ class AlterarSenhaState extends State<AlterarSenhaApp> {
                 const Text(
                   'Crie sua nova senha',
                   style: TextStyle(
-                    fontSize: 24,
-                    color: Colors.blue,
-                    fontFamily: 'Poppins'
-                  ),
+                      fontSize: 24, color: Colors.blue, fontFamily: 'Poppins'),
                 ),
                 const SizedBox(height: 30),
                 TextFormField(
@@ -94,21 +90,26 @@ class AlterarSenhaState extends State<AlterarSenhaApp> {
                 const SizedBox(height: 60),
                 ElevatedButton(
                   onPressed: () async {
-                    if (novaSenhaController.text.isEmpty || confirmaSenhaController.text.isEmpty) {
+                    if (novaSenhaController.text.isEmpty ||
+                        confirmaSenhaController.text.isEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Os campos não podem estar vazios')),
+                        const SnackBar(
+                            content: Text('Os campos não podem estar vazios')),
                       );
-                    } else if (novaSenhaController.text == confirmaSenhaController.text) {
+                    } else if (novaSenhaController.text ==
+                        confirmaSenhaController.text) {
                       await _salvarSenhaUsuario();
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Senha salva com sucesso')),
+                        const SnackBar(
+                            content: Text('Senha salva com sucesso')),
                       );
                       novaSenhaController.clear();
                       novaSenhaController1.clear();
                       confirmaSenhaController.clear();
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('As senhas devem ser iguais')),
+                        const SnackBar(
+                            content: Text('As senhas devem ser iguais')),
                       );
                     }
                   },
@@ -122,7 +123,10 @@ class AlterarSenhaState extends State<AlterarSenhaApp> {
                   ),
                   child: const Text(
                     'Salvar Senha',
-                    style: TextStyle(fontSize: 18, color: Colors.white, fontFamily: 'Poppins'),
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                        fontFamily: 'Poppins'),
                   ),
                 ),
               ],

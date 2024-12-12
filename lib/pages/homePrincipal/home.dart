@@ -1,21 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutterguys/pages/perfil.dart';
-import 'package:flutterguys/pages/modules.dart';
-import 'package:flutterguys/pages/produtos.dart' as produtos;
+import 'package:flutterguys/pages/Local/localizacao_ruas.dart' as localizacao;
+import 'package:flutterguys/pages/perfil/perfil.dart';
+import 'package:flutterguys/pages/test/modules.dart';
+import 'package:flutterguys/pages/homePrincipal/produtos.dart' as produtos;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutterguys/pages/a.dart';
-import 'package:flutterguys/pages/meusDados.dart';
 
 void main() {
   final GlobalKey<HomePageState> homePageKey = GlobalKey<HomePageState>();
 
   runApp(
     MaterialApp(
-      navigatorObservers: [
-        MyNavigatorObserver(() {
-          homePageKey.currentState?._loadUserName();
-        }),
-      ],
       home: HomePage(key: homePageKey),
     ),
   );
@@ -47,7 +41,7 @@ class HomePageState extends State<HomePage> {
   String saudacao = 'Olá Visitante';
   final TextEditingController controller = TextEditingController();
 
-  List<Produtos> cesta = [];  // Variável para a cesta de compras
+  List<Produtos> cesta = [];
 
   void listener() {
     search(controller.text);
@@ -80,11 +74,10 @@ class HomePageState extends State<HomePage> {
     _loadUserName();
     controller.addListener(listener);
 
-    // Limpar a cesta quando a página for carregada
     cesta.clear();
   }
 
-  // Método que carrega o nome do usuário armazenado no SharedPreferences
+
   Future<void> _loadUserName() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? nomeUsuario = prefs.getString('nomeUsuario');
@@ -113,14 +106,14 @@ class HomePageState extends State<HomePage> {
               _selectedIndex = index;
             });
             switch (index) {
-              case 1:
+              case 0:
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+                break;
+              case 1:
+                Navigator.push(context, MaterialPageRoute(builder: (context) => localizacao.LocalizacaoRuas()));
                 break;
               case 2:
                 Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));
-                break;
-              default:
-                Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
             }
           }),
           body: Column(

@@ -21,7 +21,7 @@ class MeusDadosState extends State<MeusDados> {
   XFile? _imagemPerfil;
   String? _caminhoImagemPerfil;
 
-  String nomeExibido = 'Visitante'; // Nome padrão
+  String nomeExibido = 'Visitante';
 
   @override
   void initState() {
@@ -40,7 +40,6 @@ class MeusDadosState extends State<MeusDados> {
     }
   }
 
-  // Carregar os dados do usuário (incluindo o nome)
   Future<void> _carregamentoDados() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     emailController.text = prefs.getString('emailUsuario') ?? '';
@@ -49,26 +48,25 @@ class MeusDadosState extends State<MeusDados> {
     enderecoController.text = prefs.getString('enderecoUsuario') ?? '';
     _caminhoImagemPerfil = prefs.getString('caminhoImagemPerfil');
 
-    // Carregar o nome do usuário
+
     setState(() {
-      nomeExibido = prefs.getString('nomeUsuario') ?? 'Visitante';  // Usar o nome salvo ou "Visitante"
+      nomeExibido = prefs.getString('nomeUsuario') ?? 'Visitante';
     });
 
-    // Se houver uma imagem, carregar ela também
+
     if (_caminhoImagemPerfil != null) {
       _imagemPerfil = XFile(_caminhoImagemPerfil!);
     }
   }
 
-  // Salvar os dados e o nome do usuário
+
   Future<void> _salvamentoDosDados() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('emailUsuario', emailController.text);
     await prefs.setString('telefoneUsuario', telefoneController.text);
     await prefs.setString('cpfUsuario', cpfController.text);
     await prefs.setString('enderecoUsuario', enderecoController.text);
-    await prefs.setString('nomeUsuario', nomeExibido);  // Salvar o nome também
-
+    await prefs.setString('nomeUsuario', nomeExibido);
     if (_caminhoImagemPerfil != null) {
       await prefs.setString('caminhoImagemPerfil', _caminhoImagemPerfil!);
     }

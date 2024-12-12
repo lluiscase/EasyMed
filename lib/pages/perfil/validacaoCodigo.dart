@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterguys/pages/CodigoValidacao.dart';
+import 'package:flutterguys/pages/perfil/CodigoValidacao.dart';
 
 void main() => runApp(const MyApp());
 
@@ -114,16 +114,20 @@ class ValidacaoState extends State<Validacao> {
                   onPressed: () {
                     if (emailController.text.isEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Por favor, preencha o email')),
+                        const SnackBar(
+                            content: Text('Por favor, preencha o email')),
                       );
                     } else if (!_isChecked) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Por favor, marque a caixa "I\'m not a robot"')),
+                        const SnackBar(
+                            content: Text(
+                                'Por favor, marque a caixa "I\'m not a robot"')),
                       );
                     } else {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const Codigovalidacao()),
+                        MaterialPageRoute(
+                            builder: (context) => const Codigovalidacao()),
                       );
                     }
                   },

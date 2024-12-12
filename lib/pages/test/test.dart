@@ -7,7 +7,11 @@ class Produtos {
   final String? preco;
   final String? descricao;
 
-  Produtos({required this.id, required this.nome, required this.preco, required this.descricao});
+  Produtos(
+      {required this.id,
+      required this.nome,
+      required this.preco,
+      required this.descricao});
 
   factory Produtos.fromJson(Map<String, dynamic> json) {
     return Produtos(
@@ -27,7 +31,10 @@ class Categoria {
 
   factory Categoria.fromJson(Map<String, dynamic> json) {
     var produtoList = json['produtos'] as List?;
-    List<Produtos> produtos = produtoList?.map((produtoJson) => Produtos.fromJson(produtoJson)).toList() ?? [];
+    List<Produtos> produtos = produtoList
+            ?.map((produtoJson) => Produtos.fromJson(produtoJson))
+            .toList() ??
+        [];
     return Categoria(
       nome: json['nome'],
       produtos: produtos,
@@ -36,23 +43,27 @@ class Categoria {
 }
 
 Future<List<Categoria>> fetchCategorias() async {
-  final response = await http.get(Uri.parse('https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/produtos.json'));
+  final response = await http.get(Uri.parse(
+      'https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/produtos.json'));
 
   if (response.statusCode == 200) {
     Map<String, dynamic> jsonData = json.decode(response.body);
     List<dynamic> categoriasJson = jsonData['categoria'];
-    return categoriasJson.map((categoriaJson) => Categoria.fromJson(categoriaJson)).toList();
+    return categoriasJson
+        .map((categoriaJson) => Categoria.fromJson(categoriaJson))
+        .toList();
   } else {
     throw Exception('Falha de carregamento');
   }
 }
 
-Future<List<Produtos>> getProdutos(String nomecategoria)async{
+Future<List<Produtos>> getProdutos(String nomecategoria) async {
   var categoria = await fetchCategorias();
-  var vereficador = categoria.where((categoria)=>categoria.nome == nomecategoria );
+  var vereficador =
+      categoria.where((categoria) => categoria.nome == nomecategoria);
   List<Produtos> produtosList = [];
-  for(var b in vereficador){
-     produtosList.addAll(b.produtos);
+  for (var b in vereficador) {
+    produtosList.addAll(b.produtos);
   }
   return produtosList;
 }

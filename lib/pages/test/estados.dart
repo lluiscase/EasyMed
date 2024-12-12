@@ -64,21 +64,21 @@ class _HomePageState extends State<HomePage> {
   Widget buildStateA() {
     return Center(
       child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const Text(
-                'Sua cesta está vazia...',
-                style: TextStyle(
-                  fontSize: 24,
-                ),
-              ),
-        Padding(
-          padding: const EdgeInsets.all(35),
-          child: Image.network(
-            'https://via.placeholder.com/150', // Alterado para um link de exemplo
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            'Sua cesta está vazia...',
+            style: TextStyle(
+              fontSize: 24,
+            ),
           ),
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.all(35),
+            child: Image.network(
+              'https://via.placeholder.com/150', // Alterado para um link de exemplo
+            ),
+          ),
+        ],
       ),
     );
   }

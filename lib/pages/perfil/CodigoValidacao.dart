@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterguys/pages/alterarSenhar.dart';
+import 'package:flutterguys/pages/perfil/alterarSenhar.dart';
 
 void main() => runApp(const MyApp());
 
@@ -24,7 +24,6 @@ class Codigovalidacao extends StatefulWidget {
 
 class CodigovalidacaoState extends State<Codigovalidacao> {
   final TextEditingController emailController = TextEditingController();
-
 
   final List<FocusNode> _focusNodes = [
     FocusNode(),
@@ -90,19 +89,19 @@ class CodigovalidacaoState extends State<Codigovalidacao> {
                 children: [
                   const Text(
                     'Código de validação:',
-                      style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 15,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xFF16697A),
-                      ),
+                    style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 15,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xFF16697A),
+                    ),
                   ),
                   const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: List.generate(
                       5,
-                          (index) => SizedBox(
+                      (index) => SizedBox(
                         width: 50,
                         child: TextField(
                           autofocus: index == 0,
@@ -151,30 +150,32 @@ class CodigovalidacaoState extends State<Codigovalidacao> {
                   onPressed: () {
                     if (emailController.text.isEmpty) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Por favor, preencha o email')),
+                        const SnackBar(
+                            content: Text('Por favor, preencha o email')),
                       );
-                    }
-                    else if (_textControllers.any((controller) => controller.text.isEmpty)) {
+                    } else if (_textControllers
+                        .any((controller) => controller.text.isEmpty)) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Por favor, preencha todas as caixas de código')),
+                        const SnackBar(
+                            content: Text(
+                                'Por favor, preencha todas as caixas de código')),
                       );
-                    }
-                    else {
+                    } else {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const AlterarSenhaApp()),
+                        MaterialPageRoute(
+                            builder: (context) => const AlterarSenhaApp()),
                       );
                     }
                   },
-
                   child: const Text(
                     'Validar',
-                      style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                      ),
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),

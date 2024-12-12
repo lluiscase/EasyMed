@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutterguys/pages/Cesta.dart' as cesta;
-import 'package:flutterguys/pages/home.dart';
-import 'package:flutterguys/pages/Perfil.dart';
+import 'package:flutterguys/pages/homePrincipal/Cesta.dart' as cesta;
+import 'package:flutterguys/pages/homePrincipal/home.dart';
+import 'package:flutterguys/pages/perfil//Perfil.dart';
 
 void main() => runApp(const LocalizacaoRuas());
 
@@ -26,7 +26,7 @@ class LocalizacaoRuasState extends State<LocalizacaoRuas> {
   Future<void> _carregarCep() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
-      _cepSalvo = prefs.getString('cep');
+      _cepSalvo = prefs.getString('cep') ?? 'Não disponível';
     });
   }
 
@@ -88,7 +88,7 @@ class LocalizacaoRuasState extends State<LocalizacaoRuas> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => cesta.Cesta(), // Chama a tela buildStateC
+                    builder: (context) => cesta.Cesta(),
                   ),
                 );
               },
@@ -99,17 +99,17 @@ class LocalizacaoRuasState extends State<LocalizacaoRuas> {
                 ),
               ),
             ),
-
           ],
         ),
         bottomNavigationBar: bottomNav(_selectedIndex, (index) {
+          if (index < 0 || index > 2) return;
           setState(() {
             _selectedIndex = index;
           });
           switch (index) {
             case 0:
-              Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
-              ;
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => HomePage()));
               break;
             case 1:
               Navigator.push(

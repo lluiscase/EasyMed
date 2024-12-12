@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutterguys/pages/cadastro.dart';
-import 'package:flutterguys/pages/validacaoCodigo.dart';
-import 'package:flutterguys/pages/home.dart';
+import 'package:flutterguys/pages/perfil/cadastro.dart';
+import 'package:flutterguys/pages/perfil/validacaoCodigo.dart';
+import 'package:flutterguys/pages/homePrincipal/home.dart';
 
 void main() => runApp(
   MaterialApp(
@@ -12,7 +12,7 @@ void main() => runApp(
   ),
 );
 
-final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>(); // Chave global
+final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
 class Login extends StatefulWidget {
   const Login({super.key, required this.nomeUsuario});
@@ -28,7 +28,7 @@ class LoginState extends State<Login> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController nomeController = TextEditingController();
 
-  String nomeExibido = "Faça Seu Login"; // Valor padrão
+  String nomeExibido = "Faça Seu Login";
 
   @override
   void initState() {
