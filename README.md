@@ -1,5 +1,3 @@
-markdown
-Copiar código
 # EasyMeds: Solução Rápida e Inteligente para Farmácias
 
 ## 1. Título e Descrição
