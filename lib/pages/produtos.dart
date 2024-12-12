@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutterguys/pages/home.dart';
 import 'package:flutterguys/pages/perfil.dart';
 import 'package:flutterguys/pages/modules.dart';
-import 'package:flutterguys/pages/telaEspec.dart';
-import 'package:flutterguys/pages/Cesta.dart';
+import 'package:flutterguys/pages/telaEspec.dart' as telaEspc;
+import 'package:flutterguys/pages/cesta.dart';
 
-void main() =>
-    runApp(const ProdutosPage(desc: '', nome: '', prec: '', img: ''));
+void main() => runApp(
+    const ProdutosPage(desc: '', nome: '', prec: '', img: '')
+);
 
 class ProdutosPage extends StatefulWidget {
   const ProdutosPage({
@@ -32,6 +33,7 @@ class ProdutosPageState extends State<ProdutosPage> {
       'https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/coracao.png';
   int _selectedIndex = 0;
 
+  @override
   void initState() {
     super.initState();
   }
@@ -47,51 +49,37 @@ class ProdutosPageState extends State<ProdutosPage> {
       home: Scaffold(
         backgroundColor: const Color(0xffF9FAFD),
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(122),
-          child: Column(
-            children: [
-              AppBar(
-                title: Image.network(
-                  'https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/logo_easyMeds.png',
-                  width: 165,
-                ),
-                actions: [
-                  GestureDetector(
-                    onTap: () {
-                      print('Clicou no carrinho');
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.all(10),
-                      child: Image.asset(
-                        'assets/icons/shopping_basket.png',
-                        width: 50,
-                      ),
-                      decoration: BoxDecoration(
-                        color: const Color(0xffF7f8f8),
-                        borderRadius: BorderRadius.circular(1),
+            preferredSize: const Size.fromHeight(122),
+            child: Column(
+              children: [
+                AppBar(
+                  title: Image.network(
+                    'https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/logo_easyMeds.png',
+                    width: 165,
+                  ),
+                  actions: [
+                    GestureDetector(
+                      onTap: () {
+                        print('Clicou no carrinho');
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.all(10),
+                        child: Image.asset(
+                          'assets/icons/shopping_basket.png',
+                          width: 50,
+                        ),
+                        decoration: BoxDecoration(
+                          color: const Color(0xffF7f8f8),
+                          borderRadius: BorderRadius.circular(1),
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              Container(
-                child: Row(
-                  children: [
-                    TextButton(
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> f891f5c0587c6f0f005e2d2aabb21a175955cd68
-                  onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
-                  }, 
-                  child: Text(
-                    '<',
-                    style: TextStyle(
-                      fontSize: 35
-<<<<<<< HEAD
-=======
-=======
+                  ],
+                ),
+                Container(
+                  child: Row(
+                    children: [
+                      TextButton(
                         onPressed: () {
                           Navigator.push(
                             context,
@@ -101,162 +89,46 @@ class ProdutosPageState extends State<ProdutosPage> {
                         child: const Text(
                           '<',
                           style: TextStyle(fontSize: 35),
-                        )),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 60),
-                      child: const Text(
-                        'Detalhes do produto',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 17,
-                          color: Color(0xff16697A),
                         ),
                       ),
->>>>>>> 41d4549ebfcc89a5d882ce319214181fa4cffa84
->>>>>>> f891f5c0587c6f0f005e2d2aabb21a175955cd68
-                    ),
-                    const Divider(
-                      color: Colors.grey,
-                      thickness: 2,
-                    ),
-                  ],
+                      const Padding(
+                        padding: EdgeInsets.only(left: 60),
+                        child: Text(
+                          'Detalhes do produto',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 17,
+                            color: Color(0xff16697A),
+                          ),
+                        ),
+                      ),
+                      const Divider(
+                        color: Colors.grey,
+                        thickness: 2,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> f891f5c0587c6f0f005e2d2aabb21a175955cd68
-          bottomNavigationBar: bottomNav(_selectedIndex, (index){
-           setState(() {
-          _selectedIndex = index;
-        });
-        switch (index) {
-          case 1:
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
-            break;
-          case 2:
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));
-            break;
-          default:
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
-        }
+              ],
+            )),
+        bottomNavigationBar: bottomNav(_selectedIndex, (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+          switch (index) {
+            case 1:
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => HomePage()));
+              break;
+            case 2:
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Perfil()));
+              break;
+            default:
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => HomePage()));
+          }
         }),
-        body:Expanded( 
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-        Container(
-            child:Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              IconButton(
-                onPressed: (){
-                  setState(() {
-                    url = 'https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/heart.png';
-                  });
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context)=>
-                    telaEspec(
-                      categoria: '', 
-                      state: 'Favoritos', 
-                      desc: widget.desc, 
-                      nome: widget.nome, 
-                      prec: widget.prec, 
-                      img: widget.img)));
-                }, 
-                
-              icon: Image.network(
-                url,
-                  width: 34,
-              )
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: Center(
-                  child: Image.network(widget.img, width: 150,)
-                  ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0,left: 25.0),
-                child: Align(
-                  alignment:Alignment.centerLeft, 
-                  child:Text(widget.nome,
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w500
-                  ),
-                  )),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0,left: 25.0),
-                child: Align(alignment:Alignment.centerLeft, 
-                child:Text('R\$'+ widget.prec,
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  fontSize: 17,
-                  color: Color(0xffFC444C),
-                  fontWeight: FontWeight.w700
-                ),
-                )),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(35),
-                child: Center(
-                  child: 
-                    TextButton(
-                      onPressed: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>CestaPage(img: widget.img,nome: widget.nome, preco: widget.prec,state: 'b',)));
-                      }, 
-                      child: Text(
-                        'Adicionar à cesta',
-                      style: TextStyle(
-                        color: Color(0xffFFFFFF)
-                      ),),
-                      style: ButtonStyle(
-                        padding: MaterialStateProperty.all(EdgeInsets.symmetric(horizontal: 40,vertical: 15)),
-                        backgroundColor: MaterialStatePropertyAll<Color>(Color(0xff16697A)),
-                        
-                      ),
-                      ),
-                ),
-              ),
-               Divider(
-                    color: Colors.grey[300],
-                    thickness: 2,
-              ),
-
-            ],
-            ),
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 41d4549ebfcc89a5d882ce319214181fa4cffa84
->>>>>>> f891f5c0587c6f0f005e2d2aabb21a175955cd68
-        ),
-        bottomNavigationBar: bottomNav(
-          _selectedIndex,
-          (index) {
-            setState(() {
-              _selectedIndex = index;
-            });
-            switch (index) {
-              case 1:
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => HomePage()));
-                break;
-              case 2:
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Perfil()));
-                break;
-              default:
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => HomePage()));
-            }
-          },
-        ),
         body: Expanded(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -268,22 +140,19 @@ class ProdutosPageState extends State<ProdutosPage> {
                     IconButton(
                       onPressed: () {
                         setState(() {
-                          url =
-                              'https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/heart.png';
+                          url = 'https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/heart.png';
                         });
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => TelaEspec(
-                              categoria: '',
-                              state: 'Favoritos',
-                              desc: widget.desc,
-                              nome: widget.nome,
-                              prec: widget.prec,
-                              img: widget.img,
-                            ),
-                          ),
-                        );
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context) =>
+                                telaEspc.telaEspec(
+                                  categoria: '',
+                                  state: 'Favoritos',
+                                  desc: widget.desc,
+                                  nome: widget.nome,
+                                  prec: widget.prec,
+                                  img: widget.img,
+                                )
+                        ));
                       },
                       icon: Image.network(
                         url,
@@ -293,10 +162,7 @@ class ProdutosPageState extends State<ProdutosPage> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: Center(
-                        child: Image.network(
-                          widget.img,
-                          width: 150,
-                        ),
+                        child: Image.network(widget.img, width: 150,),
                       ),
                     ),
                     Padding(
@@ -307,7 +173,9 @@ class ProdutosPageState extends State<ProdutosPage> {
                           widget.nome,
                           textAlign: TextAlign.start,
                           style: const TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w500, fontFamily: 'Montserrat'),
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ),
@@ -322,7 +190,6 @@ class ProdutosPageState extends State<ProdutosPage> {
                             fontSize: 17,
                             color: Color(0xffFC444C),
                             fontWeight: FontWeight.w700,
-                            fontFamily: 'Montserrat'
                           ),
                         ),
                       ),
@@ -332,28 +199,28 @@ class ProdutosPageState extends State<ProdutosPage> {
                       child: Center(
                         child: TextButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => CestaPage(
-                                  img: widget.img,
-                                  nome: widget.nome,
-                                  preco: widget.prec,
-                                  state: 'b',
-                                ),
-                              ),
-                            );
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) =>
+                                    CestaPage(
+                                      img: widget.img,
+                                      nome: widget.nome,
+                                      preco: widget.prec,
+                                      state: 'b',
+                                    )
+                                ));
                           },
                           child: const Text(
                             'Adicionar à cesta',
-                            style: TextStyle(color: Color(0xffFFFFFF), fontFamily: 'Poppins', fontSize: 16),
+                            style: TextStyle(
+                              color: Color(0xffFFFFFF),
+                            ),
                           ),
                           style: ButtonStyle(
                             padding: MaterialStateProperty.all(
-                                const EdgeInsets.symmetric(
-                                    horizontal: 40, vertical: 15)),
-                            backgroundColor: MaterialStatePropertyAll<Color>(
-                                const Color(0xff16697A)),
+                                const EdgeInsets.symmetric(horizontal: 40, vertical: 15)),
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                              const Color(0xff16697A),
+                            ),
                           ),
                         ),
                       ),
@@ -376,7 +243,6 @@ class ProdutosPageState extends State<ProdutosPage> {
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
-                          fontFamily: 'Montserrat'
                         ),
                       ),
                     ),
@@ -387,7 +253,6 @@ class ProdutosPageState extends State<ProdutosPage> {
                         style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
-                          fontFamily: 'Montserrat'
                         ),
                       ),
                     ),
