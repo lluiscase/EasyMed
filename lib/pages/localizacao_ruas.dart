@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutterguys/pages/Cesta.dart';
+import 'package:flutterguys/pages/Cesta.dart' as cesta;
 import 'package:flutterguys/pages/home.dart';
 import 'package:flutterguys/pages/Perfil.dart';
 
@@ -86,18 +86,20 @@ class LocalizacaoRuasState extends State<LocalizacaoRuas> {
               ),
               onPressed: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Cesta(),
-                    ));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => cesta.Cesta(), // Chama a tela buildStateC
+                  ),
+                );
               },
               child: const Text(
-                'Ir para seu comprovante ',
+                'Ir para seu comprovante',
                 style: TextStyle(
                   color: Colors.white,
                 ),
               ),
             ),
+
           ],
         ),
         bottomNavigationBar: bottomNav(_selectedIndex, (index) {
@@ -111,7 +113,7 @@ class LocalizacaoRuasState extends State<LocalizacaoRuas> {
               break;
             case 1:
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Cesta()));
+                  context, MaterialPageRoute(builder: (context) => cesta.Cesta()));
               break;
             case 2:
               Navigator.push(

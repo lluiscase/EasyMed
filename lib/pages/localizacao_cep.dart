@@ -82,7 +82,7 @@ class LocalizacaoCepState extends State<LocalizacaoCep> {
                   fontWeight: FontWeight.w400),
             ),
             const SizedBox(height: 20),
-            Image.asset('assets/imagens/localizacao.png', height: 200),
+            Image.network('https://s3-alpha-sig.figma.com/img/d249/f06d/b54372707ffeeab5237dcb760b6fecf2?Expires=1734912000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=bcsZWkIArhlMoyfgNzrLYykFytCedhGdTjyzbZL~TyvO6OIObjvzhtOow8xGir5b8vJSabzGrU0RMneyWbNeAdSyufjm03BkytTsWRC~tKqDdthSsNDE~AeSGbQ~KHWU4PUwM3SKYpfAGkXUZG8IP3dmF7-UmURuh1NS6CKHGICg9HawWgmFNPQuVqx34f4NiqEulNxgJZ4WwOPmFOk-jwoqb6k5RGZmXXP6qY2j2smnR8P4kSgTFbsULY5wICfjEswANpnO32aXRuoDXw2yczvygpS1g-qagHO690rO9~82XHyAvJltP12TiSOOK~LJN2U-~pqCc0X2MgnRqvzbWA__'),
             const SizedBox(height: 20),
             Container(
               padding: const EdgeInsets.all(16.0),

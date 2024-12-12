@@ -19,23 +19,18 @@ class telaEspec extends StatefulWidget {
   telaEspecState createState() => telaEspecState();
 }
 
-
 class telaEspecState extends State<telaEspec> {
   List<String> nome = [];
   List<String> preco = [];
   List<String> imgs = [];
 
-  bool isLoading = true;
-
   Future<void> addProduto() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      isLoading = true;
-    });
 
     List<String> nomesatual = prefs.getStringList('nomes') ?? [];
     List<String> precoatual = prefs.getStringList('precos') ?? [];
     List<String> imgatual = prefs.getStringList('imagens') ?? [];
+    await prefs.clear();
 
     String nome = widget.nome;
     String preco = widget.prec;
@@ -45,7 +40,7 @@ class telaEspecState extends State<telaEspec> {
       nomesatual.add(nome);
       precoatual.add(preco);
       imgatual.add(img);
-      isLoading= false;
+
     }
 
 
@@ -68,7 +63,6 @@ class telaEspecState extends State<telaEspec> {
     List<String> precoatual = prefs.getStringList('precos') ?? [];
     List<String> imgatual = prefs.getStringList('imagens') ?? [];
 
-      await prefs.clear();
     setState(() {
       nome = nomesatual;
       preco = precoatual;
@@ -79,136 +73,113 @@ class telaEspecState extends State<telaEspec> {
   @override
   void initState() {
     super.initState();
-    if (nome.isEmpty || preco.isEmpty || imgs.isEmpty) {
     addProduto();
     carregar();
   }
-  }
 
-   Widget changeScreen(){
+  Widget changeScreen(){
     if(widget.state == 'Favoritos'){
       return buildStateB();
     }
     return buildStateA();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffF9FAFD),
-      appBar: AppBar(title: Text(widget.state),),
-      body:Column(
-        children: [
-          changeScreen(),
-          Center(
-                  child: TextButton(onPressed: ()async{
-                    SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> nomesatual = prefs.getStringList('nomes') ?? [];
-    List<String> precoatual = prefs.getStringList('precos') ?? [];
-    List<String> imgatual = prefs.getStringList('imagens') ?? [];
-
-      await prefs.clear();
-    setState(() {
-      nome = nomesatual;
-      preco = precoatual;
-      imgs = imgatual;
-    });
-                  }, child: Text('Clear')),
-                )
-        ],
+      appBar: AppBar(
+        title: Text(widget.state),
       ),
-      
-
+      body: changeScreen(),
     );
   }
-
-Widget buildStateA() {
+  Widget buildStateA() {
     return FutureBuilder(
-              future: getProdutos(widget.categoria), 
-              builder: (context, snapshot){
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasError) {
-          return Center(child: Text("Erro ao carregar categorias"));
-        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return Center(child: Text("Nenhuma categoria disponível"));
-        }
+        future: getProdutos(widget.categoria),
+        builder: (context, snapshot){
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text("Erro ao carregar categorias"));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text("Nenhuma categoria disponível"));
+          }
           return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              childAspectRatio: 0.75
-              ),
+                crossAxisCount: 3,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                childAspectRatio: 0.75
+            ),
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
               return Center(
                 child: GestureDetector(
-                  onTap: (){
-                     Navigator.push(context, MaterialPageRoute(builder: (context) => 
-                     ProdutosPage(
-                      nome: snapshot.data![index].nome,
-                      desc: snapshot.data![index].descricao,
-                      prec: snapshot.data![index].preco,
-                      img:snapshot.data![index].foto
-                        )
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                          ProdutosPage(
+                              nome: snapshot.data![index].nome,
+                              desc: snapshot.data![index].descricao,
+                              prec: snapshot.data![index].preco,
+                              img:snapshot.data![index].foto
+                          )
                       )
-                    );
-                  },
-                child: Container(
-                  margin: EdgeInsets.all(8.0),
-                  width: 109,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children:[
-                      Padding(
-                        padding: const EdgeInsets.only(left: 12,top: 10),
-                        child: Image.network(
-                          alignment: Alignment.center, 
-                            snapshot.data![index].foto, 
-                            width: 75,
-                            fit: BoxFit.contain,
-                            loadingBuilder: (context, child, loadingProgress) {
-                              return loadingProgress == null ? child : CircularProgressIndicator(); 
-                            },errorBuilder:(context, url, stackTrace) {
-                              return Icon(Icons.error);
-                            } ,),
+                      );
+                    },
+                    child: Container(
+                      margin: EdgeInsets.all(8.0),
+                      width: 109,
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children:[
+                            Padding(
+                              padding: const EdgeInsets.only(left: 12,top: 10),
+                              child: Image.network(
+                                alignment: Alignment.center,
+                                snapshot.data![index].foto,
+                                width: 75,
+                                fit: BoxFit.contain,
+                                loadingBuilder: (context, child, loadingProgress) {
+                                  return loadingProgress == null ? child : CircularProgressIndicator();
+                                },errorBuilder:(context, url, stackTrace) {
+                                return Icon(Icons.error);
+                              } ,),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5.0),
+                              child: Text(
+                                snapshot.data![index].nome,
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  color: Color(0xff080F0F),
+                                  fontSize: 9,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5.0,top: 5.0),
+                              child: Text(
+                                'R\$${snapshot.data![index].preco}',
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  color: Color(0xfffc444c),
+                                  fontSize: 10,
+
+                                ),
+                              ),
+                            ),
+                          ]
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5.0),
-                        child: Text(
-                        snapshot.data![index].nome,
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          color: Color(0xff080F0F),
-                          fontSize: 9,
-                                        ),
-                                        ),
+                      decoration: BoxDecoration(
+                          color: Color(0xffF9FAFD),
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(width: 1,color: Colors.grey)
                       ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 5.0,top: 5.0),
-                    child: Text(
-                        'R\$${snapshot.data![index].preco}',
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          color: Color(0xfffc444c),
-                          fontSize: 10,
-                          
-                    ),
-                    ),
-                  ),
-                    ] 
-                  ),
-                  decoration: BoxDecoration(
-                    color: Color(0xffF9FAFD),
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(width: 1,color: Colors.grey)
-                  ),
-                )),
+                    )),
               );
-              },
-              );
-            });
+            },
+          );
+        });
   }
 
   Widget buildStateB() {
@@ -219,20 +190,19 @@ Widget buildStateA() {
         crossAxisSpacing: 10,
         childAspectRatio: 0.75,
       ),
-      shrinkWrap: true,
       itemCount: nome.length,
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => 
-                     ProdutosPage(
-                      nome: nome[index],
-                      desc: widget.desc,
-                      prec: preco[index],
-                      img:  imgs[index]
-                        )
-                      )
-                    );
+            Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                ProdutosPage(
+                    nome: nome[index],
+                    desc: widget.desc,
+                    prec: preco[index],
+                    img:  imgs[index]
+                )
+            )
+            );
           },
           child: Container(
             margin: EdgeInsets.all(8.0),
@@ -241,14 +211,14 @@ Widget buildStateA() {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                        padding: const EdgeInsets.only(left: 12,top: 10),
-                        child: Image.network(
-                          alignment: Alignment.topRight, 
-                          'https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/heart.png',
-                        width: 20,
-                        fit: BoxFit.contain,
-                        ),
-                        ),
+                  padding: const EdgeInsets.only(left: 12,top: 10),
+                  child: Image.network(
+                    alignment: Alignment.topRight,
+                    'https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/heart.png',
+                    width: 20,
+                    fit: BoxFit.contain,
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.only(left: 12, top: 10),
                   child: Image.network(
@@ -279,7 +249,6 @@ Widget buildStateA() {
                     style: TextStyle(color: Color(0xfffc444c), fontSize: 10),
                   ),
                 ),
-                
               ],
             ),
             decoration: BoxDecoration(
@@ -291,6 +260,5 @@ Widget buildStateA() {
         );
       },
     );
-    
   }
 }
