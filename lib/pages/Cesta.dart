@@ -65,16 +65,14 @@ class CestaPageState extends State<CestaPage> {
 
   }
 
-  void calcularTotal(){
+  String calcularTotal(){
     double resultado = 0.0;
     for(int i = 0;i< preco.length;i++){
       double soma = double.tryParse(preco[i]) ?? 0.0;
       resultado +=  item[i]*soma;
     }
-    total = resultado.toStringAsFixed(2);
+    return resultado.toStringAsFixed(2);
 }
-
-
 
   Future<void> addProduto() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -110,6 +108,7 @@ Future<void> carregar() async {
   List<String> nomesatual = prefs.getStringList('nomes') ?? [];
   List<String> precoatual = prefs.getStringList('precos') ?? [];
   List<String> imgatual = prefs.getStringList('imagens') ?? [];
+  await prefs.clear();
 
   
   setState(() {
@@ -130,10 +129,9 @@ Future<void> carregar() async {
     super.initState();
     addProduto();
     carregar();
+    calcularTotal();
     estado = widget.state;
   }
-
-  
 
   @override
   Widget build(BuildContext context) {

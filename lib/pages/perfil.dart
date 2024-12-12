@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterguys/pages/localizacao_ruas.dart';
 import 'package:flutterguys/pages/meusDados.dart';
 import 'package:flutterguys/pages/cuponsDesconto.dart';
 import 'package:flutterguys/pages/localizacao_cep.dart';
@@ -39,7 +40,7 @@ class PerfilState extends State<Perfil> {
       home: Scaffold(
         appBar: AppBar(
           leading:
-          Image.asset('assets/icons/logo.png', width: 47.43, height: 40),
+              Image.asset('assets/icons/logo.png', width: 47.43, height: 40),
           title: Text("Olá!, $nomeUsuario"),
           actions: [
             GestureDetector(
@@ -82,125 +83,125 @@ class PerfilState extends State<Perfil> {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 50),
-          Expanded(
-            child: ListView(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => TelaFavoritos(),
-                      ),
-                    );
-                  },
-                  child: const ListTile(
-                    title: Text(
-                      "Favoritos",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w400,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => MeusDados(
-                          onNomeSalvo: (String novoNome) {
-                            setState(() {
-                              nomeUsuario = novoNome.isNotEmpty
-                                  ? novoNome
-                                  : 'Visitante';
-                              _carregaDadosUsuario();
-                            });
-                          },
+              Expanded(
+                child: ListView(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TelaFavoritos(),
+                          ),
+                        );
+                      },
+                      child: const ListTile(
+                        title: Text(
+                          "Favoritos",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.black,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w400,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
                       ),
-                    );
-                  },
-                  child: const ListTile(
-                    title: Text(
-                      "Meus Dados",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w400,
-                      ),
-                      textAlign: TextAlign.center,
                     ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const TelaCupons(),
+                    const SizedBox(height: 10),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MeusDados(
+                              onNomeSalvo: (String novoNome) {
+                                setState(() {
+                                  nomeUsuario = novoNome.isNotEmpty
+                                      ? novoNome
+                                      : 'Visitante';
+                                  _carregaDadosUsuario();
+                                });
+                              },
+                            ),
+                          ),
+                        );
+                      },
+                      child: const ListTile(
+                        title: Text(
+                          "Meus Dados",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.black,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w400,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
-                    );
-                  },
-                  child: const ListTile(
-                    title: Text(
-                      "Cupons",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w400,
-                      ),
-                      textAlign: TextAlign.center,
                     ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LocalizacaoCep(),
+                    const SizedBox(height: 10),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const TelaCupons(),
+                          ),
+                        );
+                      },
+                      child: const ListTile(
+                        title: Text(
+                          "Cupons",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.black,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w400,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
-                    );
-                  },
-                  child: const ListTile(
-                    title: Text(
-                      "Retiradas",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w400,
+                    ),
+                    const SizedBox(height: 10),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LocalizacaoRuas(),
+                          ),
+                        );
+                      },
+                      child: const ListTile(
+                        title: Text(
+                          "Retiradas",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.black,
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.w400,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
-                      textAlign: TextAlign.center,
                     ),
-                  ),
-                ),
-                const SizedBox(height: 10),
-                const ListTile(
-                  title: Text(
-                    "Sair",
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.w400,
+                    const SizedBox(height: 10),
+                    const ListTile(
+                      title: Text(
+                        "Sair",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.w400,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                     ),
-                    textAlign: TextAlign.center,
-                  ),
+                  ],
                 ),
-              ],
-            ),
-          ),
+              ),
             ],
           ),
         ),
