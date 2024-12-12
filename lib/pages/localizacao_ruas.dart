@@ -106,8 +106,21 @@ class LocalizacaoRuasState extends State<LocalizacaoRuas> {
           });
           switch (index) {
             case 0:
+<<<<<<< HEAD
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => HomePage()));
+=======
+<<<<<<< HEAD
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+=======
+<<<<<<< HEAD
+              Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+=======
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => HomePage()));
+>>>>>>> 41d4549ebfcc89a5d882ce319214181fa4cffa84
+>>>>>>> f891f5c0587c6f0f005e2d2aabb21a175955cd68
+>>>>>>> 57157a262ea30a8e8189b94f572891db7fb6686c
               break;
             case 1:
               Navigator.push(
