@@ -24,10 +24,7 @@ class telaEspecState extends State<telaEspec> {
   List<String> preco = [];
   List<String> imgs = [];
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 3596d9c8e1815506596a60b4fc898ba3812dd089
   Future<void> addProduto() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -61,7 +58,7 @@ class telaEspecState extends State<telaEspec> {
   }
 
 
-  Future<void> carregar() async {
+  Future<void> verItens() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> nomesatual = prefs.getStringList('nomes') ?? [];
     List<String> precoatual = prefs.getStringList('precos') ?? [];
@@ -78,23 +75,22 @@ class telaEspecState extends State<telaEspec> {
   void initState() {
     super.initState();
     addProduto();
-    carregar();
+    verItens();
   }
 
-  Widget changeScreen(){
-    final String _currentState = widget.state;
-    print("Estado atual: $_currentState");
-    if(_currentState == 'Ver mais'){
-      return buildStateA();
-    }else{
-      return buildStateB();
-    }
+   Widget changeScreen(){
+  final String _currentState = widget.state;
+  print("Estado atual: $_currentState");
+  if(_currentState == 'Ver mais'){
+    return buildStateA();
+  }else{
+    return buildStateB();
+  }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffF9FAFD),
       appBar: AppBar(title: Text(widget.state),),
       body: widget.state.isNotEmpty
           ? changeScreen()
@@ -102,35 +98,32 @@ class telaEspecState extends State<telaEspec> {
     );
   }
 
-<<<<<<< HEAD
 Widget buildStateA() {
-=======
-  Widget buildStateA() {
-
->>>>>>> 3596d9c8e1815506596a60b4fc898ba3812dd089
+  
     return FutureBuilder(
-        future: getProdutos(widget.categoria),
-        builder: (context, snapshot){
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text("Erro ao carregar categorias"));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text("Nenhuma categoria disponível"));
-          }
+              future: getProdutos(widget.categoria), 
+              builder: (context, snapshot){
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return Center(child: Text("Erro ao carregar categorias"));
+        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return Center(child: Text("Nenhuma categoria disponível"));
+        }
           return GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                childAspectRatio: 0.75
-            ),
+              crossAxisCount: 3,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              childAspectRatio: 0.75
+              ),
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
               return Center(
                 child: GestureDetector(
-<<<<<<< HEAD
+                  
                   onTap: (){
+                    print("fon fon" + widget.categoria);
                      Navigator.push(context, MaterialPageRoute(builder: (context) => 
                      ProdutosPage(
                       nome: snapshot.data![index].nome,
@@ -159,80 +152,46 @@ Widget buildStateA() {
                             },errorBuilder:(context, url, stackTrace) {
                               return Icon(Icons.error);
                             } ,),
-=======
-
-                    onTap: (){
-                      print("fon fon" + widget.categoria);
-                      Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                          ProdutosPage(
-                              nome: snapshot.data![index].nome,
-                              desc: snapshot.data![index].descricao,
-                              prec: snapshot.data![index].preco,
-                              img:snapshot.data![index].foto
-                          )
-                      )
-                      );
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(8.0),
-                      width: 109,
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children:[
-                            Padding(
-                              padding: const EdgeInsets.only(left: 12,top: 10),
-                              child: Image.network(
-                                alignment: Alignment.center,
-                                snapshot.data![index].foto,
-                                width: 75,
-                                fit: BoxFit.contain,
-                                loadingBuilder: (context, child, loadingProgress) {
-                                  return loadingProgress == null ? child : CircularProgressIndicator();
-                                },errorBuilder:(context, url, stackTrace) {
-                                return Icon(Icons.error);
-                              } ,),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 5.0),
-                              child: Text(
-                                snapshot.data![index].nome,
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  color: Color(0xff080F0F),
-                                  fontSize: 9,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 5.0,top: 5.0),
-                              child: Text(
-                                'R\$${snapshot.data![index].preco}',
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  color: Color(0xfffc444c),
-                                  fontSize: 10,
-
-                                ),
-                              ),
-                            ),
-                          ]
->>>>>>> 3596d9c8e1815506596a60b4fc898ba3812dd089
                       ),
-                      decoration: BoxDecoration(
-                          color: Color(0xffF9FAFD),
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(width: 1,color: Colors.grey)
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5.0),
+                        child: Text(
+                        snapshot.data![index].nome,
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: Color(0xff080F0F),
+                          fontSize: 9,
+                                        ),
+                                        ),
                       ),
-                    )),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5.0,top: 5.0),
+                    child: Text(
+                        'R\$${snapshot.data![index].preco}',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          color: Color(0xfffc444c),
+                          fontSize: 10,
+                          
+                    ),
+                    ),
+                  ),
+                    ] 
+                  ),
+                  decoration: BoxDecoration(
+                    color: Color(0xffF9FAFD),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(width: 1,color: Colors.grey)
+                  ),
+                )),
               );
-            },
-          );
-        });
+              },
+              );
+            });
   }
 
   Widget buildStateB() {
     return GridView.builder(
-<<<<<<< HEAD
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
         mainAxisSpacing: 10,
@@ -243,84 +202,63 @@ Widget buildStateA() {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => 
-                     ProdutosPage(
-                      nome: nome[index],
-                      desc: widget.desc,
-                      prec: preco[index],
-                      img:  imgs[index]
-                        )
-                      )
-                    );
-=======
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-          childAspectRatio: 0.75,
-        ),
-        itemCount: nome.length,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              print('Produto ${nome[index]} clicado');
-            },
-            child: Container(
-              margin: EdgeInsets.all(8.0),
-              width: 109,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 12,top: 10),
-                    child: Image.network(
-                      alignment: Alignment.topRight,
-                      'https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/heart.png',
-                      width: 20,
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 12, top: 10),
-                    child: Image.network(
-                      imgs[index],
-                      width: 55,
-                      fit: BoxFit.contain,
-                      loadingBuilder: (context, child, loadingProgress) {
-                        return loadingProgress == null
-                            ? child
-                            : CircularProgressIndicator();
-                      },
-                      errorBuilder: (context, url, stackTrace) {
-                        return Icon(Icons.error);
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 5.0),
-                    child: Text(
-                      nome[index],
-                      style: TextStyle(color: Color(0xff080F0F), fontSize: 9),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 5.0, top: 5.0),
-                    child: Text(
-                      'R\$${preco[index]}',
-                      style: TextStyle(color: Color(0xfffc444c), fontSize: 10),
-                    ),
-                  ),
-                ],
-              ),
-              decoration: BoxDecoration(
-                color: Color(0xffF9FAFD),
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(width: 1, color: Colors.grey),
-              ),
-            ),
-          );
->>>>>>> 3596d9c8e1815506596a60b4fc898ba3812dd089
+            print('Produto ${nome[index]} clicado');
           },
+          child: Container(
+            margin: EdgeInsets.all(8.0),
+            width: 109,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                        padding: const EdgeInsets.only(left: 12,top: 10),
+                        child: Image.network(
+                          alignment: Alignment.topRight, 
+                          'https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/heart.png',
+                        width: 20,
+                        fit: BoxFit.contain,
+                        ),
+                        ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 12, top: 10),
+                  child: Image.network(
+                    imgs[index],
+                    width: 55,
+                    fit: BoxFit.contain,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      return loadingProgress == null
+                          ? child
+                          : CircularProgressIndicator();
+                    },
+                    errorBuilder: (context, url, stackTrace) {
+                      return Icon(Icons.error);
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 5.0),
+                  child: Text(
+                    nome[index],
+                    style: TextStyle(color: Color(0xff080F0F), fontSize: 9),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 5.0, top: 5.0),
+                  child: Text(
+                    'R\$${preco[index]}',
+                    style: TextStyle(color: Color(0xfffc444c), fontSize: 10),
+                  ),
+                ),
+              ],
+            ),
+            decoration: BoxDecoration(
+              color: Color(0xffF9FAFD),
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(width: 1, color: Colors.grey),
+            ),
+          ),
+        );
+      },
     );
   }
 }

@@ -147,7 +147,7 @@ class LoginState extends State<Login> {
                     );
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => const HomePage(state: 'a',)),
+                      MaterialPageRoute(builder: (context) => const HomePage()),
                     );
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(

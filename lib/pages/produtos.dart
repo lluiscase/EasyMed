@@ -70,7 +70,7 @@ class ProdutosPageState extends State<ProdutosPage>{
                   children: [
                     TextButton(
                   onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage(state: '',)));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
                   }, 
                   child: Text(
                     '<',
@@ -109,13 +109,13 @@ class ProdutosPageState extends State<ProdutosPage>{
         });
         switch (index) {
           case 1:
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(state: '',)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
             break;
           case 2:
             Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));
             break;
           default:
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(state: '',)));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
         }
         }),
         body:Expanded( 

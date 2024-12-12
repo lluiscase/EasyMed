@@ -122,7 +122,7 @@ class LocalizacaoCepState extends State<LocalizacaoCep> {
           case 0:
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => const HomePage(state: 'a',)),
+              MaterialPageRoute(builder: (context) => const HomePage()),
             );
             break;
           case 1:
