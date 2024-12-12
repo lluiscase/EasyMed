@@ -33,7 +33,7 @@ dependencies:
   shared_preferences: ^2.0.11
   http: ^0.13.4
   image_picker: ^0.8.7+3
-  webview_flutter: ^4.0.0
+  ##webview_flutter: ^4.0.0
   qr_flutter: ^4.0.0
   flutter_multi_formatter: ^2.4.0
 
@@ -65,6 +65,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:  # Alinhado corretamente
     - assets/icons/
+    - assets/imagens/
+
 
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

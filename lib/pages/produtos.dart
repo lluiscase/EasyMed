@@ -49,51 +49,52 @@ class ProdutosPageState extends State<ProdutosPage> {
       home: Scaffold(
         backgroundColor: const Color(0xffF9FAFD),
         appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(122),
-            child: Column(
-              children: [
-                AppBar(
-                  title: Image.network(
-                    'https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/logo_easyMeds.png',
-                    width: 165,
-                  ),
-                  actions: [
-                    GestureDetector(
-                      onTap: () {
-                        print('Clicou no carrinho');
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.all(10),
-                        child: Image.asset(
-                          'assets/icons/shopping_basket.png',
-                          width: 50,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(0xffF7f8f8),
-                          borderRadius: BorderRadius.circular(1),
-                        ),
+          preferredSize: const Size.fromHeight(122),
+          child: Column(
+            children: [
+              AppBar(
+                title: Image.network(
+                  'https://raw.githubusercontent.com/lluiscase/EasyMed/refs/heads/main/assets/icons/logo_easyMeds.png',
+                  width: 165,
+                ),
+                actions: [
+                  GestureDetector(
+                    onTap: () {
+                      print('Clicou no carrinho');
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.all(10),
+                      child: Image.asset(
+                        'assets/icons/shopping_basket.png',
+                        width: 50,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xffF7f8f8),
+                        borderRadius: BorderRadius.circular(1),
                       ),
                     ),
-                  ],
-                ),
-                Container(
-                  child: Row(
-                    children: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
-                          );
-                        },
-                        child: const Text(
-                          '<',
-                          style: TextStyle(fontSize: 35),
+                  ),
+                ],
+              ),
+              Container(
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => HomePage()),
+                            );
+                          },
+                          child: const Text(
+                            '<',
+                            style: TextStyle(fontSize: 35),
+                          ),
                         ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 60),
-                        child: Text(
+                        const Spacer(),
+                        const Text(
                           'Detalhes do produto',
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -101,16 +102,19 @@ class ProdutosPageState extends State<ProdutosPage> {
                             color: Color(0xff16697A),
                           ),
                         ),
-                      ),
-                      const Divider(
-                        color: Colors.grey,
-                        thickness: 2,
-                      ),
-                    ],
-                  ),
+                        const Spacer(),
+                      ],
+                    ),
+                    const Divider(
+                      color: Colors.grey,
+                      thickness: 2,
+                    ),
+                  ],
                 ),
-              ],
-            )),
+              ),
+            ],
+          ),
+        ),
         bottomNavigationBar: bottomNav(_selectedIndex, (index) {
           setState(() {
             _selectedIndex = index;
@@ -129,9 +133,9 @@ class ProdutosPageState extends State<ProdutosPage> {
                   MaterialPageRoute(builder: (context) => Perfil()));
           }
         }),
-        body: Expanded(
+        body: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 child: Column(
@@ -162,7 +166,12 @@ class ProdutosPageState extends State<ProdutosPage> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: Center(
-                        child: Image.network(widget.img, width: 150,),
+                        child: Image.network(
+                          widget.img,
+                          width: 150,
+                          height: 150,
+                          fit: BoxFit.contain,
+                        ),
                       ),
                     ),
                     Padding(
@@ -194,71 +203,64 @@ class ProdutosPageState extends State<ProdutosPage> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(35),
-                      child: Center(
-                        child: TextButton(
-                          onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) =>
-                                    CestaPage(
-                                      img: widget.img,
-                                      nome: widget.nome,
-                                      preco: widget.prec,
-                                      state: 'b',
-                                    )
-                                ));
-                          },
-                          child: const Text(
-                            'Adicionar à cesta',
-                            style: TextStyle(
-                              color: Color(0xffFFFFFF),
-                            ),
-                          ),
-                          style: ButtonStyle(
-                            padding: MaterialStateProperty.all(
-                                const EdgeInsets.symmetric(horizontal: 40, vertical: 15)),
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                              const Color(0xff16697A),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const Divider(
-                      color: Colors.grey,
-                      thickness: 2,
-                    ),
                   ],
                 ),
               ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        'Descrição',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                        ),
+              Padding(
+                padding: const EdgeInsets.all(35),
+                child: Center(
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) =>
+                              CestaPage(
+                                img: widget.img,
+                                nome: widget.nome,
+                                preco: widget.prec,
+                                state: 'b',
+                              )
+                          ));
+                    },
+                    child: const Text(
+                      'Adicionar à cesta',
+                      style: TextStyle(
+                        color: Color(0xffFFFFFF),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        widget.desc,
-                        style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400,
-                        ),
+                    style: ButtonStyle(
+                      padding: MaterialStateProperty.all(
+                          const EdgeInsets.symmetric(horizontal: 40, vertical: 15)),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                        const Color(0xff16697A),
                       ),
                     ),
-                  ],
+                  ),
                 ),
-              )
+              ),
+              const Divider(
+                color: Colors.grey,
+                thickness: 2,
+              ),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  'Descrição',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  widget.desc,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
             ],
           ),
         ),

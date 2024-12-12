@@ -5,18 +5,18 @@ import 'package:flutterguys/pages/produtos.dart' as produtos;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutterguys/pages/a.dart';
 import 'package:flutterguys/pages/meusDados.dart';
+
 void main() {
   final GlobalKey<HomePageState> homePageKey = GlobalKey<HomePageState>();
 
   runApp(
     MaterialApp(
       navigatorObservers: [
-        // Passa a função _loadUserName para o MyNavigatorObserver usando o GlobalKey
         MyNavigatorObserver(() {
-          homePageKey.currentState?._loadUserName(); // Chama _loadUserName usando o GlobalKey
+          homePageKey.currentState?._loadUserName();
         }),
       ],
-      home: HomePage(key: homePageKey), // Passa o GlobalKey para o HomePage
+      home: HomePage(key: homePageKey),
     ),
   );
 }
@@ -46,6 +46,8 @@ class HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   String saudacao = 'Olá Visitante';
   final TextEditingController controller = TextEditingController();
+
+  List<Produtos> cesta = [];  // Variável para a cesta de compras
 
   void listener() {
     search(controller.text);
@@ -77,6 +79,9 @@ class HomePageState extends State<HomePage> {
     _load();
     _loadUserName();
     controller.addListener(listener);
+
+    // Limpar a cesta quando a página for carregada
+    cesta.clear();
   }
 
   // Método que carrega o nome do usuário armazenado no SharedPreferences

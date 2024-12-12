@@ -82,7 +82,7 @@ class LocalizacaoCepState extends State<LocalizacaoCep> {
                   fontWeight: FontWeight.w400),
             ),
             const SizedBox(height: 20),
-            Image.asset('assets/icons/localizacao.png', height: 200),
+            Image.asset('assets/imagens/localizacao.png', height: 200),
             const SizedBox(height: 20),
             Container(
               padding: const EdgeInsets.all(16.0),
