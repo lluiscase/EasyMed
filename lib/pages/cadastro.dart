@@ -98,6 +98,7 @@ class CadastroState extends State<Cadastro> {
               color: Color(0xff080F0F),
               fontSize: 20,
               fontWeight: FontWeight.w700,
+              fontFamily: 'Poppins'
             ),
           ),
           elevation: 0.0,

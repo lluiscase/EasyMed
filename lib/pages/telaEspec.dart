@@ -19,19 +19,23 @@ class telaEspec extends StatefulWidget {
   telaEspecState createState() => telaEspecState();
 }
 
+
 class telaEspecState extends State<telaEspec> {
   List<String> nome = [];
   List<String> preco = [];
   List<String> imgs = [];
 
+  bool isLoading = true;
 
   Future<void> addProduto() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isLoading = true;
+    });
 
     List<String> nomesatual = prefs.getStringList('nomes') ?? [];
     List<String> precoatual = prefs.getStringList('precos') ?? [];
     List<String> imgatual = prefs.getStringList('imagens') ?? [];
-    await prefs.clear();
 
     String nome = widget.nome;
     String preco = widget.prec;
@@ -41,7 +45,7 @@ class telaEspecState extends State<telaEspec> {
       nomesatual.add(nome);
       precoatual.add(preco);
       imgatual.add(img);
-
+      isLoading= false;
     }
 
 
@@ -58,12 +62,13 @@ class telaEspecState extends State<telaEspec> {
   }
 
 
-  Future<void> verItens() async {
+  Future<void> carregar() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> nomesatual = prefs.getStringList('nomes') ?? [];
     List<String> precoatual = prefs.getStringList('precos') ?? [];
     List<String> imgatual = prefs.getStringList('imagens') ?? [];
 
+      await prefs.clear();
     setState(() {
       nome = nomesatual;
       preco = precoatual;
@@ -74,32 +79,50 @@ class telaEspecState extends State<telaEspec> {
   @override
   void initState() {
     super.initState();
+    if (nome.isEmpty || preco.isEmpty || imgs.isEmpty) {
     addProduto();
-    verItens();
+    carregar();
+  }
   }
 
    Widget changeScreen(){
-  final String _currentState = widget.state;
-  print("Estado atual: $_currentState");
-  if(_currentState == 'Ver mais'){
+    if(widget.state == 'Favoritos'){
+      return buildStateB();
+    }
     return buildStateA();
-  }else{
-    return buildStateB();
-  }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffF9FAFD),
       appBar: AppBar(title: Text(widget.state),),
-      body: widget.state.isNotEmpty
-          ? changeScreen()
-          : Center(child: CircularProgressIndicator()),
+      body:Column(
+        children: [
+          changeScreen(),
+          Center(
+                  child: TextButton(onPressed: ()async{
+                    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> nomesatual = prefs.getStringList('nomes') ?? [];
+    List<String> precoatual = prefs.getStringList('precos') ?? [];
+    List<String> imgatual = prefs.getStringList('imagens') ?? [];
+
+      await prefs.clear();
+    setState(() {
+      nome = nomesatual;
+      preco = precoatual;
+      imgs = imgatual;
+    });
+                  }, child: Text('Clear')),
+                )
+        ],
+      ),
+      
+
     );
   }
 
 Widget buildStateA() {
-  
     return FutureBuilder(
               future: getProdutos(widget.categoria), 
               builder: (context, snapshot){
@@ -121,9 +144,7 @@ Widget buildStateA() {
             itemBuilder: (context, index) {
               return Center(
                 child: GestureDetector(
-                  
                   onTap: (){
-                    print("fon fon" + widget.categoria);
                      Navigator.push(context, MaterialPageRoute(builder: (context) => 
                      ProdutosPage(
                       nome: snapshot.data![index].nome,
@@ -198,11 +219,20 @@ Widget buildStateA() {
         crossAxisSpacing: 10,
         childAspectRatio: 0.75,
       ),
+      shrinkWrap: true,
       itemCount: nome.length,
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
-            print('Produto ${nome[index]} clicado');
+            Navigator.push(context, MaterialPageRoute(builder: (context) => 
+                     ProdutosPage(
+                      nome: nome[index],
+                      desc: widget.desc,
+                      prec: preco[index],
+                      img:  imgs[index]
+                        )
+                      )
+                    );
           },
           child: Container(
             margin: EdgeInsets.all(8.0),
@@ -249,6 +279,7 @@ Widget buildStateA() {
                     style: TextStyle(color: Color(0xfffc444c), fontSize: 10),
                   ),
                 ),
+                
               ],
             ),
             decoration: BoxDecoration(
@@ -260,5 +291,6 @@ Widget buildStateA() {
         );
       },
     );
+    
   }
 }

@@ -4,7 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'localizacao_ruas.dart';
 import 'package:flutterguys/pages/home.dart';
 import 'package:flutterguys/pages/perfil.dart';
-import 'package:flutterguys/pages/Cesta.dart';
 
 void main() => runApp(const LocalizacaoCepApp());
 
@@ -60,7 +59,7 @@ class LocalizacaoCepState extends State<LocalizacaoCep> {
 
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => const LocalizacaoRuas()),
+      MaterialPageRoute(builder: (context) => LocalizacaoRuas()),
     );
   }
 
@@ -77,8 +76,10 @@ class LocalizacaoCepState extends State<LocalizacaoCep> {
             const Text(
               "Encontre a EasyMed mais próxima de você e retire sua compra, sem custos adicionais.",
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16,
-                  fontFamily: 'Montserrat', fontWeight: FontWeight.w400),
+              style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: 'Montserrat',
+                  fontWeight: FontWeight.w400),
             ),
             const SizedBox(height: 20),
             Image.asset('assets/icons/localizacao.png', height: 200),
@@ -88,8 +89,16 @@ class LocalizacaoCepState extends State<LocalizacaoCep> {
               color: Colors.grey[200],
               child: Column(
                 children: [
-                  Text('Encontre unidades próximas', style: TextStyle(fontFamily: 'Montserrat', fontSize: 19,fontWeight: FontWeight.w500),),
-                  const SizedBox(height: 30 ,),
+                  Text(
+                    'Encontre unidades próximas',
+                    style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 19,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
                   TextField(
                     controller: _cepController,
                     keyboardType: TextInputType.number,
@@ -102,7 +111,14 @@ class LocalizacaoCepState extends State<LocalizacaoCep> {
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: _salvarCepENavegar,
-                    child: const Text('BUSCAR',style: TextStyle(color: Colors.white, fontFamily: 'Montserrat', fontWeight:  FontWeight.w500, fontSize: 15),),
+                    child: const Text(
+                      'BUSCAR',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15),
+                    ),
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(double.infinity, 50),
                       backgroundColor: Colors.blue,

@@ -44,15 +44,36 @@ class LocalizacaoRuasState extends State<LocalizacaoRuas> {
               child: Center(
                 child: Text(
                   'EasyMeds próximas a você!',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500, fontFamily: 'Poppins', color: Colors.blue),
+                  style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: 'Poppins',
+                      color: Colors.blue),
                 ),
               ),
             ),
-            _buildLocationCard('EasyMeds - Morumbi', 'Rua das Magnólias, 222, Morumbi', 'CEP: $_cepSalvo', '800m'),
-            _buildLocationCard('EasyMeds - Alto de Pinheiros', 'Avenida Brasil, 55, Alto de Pinheiros', 'CEP: $_cepSalvo', '1.6 km'),
-            _buildLocationCard('EasyMeds - Vila Mariana', 'Avenida dos Manacás, 101, Vila Mariana', 'CEP: $_cepSalvo', '2.8 km'),
-            _buildLocationCard('EasyMeds - Higienópolis', 'Rua do Pacaembu, 789, Higienópolis', 'CEP: $_cepSalvo', '950m'),
-            _buildLocationCard('EasyMeds - Ibirapuera', 'Avenida Iepê Roxo, 465, Ibirapuera', 'CEP: $_cepSalvo', '2.3 km'),
+            _buildLocationCard('EasyMeds - Morumbi',
+                'Rua das Magnólias, 222, Morumbi', 'CEP: $_cepSalvo', '800m'),
+            _buildLocationCard(
+                'EasyMeds - Alto de Pinheiros',
+                'Avenida Brasil, 55, Alto de Pinheiros',
+                'CEP: $_cepSalvo',
+                '1.6 km'),
+            _buildLocationCard(
+                'EasyMeds - Vila Mariana',
+                'Avenida dos Manacás, 101, Vila Mariana',
+                'CEP: $_cepSalvo',
+                '2.8 km'),
+            _buildLocationCard(
+                'EasyMeds - Higienópolis',
+                'Rua do Pacaembu, 789, Higienópolis',
+                'CEP: $_cepSalvo',
+                '950m'),
+            _buildLocationCard(
+                'EasyMeds - Ibirapuera',
+                'Avenida Iepê Roxo, 465, Ibirapuera',
+                'CEP: $_cepSalvo',
+                '2.3 km'),
             const SizedBox(height: 20),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -65,9 +86,10 @@ class LocalizacaoRuasState extends State<LocalizacaoRuas> {
               ),
               onPressed: () {
                 Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Cesta()),
-                );
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Cesta(),
+                    ));
               },
               child: const Text(
                 'Ir para seu comprovante ',
@@ -84,13 +106,20 @@ class LocalizacaoRuasState extends State<LocalizacaoRuas> {
           });
           switch (index) {
             case 0:
+<<<<<<< HEAD
               Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+=======
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => HomePage()));
+>>>>>>> 41d4549ebfcc89a5d882ce319214181fa4cffa84
               break;
             case 1:
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Cesta()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Cesta()));
               break;
             case 2:
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Perfil()));
               break;
             default:
               break;
@@ -100,7 +129,8 @@ class LocalizacaoRuasState extends State<LocalizacaoRuas> {
     );
   }
 
-  Widget _buildLocationCard(String name, String address, String cep, String distance) {
+  Widget _buildLocationCard(
+      String name, String address, String cep, String distance) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -121,29 +151,34 @@ class LocalizacaoRuasState extends State<LocalizacaoRuas> {
                 ),
               ),
               const SizedBox(height: 6),
-              Text(address,
-              style: const TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w300,
-                fontFamily: 'NunitoSans',
-                color: Colors.grey
-              ),),
+              Text(
+                address,
+                style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w300,
+                    fontFamily: 'NunitoSans',
+                    color: Colors.grey),
+              ),
               const SizedBox(height: 4),
               Text(cep,
                   style: const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w300,
-                    fontFamily: 'NunitoSans',)),
+                    fontFamily: 'NunitoSans',
+                  )),
               const SizedBox(height: 8),
-              Text(distance, style: const TextStyle(fontWeight: FontWeight.w300, fontSize: 15, fontFamily: 'NunitoSans', color: Color(0xFF16697A))),
+              Text(distance,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w300,
+                      fontSize: 15,
+                      fontFamily: 'NunitoSans',
+                      color: Color(0xFF16697A))),
             ],
           ),
         ),
       ),
     );
   }
-
-
 
   Widget bottomNav(int selectedIndex, ValueChanged<int> onTap) {
     return BottomNavigationBar(
@@ -173,10 +208,7 @@ AppBar appbar() {
     title: const Text(
       'EasyMed',
       style: TextStyle(
-          color: Color(0xff080F0F),
-          fontSize: 22,
-          fontFamily: 'Poppins'
-      ),
+          color: Color(0xff080F0F), fontSize: 22, fontFamily: 'Poppins'),
     ),
     elevation: 0.0,
     leading: GestureDetector(
